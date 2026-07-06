@@ -268,5 +268,5 @@ export const faqs = [
 export const finalMessage = {
   heading: "Some things are too meaningful to be trend-driven.",
   lines:   ["Jewelry should hold memory.", "It should gather stories.", "It should stay."],
-  image:   img.cinematic,
+  // image served directly in Home.jsx via hero_jewel.png
 };

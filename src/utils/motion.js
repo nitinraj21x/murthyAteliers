@@ -6,12 +6,6 @@ export const fadeUp = {
   transition:{ duration: 0.72, ease: [0.22, 1, 0.36, 1] },
 };
 
-export const fadeIn = {
-  initial:   { opacity: 0 },
-  animate:   { opacity: 1 },
-  transition:{ duration: 0.6, ease: "easeOut" },
-};
-
 export const fadeLeft = {
   initial:   { opacity: 0, x: -32 },
   animate:   { opacity: 1, x: 0 },

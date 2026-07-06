@@ -6,7 +6,7 @@ import SectionHeading from "../components/SectionHeading";
 import CollectionCard from "../components/CollectionCard";
 import FaqAccordion from "../components/FaqAccordion";
 import { philosophy, collections, bespoke, legacyStories, faqs, brand } from "../data/content";
-import { fadeUp, fadeLeft, fadeRight, staggerContainer, staggerItem, inView, scaleIn } from "../utils/motion";
+import { fadeUp, fadeRight, staggerContainer, staggerItem, inView, scaleIn } from "../utils/motion";
 
 // ==========================================================================
 // proj2 Data constants
