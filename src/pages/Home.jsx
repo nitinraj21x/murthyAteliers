@@ -148,7 +148,7 @@ export default function Home() {
          Section 2: Banner Section (proj2)
          ========================================================================== */}
       <section className="hero-sec">
-        <div className="hero-bg" style={{ backgroundImage: `url('/hero_jewel.png')` }}></div>
+        <div className="hero-bg" style={{ backgroundImage: `url('banner_collection.jpg')` }}></div>
         <div className="hero-overlay"></div>
         <div className="hero-content">
           <span className="hero-pretitle">Murthy Ateliers by 9th</span>
