@@ -151,11 +151,6 @@ export default function Home() {
         <div className="hero-bg" style={{ backgroundImage: `url('banner_collection.jpg')` }}></div>
         <div className="hero-overlay"></div>
         <div className="hero-content">
-          <span className="hero-pretitle">Murthy Ateliers by 9th</span>
-          <h1 className="hero-title">Heirloom Jewels for <span>Generations to Come</span></h1>
-          <p className="hero-sub">
-            Crafted with memory, intention, and timeless artistry — Murthy Ateliers creates jewels meant to be worn, loved, and passed on.
-          </p>
           <div className="hero-ctas">
             <Link to="/collections" className="btn btn-primary">Explore Collections</Link>
             <button 
@@ -213,6 +208,14 @@ export default function Home() {
          Section 4: Made to Outlive Trends Section (proj1)
          ========================================================================== */}
       <section className="shell py-20 sm:py-28 bg-crimson relative overflow-hidden">
+        {/* Background image */}
+        <img
+          src="/imgs/bgsec1.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          style={{ opacity: 0.18 }}
+        />
         {/* Background texture */}
         <div
           className="absolute inset-0 opacity-20 pointer-events-none"
@@ -354,8 +357,16 @@ export default function Home() {
       {/* ==========================================================================
          Section 7: Craft Something Personal Section (proj1)
          ========================================================================== */}
-      <section className="shell py-20 sm:py-28 bg-cream-dark">
-        <div className="frame grid gap-10 lg:grid-cols-[1fr_1fr] items-center">
+      <section className="shell py-20 sm:py-28 bg-cream-dark relative overflow-hidden">
+        {/* Background image */}
+        <img
+          src="/imgs/bgsec2.jpg"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          style={{ opacity: 0.12 }}
+        />
+        <div className="frame relative z-10 grid gap-10 lg:grid-cols-[1fr_1fr] items-center">
 
           {/* Image */}
           <motion.div

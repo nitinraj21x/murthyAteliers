@@ -60,19 +60,19 @@ export const philosophy = {
       number: "01",
       title:  "Craftsmanship",
       body:   "Handcrafted with attention to detail, preserving traditional artistry while embracing contemporary elegance.",
-      image:  img.goldwork1,
+      image:  "/imgs/craftmanship.jpg",
     },
     {
       number: "02",
       title:  "Meaning",
       body:   "Every jewel carries emotion, memory, and personal significance beyond ornamentation.",
-      image:  img.gemstone1,
+      image:  "/imgs/meaning.jpg",
     },
     {
       number: "03",
       title:  "Heirloom Value",
       body:   "Designed not for seasons, but for generations — and the stories they gather along the way.",
-      image:  img.velvetTray,
+      image:  "/imgs/heirloom.jpg",
     },
   ],
 };
@@ -84,7 +84,7 @@ export const collections = [
     name:    "Bridal Heirlooms",
     tagline: "For wedding mornings, ancestral gold, and measured grandeur.",
     story:   "Layered necklaces, vankis, and jhumkas designed for muhurtham light, silk richness, and the emotional weight of family ceremony. Each piece is composed to feel like it has always belonged to the family.",
-    image:   img.bridal,
+    image:   "/imgs/cat1.png",
     accent:  img.necklace1,
   },
   {
@@ -92,7 +92,7 @@ export const collections = [
     name:    "Temple-Inspired Pieces",
     tagline: "Architectural, sculptural, and deeply rooted.",
     story:   "Forms informed by shrine doors, lotus borders, peacock reliefs, and the quiet geometry of Tamil sanctum ornament. Jewelry that carries the memory of sacred spaces.",
-    image:   img.temple,
+    image:   "/imgs/cat2.jpg",
     accent:  img.gemstone2,
   },
   {
@@ -100,7 +100,7 @@ export const collections = [
     name:    "Everyday Classics",
     tagline: "Refined enough for daily rituals, enduring enough for repetition.",
     story:   "Softer collars, diamond accents, and versatile silhouettes that still carry the dignity of heirloom thinking. Pieces that become part of who you are.",
-    image:   img.everyday,
+    image:   "/imgs/cat3.png",
     accent:  img.necklace2,
   },
   {
@@ -108,7 +108,7 @@ export const collections = [
     name:    "Custom Commissions",
     tagline: "Personal, collaborative, and made with restraint.",
     story:   "Client-led pieces where memory, material, and wearability are shaped together from the very first conversation. Your story, translated into gold.",
-    image:   img.custom,
+    image:   "/imgs/cat4.jpg",
     accent:  img.earrings1,
   },
   {
@@ -116,7 +116,7 @@ export const collections = [
     name:    "Heritage Revivals",
     tagline: "Museum-like depth with present-day intimacy.",
     story:   "Designs that revive antique language without becoming costume, preserving cultural richness while softening the finish for modern wear.",
-    image:   img.heritage,
+    image:   "/imgs/cat5.jpg",
     accent:  img.bangles1,
   },
 ];
