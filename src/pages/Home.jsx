@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 import CollectionCard from "../components/CollectionCard";
 import FaqAccordion from "../components/FaqAccordion";
-import { philosophy, collections, bespoke, legacyStories, faqs, brand } from "../data/content";
-import { fadeUp, fadeRight, staggerContainer, staggerItem, inView, scaleIn } from "../utils/motion";
+import { philosophy, collections, bespoke, legacyStories, faqs } from "../data/content";
+import { fadeRight, staggerContainer, staggerItem, inView, scaleIn } from "../utils/motion";
 
 // ==========================================================================
 // proj2 Data constants

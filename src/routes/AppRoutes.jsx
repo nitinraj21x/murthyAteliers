@@ -1,7 +1,6 @@
 import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
-import BrandLoader from "../components/BrandLoader";
 
 const Home         = lazy(() => import("../pages/Home"));
 const Collections  = lazy(() => import("../pages/Collections"));

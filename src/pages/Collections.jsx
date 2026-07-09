@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import SectionHeading from "../components/SectionHeading";
 import { collections, brand } from "../data/content";
 import { fadeUp, staggerContainer, staggerItem, inView, scaleIn } from "../utils/motion";
 
