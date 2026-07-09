@@ -65,7 +65,7 @@ export default function Footer() {
         <div className="container">
           <div className="footer-grid">
             <div className="footer-brand">
-              <span className="footer-logo-main">Murthy Ateliers</span>
+              <span className="footer-logo-main">Murthy Ateliers by 9th</span>
               <span className="footer-logo-sub">Heirloom Jewels</span>
               <p className="footer-desc" style={{ marginTop: '1rem' }}>
                 A contemporary heirloom jewelry house rooted in the legacy of Swamy Jewelers, Mylapore, Chennai. Crafting jewelry designed not only to adorn, but to endure.

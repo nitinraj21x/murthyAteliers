@@ -122,7 +122,7 @@
   min-height: 600px;
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   color: white;
   text-align: center;
@@ -152,8 +152,12 @@
 }
 
 .hero-content {
-  position: relative;
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 1;
+  width: 100%;
   max-width: 800px;
   padding: 0 2rem;
   display: flex;
@@ -1326,9 +1330,9 @@
 
 .footer-logo-main {
   font-family: var(--font-logo);
-  font-size: 2.8rem;
+  font-size: 2rem;
   color: var(--color-bg-light);
-  line-height: 0.9;
+  line-height: 1.5;
   margin-bottom: 0.5rem;
 }
 
@@ -1756,3 +1760,223 @@ textarea.form-input {
     width: 100%;
   }
 }
+
+/* ==========================================================================
+   Responsive — hero-content position
+   ========================================================================== */
+@media (max-width: 768px) {
+  .hero-content {
+    bottom: 12%;
+    padding: 0 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content {
+    bottom: 8%;
+  }
+
+  .hero-ctas {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .hero-ctas .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   Responsive — founder / legacy section
+   ========================================================================== */
+@media (max-width: 768px) {
+  .founder-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .founder-note {
+    padding-left: 0;
+  }
+
+  .founder-img-frame {
+    max-width: 100%;
+  }
+
+  .tamil-greeting {
+    font-size: 1.8rem;
+  }
+}
+
+/* ==========================================================================
+   Responsive — process section
+   ========================================================================== */
+@media (max-width: 768px) {
+  .process-timeline {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+
+  .process-step {
+    width: 40%;
+  }
+
+  .process-details-card {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .process-details-content {
+    padding-right: 0;
+  }
+
+  .process-details-img {
+    aspect-ratio: 4/3;
+  }
+}
+
+@media (max-width: 480px) {
+  .process-step {
+    width: 45%;
+  }
+}
+
+/* ==========================================================================
+   Responsive — bespoke / craft-something-personal section
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Bespoke image height reduction on small screens */
+  .bespoke-img-responsive {
+    height: 300px !important;
+  }
+
+  .bespoke-ctas {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .bespoke-ctas .btn,
+  .bespoke-ctas a,
+  .bespoke-ctas button {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   Responsive — journal section
+   ========================================================================== */
+@media (max-width: 992px) {
+  .journal-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .journal-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .journal-drawer {
+    max-width: 100%;
+    padding: 5rem 1.25rem 2rem;
+  }
+
+  .journal-drawer-close {
+    left: 1.25rem;
+  }
+
+  .journal-drawer-title {
+    font-size: 1.8rem;
+  }
+}
+
+/* ==========================================================================
+   Responsive — emotional / final section
+   ========================================================================== */
+@media (max-width: 768px) {
+  .emotional-sec {
+    height: 50vh;
+    min-height: 360px;
+  }
+
+  .emotional-text {
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+  }
+
+  .emotional-brand {
+    font-size: 2.2rem;
+  }
+}
+
+/* ==========================================================================
+   Responsive — footer
+   ========================================================================== */
+@media (max-width: 992px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .footer {
+    padding: 4rem 0 2.5rem;
+  }
+}
+
+/* ==========================================================================
+   Responsive — modal
+   ========================================================================== */
+@media (max-width: 640px) {
+  .modal-body {
+    padding: 2rem 1.25rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .modal-title {
+    font-size: 1.75rem;
+  }
+}
+
+/* ==========================================================================
+   Responsive — section headings / typography
+   ========================================================================== */
+@media (max-width: 480px) {
+  .section-title {
+    font-size: clamp(1.75rem, 6vw, 2.4rem);
+  }
+
+  .tamil-greeting {
+    font-size: 1.6rem;
+  }
+
+  .sig-script {
+    font-size: 1.8rem;
+  }
+}
+

@@ -94,6 +94,7 @@ export const collections = [
     story:   "Forms informed by shrine doors, lotus borders, peacock reliefs, and the quiet geometry of Tamil sanctum ornament. Jewelry that carries the memory of sacred spaces.",
     image:   "/imgs/cat2.jpg",
     accent:  img.gemstone2,
+    imagePosition: "center center",
   },
   {
     id:      "everyday-classics",
@@ -102,6 +103,7 @@ export const collections = [
     story:   "Softer collars, diamond accents, and versatile silhouettes that still carry the dignity of heirloom thinking. Pieces that become part of who you are.",
     image:   "/imgs/cat3.png",
     accent:  img.necklace2,
+    imagePosition: "center calc(50% - 25px)",
   },
   {
     id:      "custom-commissions",
@@ -162,7 +164,7 @@ export const bespoke = {
   body:        "Whether reimagining inherited jewels or creating a new legacy piece, we work closely with clients to design jewelry rooted in sentiment and individuality.",
   cta1:        { label: "Begin Your Consultation", href: "/consultation" },
   cta2:        { label: "Share Your Story", href: `mailto:hello@murthyateliers.com?subject=Share%20My%20Story` },
-  image:       img.bespoke,
+  image:       "/crafter.png",
 };
 
 /* ─── Journal ────────────────────────────────────────────────── */

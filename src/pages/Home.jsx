@@ -377,7 +377,7 @@ export default function Home() {
             <img
               src={bespoke.image}
               alt="Bespoke jewelry"
-              className="w-full h-[480px] object-cover"
+              className="w-full h-[480px] object-cover bespoke-img-responsive"
               loading="lazy"
             />
             <div className="absolute inset-0 img-overlay-dark opacity-25" />
@@ -567,7 +567,7 @@ export default function Home() {
          Section 11: Final Note Section (proj2)
          ========================================================================== */}
       <section className="emotional-sec">
-        <div className="emotional-bg" style={{ backgroundImage: `url('/hero_jewel.png')` }}></div>
+        <div className="emotional-bg" style={{ backgroundImage: `url('/fbanner1.png')` }}></div>
         <div className="emotional-overlay"></div>
         <div className="emotional-content">
           <p className="emotional-text">
