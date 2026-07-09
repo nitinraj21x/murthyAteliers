@@ -6,13 +6,10 @@ import { staggerItem } from "../utils/motion";
 /**
  * CollectionCard
  *
- * The article has an explicit min-height. An absolutely-positioned <img>
- * fills it completely — same stacking context, so h-full always works.
- * Zoom on hover uses CSS transform: scale() which transitions smoothly
- * via Tailwind's group-hover + transition utilities.
- *
- * Text: bold white with a heavy multi-layer black text-shadow for
- * legibility against any image.
+ * Desktop: featured card spans 2 cols, tall height. Non-featured: shorter fixed height.
+ * Mobile: all cards are uniform height (260px), no "Request Details" button.
+ * Zoom on hover uses CSS transform: scale() for smooth GPU-composited animation.
+ * Text: bold white with heavy black text-shadow for legibility on any image.
  */
 export default function CollectionCard({ collection, featured = false }) {
   return (
@@ -20,22 +17,20 @@ export default function CollectionCard({ collection, featured = false }) {
       variants={staggerItem}
       className={`group relative overflow-hidden rounded-3xl ${
         featured
-          ? "lg:col-span-2 min-h-[480px] lg:min-h-[560px]"
-          : "min-h-[18rem] sm:min-h-[22rem]"
+          ? "lg:col-span-2 min-h-[260px] sm:min-h-[360px] lg:min-h-[480px] xl:min-h-[560px]"
+          : "min-h-[260px] sm:min-h-[22rem]"
       }`}
     >
-      {/* ── Image — absolutely fills the article ── */}
+      {/* Image — absolutely fills the article */}
       <img
         src={collection.image}
         alt={collection.name}
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
-        style={{
-          objectPosition: collection.imagePosition ?? "center center",
-        }}
+        style={{ objectPosition: collection.imagePosition ?? "center center" }}
         loading="lazy"
       />
 
-      {/* Dark gradient — heavier at the bottom so text always reads */}
+      {/* Dark gradient overlay */}
       <div
         className="absolute inset-0"
         style={{
@@ -44,13 +39,11 @@ export default function CollectionCard({ collection, featured = false }) {
         }}
       />
 
-      {/* Gold border reveal on hover */}
+      {/* Gold border on hover */}
       <div className="absolute inset-0 rounded-3xl border border-transparent group-hover:border-gold/40 transition-colors duration-500 pointer-events-none" />
 
-      {/* ── Text content ── */}
-      <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8">
-
-        {/* Eyebrow */}
+      {/* Text content */}
+      <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6 lg:p-8">
         <p
           className="eyebrow mb-2"
           style={{
@@ -61,10 +54,9 @@ export default function CollectionCard({ collection, featured = false }) {
           {collection.name}
         </p>
 
-        {/* Tagline — bold white, strong black shadow */}
         <h3
           className={`font-display leading-tight font-bold text-white ${
-            featured ? "text-3xl sm:text-4xl" : "text-2xl sm:text-3xl"
+            featured ? "text-2xl sm:text-3xl lg:text-4xl" : "text-xl sm:text-2xl lg:text-3xl"
           }`}
           style={{
             textShadow:
@@ -74,20 +66,17 @@ export default function CollectionCard({ collection, featured = false }) {
           {collection.tagline}
         </h3>
 
-        {/* Story — featured cards only */}
         {featured && (
           <p
-            className="mt-3 text-sm leading-7 font-medium text-white/90 max-w-lg"
-            style={{
-              textShadow: "0 1px 4px rgba(0,0,0,1), 0 2px 10px rgba(0,0,0,0.9)",
-            }}
+            className="mt-2 text-xs sm:text-sm leading-6 sm:leading-7 font-medium text-white/90 max-w-lg hidden md:block"
+            style={{ textShadow: "0 1px 4px rgba(0,0,0,1), 0 2px 10px rgba(0,0,0,0.9)" }}
           >
             {collection.story}
           </p>
         )}
 
-        {/* CTA button */}
-        <div className="mt-5">
+        {/* CTA — hidden on mobile via .collection-cta-wrap */}
+        <div className="collection-cta-wrap mt-4">
           <Link
             to={`/collections#${collection.id}`}
             className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-white border border-white/40 rounded-full px-5 py-2.5 hover:bg-white/15 hover:border-white/70 transition-all duration-300 backdrop-blur-sm"

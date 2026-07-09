@@ -12,7 +12,7 @@ export default function App() {
   }, []);
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="sync">
       {loading
         ? <BrandLoader key="loader" />
         : <AppRoutes key="app" />

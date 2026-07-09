@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
@@ -106,6 +106,24 @@ const JOURNAL_POSTS = [
 export default function Home() {
   // Section 6: Making of an Heirloom (proj2) state
   const [activeProcessStep, setActiveProcessStep] = useState(1);
+  // Mobile process slider index
+  const [mobileSlide, setMobileSlide] = useState(0);
+  const touchStartX = useRef(null);
+
+  const handleProcessTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleProcessTouchEnd = (e) => {
+    if (touchStartX.current === null) return;
+    const delta = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(delta) < 40) return; // ignore tiny swipes
+    if (delta > 0 && mobileSlide < PROCESS_STEPS.length - 1) {
+      setMobileSlide((s) => s + 1);
+    } else if (delta < 0 && mobileSlide > 0) {
+      setMobileSlide((s) => s - 1);
+    }
+    touchStartX.current = null;
+  };
 
   // Section 8: Journal Section (proj2) state
   const [activeJournal, setActiveJournal] = useState(null);
@@ -317,25 +335,22 @@ export default function Home() {
           <div className="divider-gold"></div>
         </div>
 
-        <div className="process-container">
+        {/* ── Desktop timeline (hidden on mobile) ── */}
+        <div className="process-container process-desktop-only">
           <div className="process-line"></div>
           <div className="process-timeline">
             {PROCESS_STEPS.map((step) => (
-              <div 
-                key={step.step} 
+              <div
+                key={step.step}
                 className={`process-step ${activeProcessStep === step.step ? 'active' : ''}`}
                 onClick={() => setActiveProcessStep(step.step)}
               >
-                <div className="process-node">
-                  {step.step}
-                </div>
+                <div className="process-node">{step.step}</div>
                 <h4 className="process-step-title">{step.title}</h4>
                 <span className="process-step-sub">{step.subtitle}</span>
               </div>
             ))}
           </div>
-
-          {/* Detailed step content display card */}
           {PROCESS_STEPS.map((step) => {
             if (step.step !== activeProcessStep) return null;
             return (
@@ -351,6 +366,62 @@ export default function Home() {
               </div>
             );
           })}
+        </div>
+
+        {/* ── Mobile swipe slider (hidden on desktop) ── */}
+        <div
+          className="process-mobile-slider"
+          onTouchStart={handleProcessTouchStart}
+          onTouchEnd={handleProcessTouchEnd}
+        >
+          {/* Slide track */}
+          <div
+            className="process-mobile-track"
+            style={{ transform: `translateX(-${mobileSlide * 100}%)` }}
+          >
+            {PROCESS_STEPS.map((step) => (
+              <div key={step.step} className="process-mobile-slide">
+                <img src={step.image} alt={step.title} className="process-mobile-img" />
+                <div className="process-mobile-content">
+                  <span className="process-mobile-num">{step.step.toString().padStart(2, '0')}</span>
+                  <h3 className="process-mobile-title">
+                    {step.title} <span className="process-mobile-sub">{step.subtitle}</span>
+                  </h3>
+                  <p className="process-mobile-desc">{step.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Swipe arrows hint */}
+          <div className="process-mobile-arrows">
+            <button
+              className="process-mobile-arrow"
+              onClick={() => setMobileSlide((s) => Math.max(0, s - 1))}
+              aria-label="Previous step"
+              disabled={mobileSlide === 0}
+            >
+              ←
+            </button>
+            <div className="process-mobile-dots">
+              {PROCESS_STEPS.map((_, i) => (
+                <button
+                  key={i}
+                  className={`process-mobile-dot ${i === mobileSlide ? 'active' : ''}`}
+                  onClick={() => setMobileSlide(i)}
+                  aria-label={`Go to step ${i + 1}`}
+                />
+              ))}
+            </div>
+            <button
+              className="process-mobile-arrow"
+              onClick={() => setMobileSlide((s) => Math.min(PROCESS_STEPS.length - 1, s + 1))}
+              aria-label="Next step"
+              disabled={mobileSlide === PROCESS_STEPS.length - 1}
+            >
+              →
+            </button>
+          </div>
         </div>
       </section>
 

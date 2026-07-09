@@ -32,7 +32,7 @@ export default function Navbar() {
       }`}
     >
       <div className="shell">
-        <div className="frame flex items-center justify-between gap-6 py-4 lg:py-5">
+        <div className="frame flex items-center justify-between gap-4 py-2.5 lg:py-5">
 
           {/* Logo */}
           <Link
@@ -44,7 +44,7 @@ export default function Navbar() {
               className={`logo-brand script-brand whitespace-nowrap transition-colors duration-500 ${
                 scrolled ? "text-crimson" : "text-cream"
               }`}
-              style={{ fontSize: "clamp(1.1rem, 2.2vw, 1.6rem)", lineHeight: 1 }}
+              style={{ fontSize: "clamp(1rem, 4.5vw, 1.6rem)", lineHeight: 1 }}
             >
               {brand.fullName}
             </span>
@@ -79,9 +79,9 @@ export default function Navbar() {
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close menu" : "Open menu"}
-            className="lg:hidden flex items-center justify-center h-10 w-10 rounded-full border border-gold/25 bg-cream/60 backdrop-blur-sm text-forest"
+            className="lg:hidden flex items-center justify-center h-8 w-8 rounded-full border border-gold/25 bg-cream/60 backdrop-blur-sm text-forest flex-shrink-0"
           >
-            {open ? <X size={18} /> : <Menu size={18} />}
+            {open ? <X size={16} /> : <Menu size={16} />}
           </button>
         </div>
       </div>
@@ -96,15 +96,15 @@ export default function Navbar() {
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className="lg:hidden overflow-hidden border-t border-gold/15 bg-cream/96 backdrop-blur-md"
           >
-            <div className="shell py-5">
-              <div className="frame flex flex-col gap-2">
+            <div className="shell py-3">
+              <div className="frame flex flex-col gap-1">
                 {navigation.map((item) => (
                   <NavLink
                     key={item.href}
                     to={item.href}
                     onClick={() => setOpen(false)}
                     className={({ isActive }) =>
-                      `block px-4 py-3.5 rounded-2xl text-xs font-medium tracking-widest uppercase transition ${
+                      `block px-4 py-2.5 rounded-2xl text-xs font-medium tracking-widest uppercase transition ${
                         isActive
                           ? "bg-crimson/8 text-crimson"
                           : "text-forest/80 hover:bg-gold/8 hover:text-forest"
