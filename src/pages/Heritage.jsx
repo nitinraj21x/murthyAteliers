@@ -2,24 +2,18 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { founderStory, brand } from "../data/content";
-import { img } from "../data/images";
 import { fadeUp, fadeLeft, fadeRight, staggerContainer, staggerItem, inView } from "../utils/motion";
 
 const heritagePoints = [
   {
     title: "D.K. Murthy & E.A. Swamy Jewelers",
     body:  "Founded in the heart of Mylapore, Chennai, the original house built its reputation on the trust of families, the integrity of craft, and beauty made to outlast the hands that made it.",
-    image: img.mylapore,
+    image: "/store.png",
   },
   {
     title: "The Legacy of Mylapore",
     body:  "Mylapore is not just a location — it is a living archive of South Indian culture, temple tradition, and artisanal craft. The streets, the sanctums, and the silk have shaped the visual language of our jewelry.",
-    image: img.archival,
-  },
-  {
-    title: "Shanthi Shankar",
-    body:  "Murthy Ateliers was founded in memory of Shanthi Shankar — jeweller's daughter, a woman of warmth and grace who was still becoming when we lost her. Every piece is her unfinished sentence, continued.",
-    image: img.founder,
+    image: "/chennai.png",
   },
 ];
 
@@ -29,7 +23,7 @@ export default function Heritage() {
       {/* Hero */}
       <section className="relative h-[55vh] min-h-[420px] flex items-end overflow-hidden">
         <img
-          src={img.mylapore}
+          src="/store.png"
           alt="Heritage"
           className="absolute inset-0 w-full h-full object-cover"
           fetchpriority="high"
@@ -51,14 +45,14 @@ export default function Heritage() {
         </div>
       </section>
 
-      {/* Founder story */}
+      {/* Founder / Legacy Continued */}
       <section className="shell py-20 sm:py-28">
         <div className="frame grid gap-10 lg:grid-cols-[0.9fr_1.1fr] items-start">
           <motion.div variants={fadeLeft} {...inView} className="relative">
             <div className="relative overflow-hidden rounded-3xl shadow-luxury">
               <img
-                src={founderStory.image}
-                alt="Founder"
+                src="/collection1.jpg"
+                alt="A Legacy Continued"
                 className="w-full h-[520px] object-cover"
                 loading="lazy"
               />
@@ -90,39 +84,41 @@ export default function Heritage() {
         </div>
       </section>
 
-      {/* Heritage points */}
+      {/* Shanthi Shankar — centered, no image */}
+      <section className="shell py-16 bg-cream-dark">
+        <div className="frame max-w-2xl mx-auto text-center">
+          <motion.div variants={fadeUp} {...inView}>
+            <p className="eyebrow text-crimson mb-4">In Memory</p>
+            <h2 className="display-md text-forest mb-6">Shanthi Shankar</h2>
+            <div className="ornament mb-8" />
+            <p className="text-base leading-9 text-forest/70 font-display italic text-xl">
+              Murthy Ateliers was founded in memory of Shanthi Shankar — jeweller's daughter, a woman of warmth and grace who was still becoming when we lost her. Every piece is her unfinished sentence, continued.
+            </p>
+            <div className="ornament mt-8" />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Heritage points — D.K. Murthy & Mylapore */}
       <section className="shell py-20 sm:py-24 bg-crimson relative overflow-hidden">
         <div
           className="absolute inset-0 opacity-15 pointer-events-none"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 80% 30%, rgba(211,175,55,0.2) 0%, transparent 50%)",
-          }}
+          style={{ backgroundImage: "radial-gradient(circle at 80% 30%, rgba(211,175,55,0.2) 0%, transparent 50%)" }}
         />
         <div className="frame relative z-10">
           <motion.p {...fadeUp} {...inView} className="eyebrow text-gold/70 mb-4">
-            Three Pillars of Our Story
+            Two Pillars of Our Story
           </motion.p>
-          <motion.h2
-            {...fadeUp}
-            {...inView}
-            className="display-lg text-cream mb-12"
-          >
+          <motion.h2 {...fadeUp} {...inView} className="display-lg text-cream mb-12">
             Where We Come From
           </motion.h2>
 
-          <motion.div
-            variants={staggerContainer}
-            {...inView}
-            className="space-y-8"
-          >
+          <motion.div variants={staggerContainer} {...inView} className="space-y-8">
             {heritagePoints.map((point, i) => (
               <motion.div
                 key={point.title}
                 variants={staggerItem}
-                className={`grid gap-6 lg:grid-cols-2 items-center ${
-                  i % 2 === 1 ? "lg:[direction:rtl]" : ""
-                }`}
+                className={`grid gap-6 lg:grid-cols-2 items-center ${i % 2 === 1 ? "lg:[direction:rtl]" : ""}`}
               >
                 <div className="relative overflow-hidden rounded-3xl lg:[direction:ltr]">
                   <img

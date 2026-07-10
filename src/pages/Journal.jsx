@@ -2,10 +2,8 @@ import { motion } from "framer-motion";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, Clock, ArrowUpRight } from "lucide-react";
 import JournalCard from "../components/JournalCard";
-import SectionHeading from "../components/SectionHeading";
 import { journalArticles } from "../data/content";
-import { img } from "../data/images";
-import { fadeUp, staggerContainer, staggerItem, inView } from "../utils/motion";
+import { fadeUp, staggerContainer, inView } from "../utils/motion";
 
 /* Single article view */
 function ArticleView({ article }) {
@@ -68,7 +66,7 @@ function JournalIndex() {
       {/* Hero */}
       <section className="relative h-[55vh] min-h-[420px] flex items-end overflow-hidden">
         <img
-          src={img.journal1}
+          src="/heirStory.jpg"
           alt="Journal"
           className="absolute inset-0 w-full h-full object-cover"
           fetchpriority="high"

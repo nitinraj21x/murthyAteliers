@@ -2,7 +2,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, MessageCircle, Mail, MapPin, Phone, CheckCircle, Loader } from "lucide-react";
 import { brand } from "../data/content";
-import { img } from "../data/images";
 import { fadeUp, fadeLeft, fadeRight, staggerContainer, staggerItem, inView } from "../utils/motion";
 import { sendEmail } from "../utils/emailjs";
 
@@ -52,7 +51,7 @@ export default function Consultation() {
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[380px] flex items-end overflow-hidden">
         <img
-          src={img.consultation}
+          src="/hero_jewel.png"
           alt="Consultation"
           className="absolute inset-0 w-full h-full object-cover"
           fetchpriority="high"
@@ -222,20 +221,17 @@ export default function Consultation() {
               ))}
             </div>
 
-            {/* Image */}
-            <div className="relative overflow-hidden rounded-3xl shadow-luxury">
-              <img
-                src={img.velvetTray}
-                alt="Atelier"
-                className="w-full h-52 object-cover"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 img-overlay-dark opacity-30" />
-              <div className="absolute inset-0 flex items-end p-6">
-                <p className="font-display italic text-cream text-lg">
-                  "Every piece begins with a conversation."
-                </p>
+            {/* Logo card */}
+            <div className="relative overflow-hidden rounded-3xl shadow-luxury bg-crimson flex items-center justify-center" style={{ minHeight: "13rem" }}>
+              <div className="flex flex-col items-center gap-3 p-8">
+                <img src="/favicon.svg" alt="Murthy Ateliers" className="w-16 h-16 opacity-90" />
+                <p className="script-brand text-cream text-2xl leading-tight text-center">Murthy Ateliers</p>
+                <p className="eyebrow text-gold/70 text-center">by 9th</p>
               </div>
+              <div
+                className="absolute inset-0 opacity-10 pointer-events-none"
+                style={{ backgroundImage: "radial-gradient(circle at 50% 50%, rgba(211,175,55,0.5) 0%, transparent 65%)" }}
+              />
             </div>
           </motion.div>
         </div>

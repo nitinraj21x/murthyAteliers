@@ -1,60 +1,56 @@
 /**
- * Curated Unsplash image URLs for Murthy Ateliers
- * All images are jewelry-focused: gold work, gemstones, macro shots,
- * craftsmanship, velvet trays, heritage motifs, atelier closeups.
- *
- * Format: ?auto=format&fit=crop&w={width}&q=85
+ * Image paths for Murthy Ateliers — all local assets from /public
  */
 
 export const img = {
   // ── Hero & Banners ──────────────────────────────────────────
-  hero1:        "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=1800&q=85",
-  hero2:        "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=1800&q=85",
-  hero3:        "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1800&q=85",
-  heroCinematic:"https://images.unsplash.com/photo-1573408301185-9519f94816b5?auto=format&fit=crop&w=1800&q=85",
+  hero1:        "/banner_collection.jpg",
+  hero2:        "/imgs/craftmanship.jpg",
+  hero3:        "/imgs/heirloom.jpg",
+  heroCinematic:"/fbanner1.png",
 
   // ── Founder / Heritage ──────────────────────────────────────
-  founder:      "https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=900&q=85",
-  mylapore:     "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=85",
-  archival:     "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=85",
-  sketch:       "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=900&q=85",
+  founder:      "/collection1.jpg",
+  mylapore:     "/store.png",
+  archival:     "/chennai.png",
+  sketch:       "/craft.jpg",
 
   // ── Collections ─────────────────────────────────────────────
-  bridal:       "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1200&q=85",
-  temple:       "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1200&q=85",
-  everyday:     "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1200&q=85",
-  custom:       "https://images.unsplash.com/photo-1573408301185-9519f94816b5?auto=format&fit=crop&w=1200&q=85",
-  heritage:     "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=1200&q=85",
+  bridal:       "/jewellry/Cultural/1/DPPHOTGRAPHY-8171.jpg",
+  temple:       "/jewellry/Cultural/4/DPPHOTGRAPHY-8194.jpg",
+  everyday:     "/jewellry/Cultural/6/DPPHOTGRAPHY-8212.jpg",
+  custom:       "/jewellry/Commisioned/1/DPPHOTGRAPHY-8089.jpg",
+  heritage:     "/jewellry/Commisioned/4/DPPHOTGRAPHY-8147.jpg",
 
   // ── Jewelry Macro / Detail ───────────────────────────────────
-  goldwork1:    "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=900&q=85",
-  goldwork2:    "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=85",
-  gemstone1:    "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=85",
-  gemstone2:    "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=900&q=85",
-  necklace1:    "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=900&q=85",
-  necklace2:    "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=900&q=85",
-  earrings1:    "https://images.unsplash.com/photo-1573408301185-9519f94816b5?auto=format&fit=crop&w=900&q=85",
-  bangles1:     "https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=900&q=85",
-  velvetTray:   "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=85",
+  goldwork1:    "/jewellry/Cultural/2/DPPHOTGRAPHY-8350.jpg",
+  goldwork2:    "/jewellry/Cultural/3/DPPHOTGRAPHY-8180.jpg",
+  gemstone1:    "/jewellry/Cultural/5/DPPHOTGRAPHY-8202.jpg",
+  gemstone2:    "/jewellry/Cultural/7/DPPHOTGRAPHY-8227.jpg",
+  necklace1:    "/jewellry/Cultural/8/DPPHOTGRAPHY-8254.jpg",
+  necklace2:    "/jewellry/Cultural/9/DPPHOTGRAPHY-8335.jpg",
+  earrings1:    "/jewellry/Commisioned/3/DPPHOTGRAPHY-8130.jpg",
+  bangles1:     "/jewellry/Commisioned/5/DPPHOTGRAPHY-8220.jpg",
+  velvetTray:   "/jewellry/Commisioned/6/DPPHOTGRAPHY-8278.jpg",
 
   // ── Craftsmanship / Atelier ──────────────────────────────────
-  artisan1:     "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=85",
-  artisan2:     "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=85",
-  stones:       "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=85",
-  finishing:    "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=900&q=85",
+  artisan1:     "/handCrafted.jpg",
+  artisan2:     "/detailing.jpg",
+  stones:       "/jewellry/Cultural/10/DPPHOTGRAPHY-8340.jpg",
+  finishing:    "/jewellry/Commisioned/2/DPPHOTGRAPHY-8108.jpg",
 
   // ── Journal / Editorial ──────────────────────────────────────
-  journal1:     "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=800&q=85",
-  journal2:     "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=800&q=85",
-  journal3:     "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=85",
-  journal4:     "https://images.unsplash.com/photo-1573408301185-9519f94816b5?auto=format&fit=crop&w=800&q=85",
-  journal5:     "https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=800&q=85",
-  journal6:     "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=85",
+  journal1:     "/heirStory.jpg",
+  journal2:     "/imgs/craftmanship.jpg",
+  journal3:     "/antique.jpg",
+  journal4:     "/imgs/heirloom.jpg",
+  journal5:     "/craft.jpg",
+  journal6:     "/lineage.jpg",
 
   // ── Bespoke / Consultation ───────────────────────────────────
-  bespoke:      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1200&q=85",
-  consultation: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1200&q=85",
+  bespoke:      "/crafter.png",
+  consultation: "/hero_jewel.png",
 
   // ── Final / Cinematic ────────────────────────────────────────
-  cinematic:    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1800&q=85",
+  cinematic:    "/fbanner1.png",
 };

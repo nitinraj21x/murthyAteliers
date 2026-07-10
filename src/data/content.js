@@ -174,7 +174,7 @@ export const journalArticles = [
     category: "Heritage",
     title:    "The Story of Heirloom Jewelry",
     excerpt:  "Why jewels intended for memory age more beautifully than pieces made for trend cycles. A meditation on permanence and the objects we choose to keep.",
-    image:    img.journal1,
+    image:    "/heirStory.jpg",
     readTime: "6 min read",
   },
   {
@@ -182,7 +182,7 @@ export const journalArticles = [
     category: "Culture",
     title:    "Mylapore & Craft Heritage",
     excerpt:  "How street, sanctum, and silk have shaped the visual language of South Indian ornament across centuries of living tradition.",
-    image:    img.journal2,
+    image:    "/imgs/craftmanship.jpg",
     readTime: "8 min read",
   },
   {
@@ -190,7 +190,7 @@ export const journalArticles = [
     category: "Styling",
     title:    "Styling Antique Jewelry",
     excerpt:  "Layering temple pieces with restraint so the jewel remains the point of focus. Notes on proportion, occasion, and the art of wearing less.",
-    image:    img.journal3,
+    image:    "/antique.jpg",
     readTime: "5 min read",
   },
   {
@@ -198,7 +198,7 @@ export const journalArticles = [
     category: "Care",
     title:    "Caring for Precious Pieces",
     excerpt:  "Warm storage, gentle cleaning, and ritual-minded care that keeps heirlooms luminous across generations of wearing.",
-    image:    img.journal4,
+    image:    "/imgs/heirloom.jpg",
     readTime: "4 min read",
   },
   {
@@ -206,7 +206,7 @@ export const journalArticles = [
     category: "Craft",
     title:    "Behind the Design Process",
     excerpt:  "From the first sketch to the final polish — a look inside the atelier and the slow, deliberate work that makes a piece feel inevitable.",
-    image:    img.journal5,
+    image:    "/craft.jpg",
     readTime: "7 min read",
   },
   {
@@ -214,7 +214,7 @@ export const journalArticles = [
     category: "Legacy",
     title:    "The Emotional Value of Passing Jewelry Through Generations",
     excerpt:  "On the quiet power of objects that carry names, dates, and the warmth of hands that wore them before yours.",
-    image:    img.journal6,
+    image:    "/lineage.jpg",
     readTime: "9 min read",
   },
 ];
