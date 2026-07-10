@@ -30,8 +30,20 @@ const COMMISIONED_GROUPS = [
 ];
 
 // Flatten all images for a collection into a single array for the slider
-const CULTURAL_IMAGES   = CULTURAL_GROUPS.flatMap((g) => g.images);
-const COMMISIONED_IMAGES = COMMISIONED_GROUPS.flatMap((g) => g.images);
+// Round-robin interleave: first image of each folder, then second, etc.
+function interleave(groups) {
+  const result = [];
+  const maxLen = Math.max(...groups.map((g) => g.images.length));
+  for (let i = 0; i < maxLen; i++) {
+    for (const group of groups) {
+      if (i < group.images.length) result.push(group.images[i]);
+    }
+  }
+  return result;
+}
+
+const CULTURAL_IMAGES    = interleave(CULTURAL_GROUPS);
+const COMMISIONED_IMAGES = interleave(COMMISIONED_GROUPS);
 
 /* ─── Image Gallery Block ───────────────────────────────────── */
 function CollectionBlock({ id, label, eyebrow, heading, description, images, bgImage, reverse = false, whatsapp }) {
