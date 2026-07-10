@@ -51,7 +51,7 @@ export default function Consultation() {
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[380px] flex items-end overflow-hidden">
         <img
-          src="/hero_jewel.png"
+          src="/bannerConsult.png"
           alt="Consultation"
           className="absolute inset-0 w-full h-full object-cover"
           fetchpriority="high"
@@ -221,17 +221,25 @@ export default function Consultation() {
               ))}
             </div>
 
-            {/* Logo card */}
+            {/* Brand name card — same style as navbar logo */}
             <div className="relative overflow-hidden rounded-3xl shadow-luxury bg-crimson flex items-center justify-center" style={{ minHeight: "13rem" }}>
-              <div className="flex flex-col items-center gap-3 p-8">
-                <img src="/favicon.svg" alt="Murthy Ateliers" className="w-16 h-16 opacity-90" />
-                <p className="script-brand text-cream text-2xl leading-tight text-center">Murthy Ateliers</p>
-                <p className="eyebrow text-gold/70 text-center">by 9th</p>
-              </div>
               <div
-                className="absolute inset-0 opacity-10 pointer-events-none"
-                style={{ backgroundImage: "radial-gradient(circle at 50% 50%, rgba(211,175,55,0.5) 0%, transparent 65%)" }}
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  backgroundImage:
+                    "radial-gradient(circle at 20% 80%, rgba(106,20,19,0.06) 0%, transparent 40%)",
+                }}
               />
+              <div className="relative z-10 flex flex-col items-center gap-2 p-8 text-center">
+                <span
+                  className="script-brand text-cream whitespace-nowrap"
+                  style={{ fontSize: "clamp(1.8rem, 5vw, 2.8rem)", lineHeight: 1 }}
+                >
+                  Murthy Ateliers by 9th
+                </span>
+                <div className="ornament mt-3" style={{ width: "120px" }} />
+                <p className="eyebrow text-gold/70 mt-1">Heirloom Jewels Crafted to Endure</p>
+              </div>
             </div>
           </motion.div>
         </div>
