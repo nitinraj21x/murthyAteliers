@@ -1,56 +1,60 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { sendEmail } from "../utils/emailjs";
 
 export default function Footer() {
   // Booking modal states
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [isBookingOpen, setIsBookingOpen]   = useState(false);
   const [bookingSuccess, setBookingSuccess] = useState(false);
+  const [bookingSending, setBookingSending] = useState(false);
+  const [bookingError, setBookingError]     = useState("");
   const [bookingForm, setBookingForm] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    service: 'Consultation',
-    date: '',
-    notes: ''
+    name: '', email: '', phone: '', service: 'Consultation', date: '', notes: ''
   });
 
-  // Open booking modal
   const openBookingModal = (serviceType = 'Consultation', notesPrefill = '') => {
-    setBookingForm({
-      name: '',
-      email: '',
-      phone: '',
-      service: serviceType,
-      date: '',
-      notes: notesPrefill
-    });
+    setBookingForm({ name: '', email: '', phone: '', service: serviceType, date: '', notes: notesPrefill });
     setBookingSuccess(false);
+    setBookingError("");
     setIsBookingOpen(true);
   };
 
-  // Close booking modal
   const closeBookingModal = () => {
     setIsBookingOpen(false);
     setBookingSuccess(false);
+    setBookingError("");
   };
 
-  // Handle input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setBookingForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle form submit
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    if (!bookingForm.name || !bookingForm.email || !bookingForm.phone) {
-      alert('Please fill out all required fields.');
-      return;
+    setBookingSending(true);
+    setBookingError("");
+
+    const result = await sendEmail({
+      from_name:      bookingForm.name,
+      from_email:     bookingForm.email,
+      phone:          bookingForm.phone,
+      service:        bookingForm.service,
+      preferred_date: bookingForm.date,
+      notes:          bookingForm.notes,
+      message:        bookingForm.notes, // alias so template works for both forms
+      to_name:        "Murthy Ateliers",
+    });
+
+    setBookingSending(false);
+
+    if (result.success) {
+      setBookingSuccess(true);
+    } else {
+      setBookingError("Something went wrong. Please reach us directly via WhatsApp or email.");
     }
-    setBookingSuccess(true);
   };
 
-  // Listen for global open-booking-modal events
   useEffect(() => {
     const handleGlobalOpen = (e) => {
       openBookingModal(e.detail?.service || 'Consultation', e.detail?.notes || '');
@@ -242,9 +246,15 @@ export default function Footer() {
                       />
                     </div>
 
-                    <button type="submit" className="btn btn-primary" style={{ marginTop: '1rem', width: '100%' }}>
-                      Request Appointment
+                    <button type="submit" className="btn btn-primary" style={{ marginTop: '1rem', width: '100%' }} disabled={bookingSending}>
+                      {bookingSending ? 'Sending…' : 'Request Appointment'}
                     </button>
+
+                    {bookingError && (
+                      <p style={{ color: 'var(--color-dark-red)', fontSize: '0.8rem', textAlign: 'center', marginTop: '0.5rem' }}>
+                        {bookingError}
+                      </p>
+                    )}
                   </form>
                 </>
               ) : (
