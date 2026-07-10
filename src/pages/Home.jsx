@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
-import CollectionCard from "../components/CollectionCard";
 import FaqAccordion from "../components/FaqAccordion";
-import { philosophy, collections, bespoke, legacyStories, faqs } from "../data/content";
+import { philosophy, bespoke, legacyStories, faqs } from "../data/content";
 import { fadeRight, staggerContainer, staggerItem, inView, scaleIn } from "../utils/motion";
 
 // ==========================================================================
@@ -291,15 +290,15 @@ export default function Home() {
       </section>
 
       {/* ==========================================================================
-         Section 5: Signature Collections Section (proj1)
+         Section 5: Signature Collections Section
          ========================================================================== */}
       <section id="collections" className="shell py-20 sm:py-28">
         <div className="frame">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
             <SectionHeading
               eyebrow="Signature Collections"
-              heading="Five Worlds of Heirloom Jewelry"
-              body="Each collection is a distinct visual and emotional universe — not a catalogue, but a story."
+              heading="Two Worlds of Heirloom Jewelry"
+              body="Each collection is a distinct emotional universe — not a catalogue, but a curated world of meaning."
             />
             <Link
               to="/collections"
@@ -312,15 +311,77 @@ export default function Home() {
           <motion.div
             variants={staggerContainer}
             {...inView}
-            className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+            className="grid gap-5 sm:grid-cols-2"
           >
-            {collections.map((col, i) => (
-              <CollectionCard
-                key={col.id}
-                collection={col}
-                featured={i === 0}
+            {/* Cultural */}
+            <motion.article
+              variants={staggerItem}
+              className="group relative overflow-hidden rounded-3xl min-h-[420px] sm:min-h-[500px]"
+            >
+              <img
+                src="/jewellry/Cultural/1/DPPHOTGRAPHY-8173.jpg"
+                alt="Cultural Collection"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
+                loading="lazy"
               />
-            ))}
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.08) 100%)" }} />
+              <div className="absolute inset-0 rounded-3xl border border-transparent group-hover:border-gold/40 transition-colors duration-500 pointer-events-none" />
+              <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8">
+                <p className="eyebrow mb-2" style={{ color: "#D3AF37", textShadow: "0 1px 4px rgba(0,0,0,1)" }}>Cultural</p>
+                <h3
+                  className="font-display text-2xl sm:text-3xl font-bold text-white leading-tight"
+                  style={{ textShadow: "0 2px 4px rgba(0,0,0,1), 0 4px 16px rgba(0,0,0,0.95)" }}
+                >
+                  Rooted in Tradition
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-white/75 hidden sm:block" style={{ textShadow: "0 1px 4px rgba(0,0,0,0.9)" }}>
+                  Jewelry shaped by temple geometry, Mylapore sanctums, and generations of South Indian goldsmithing.
+                </p>
+                <div className="mt-5 hidden sm:block">
+                  <Link
+                    to="/collections"
+                    className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-white border border-white/40 rounded-full px-5 py-2.5 hover:bg-white/15 hover:border-white/70 transition-all duration-300 backdrop-blur-sm"
+                  >
+                    Explore Cultural <ArrowUpRight size={13} />
+                  </Link>
+                </div>
+              </div>
+            </motion.article>
+
+            {/* Commissioned */}
+            <motion.article
+              variants={staggerItem}
+              className="group relative overflow-hidden rounded-3xl min-h-[420px] sm:min-h-[500px]"
+            >
+              <img
+                src="/jewellry/Commisioned/4/DPPHOTGRAPHY-8162.jpg"
+                alt="Commissioned Collection"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
+                loading="lazy"
+              />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.08) 100%)" }} />
+              <div className="absolute inset-0 rounded-3xl border border-transparent group-hover:border-gold/40 transition-colors duration-500 pointer-events-none" />
+              <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8">
+                <p className="eyebrow mb-2" style={{ color: "#D3AF37", textShadow: "0 1px 4px rgba(0,0,0,1)" }}>Commissioned</p>
+                <h3
+                  className="font-display text-2xl sm:text-3xl font-bold text-white leading-tight"
+                  style={{ textShadow: "0 2px 4px rgba(0,0,0,1), 0 4px 16px rgba(0,0,0,0.95)" }}
+                >
+                  Made for You, by Name
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-white/75 hidden sm:block" style={{ textShadow: "0 1px 4px rgba(0,0,0,0.9)" }}>
+                  Client-led bespoke pieces where memory, material, and wearability are shaped together from the first conversation.
+                </p>
+                <div className="mt-5 hidden sm:block">
+                  <Link
+                    to="/collections"
+                    className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-white border border-white/40 rounded-full px-5 py-2.5 hover:bg-white/15 hover:border-white/70 transition-all duration-300 backdrop-blur-sm"
+                  >
+                    Explore Commissioned <ArrowUpRight size={13} />
+                  </Link>
+                </div>
+              </div>
+            </motion.article>
           </motion.div>
         </div>
       </section>
