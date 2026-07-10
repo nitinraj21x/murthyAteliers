@@ -33,16 +33,17 @@ export const EMAILJS_CONFIG = {
  * @param {object} templateParams - key/value pairs matching your EmailJS template variables
  */
 export async function sendEmail(templateParams) {
-  // Lazy-import EmailJS so it's only bundled when needed
   const emailjs = await import("@emailjs/browser");
 
+  const { SERVICE_ID, TEMPLATE_ID, PUBLIC_KEY } = EMAILJS_CONFIG;
+
+  if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+    console.error("EmailJS: Missing environment variables. Check VITE_EMAILJS_* in your deployment settings.");
+    return { success: false, error: "Email service is not configured. Please contact us directly via WhatsApp or email." };
+  }
+
   try {
-    await emailjs.send(
-      EMAILJS_CONFIG.SERVICE_ID,
-      EMAILJS_CONFIG.TEMPLATE_ID,
-      templateParams,
-      { publicKey: EMAILJS_CONFIG.PUBLIC_KEY }
-    );
+    await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, { publicKey: PUBLIC_KEY });
     return { success: true };
   } catch (err) {
     console.error("EmailJS error:", err);
