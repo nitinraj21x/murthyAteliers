@@ -190,7 +190,7 @@ export default function Collections() {
       {/* Page Hero */}
       <section className="relative h-[50vh] min-h-[380px] flex items-end overflow-hidden">
         <img
-          src="/jewellry/Cultural/1/DPPHOTGRAPHY-8171.jpg"
+          src="/bannerCollection.jpg"
           alt="Collections"
           className="absolute inset-0 w-full h-full object-cover"
           fetchpriority="high"

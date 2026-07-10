@@ -36,7 +36,7 @@ export default function Craftsmanship() {
       {/* Hero */}
       <section className="relative h-[55vh] min-h-[420px] flex items-end overflow-hidden">
         <img
-          src={img.artisan1}
+          src="/detailing.jpg"
           alt="Craftsmanship"
           className="absolute inset-0 w-full h-full object-cover"
           fetchpriority="high"
