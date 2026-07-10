@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { brand } from "../data/content";
 import { fadeUp, inView, scaleIn } from "../utils/motion";
-
 /* ─── Image data ────────────────────────────────────────────── */
 const CULTURAL_GROUPS = [
   { label: "Set 1",  images: ["/jewellry/Cultural/1/DPPHOTGRAPHY-8171.jpg","/jewellry/Cultural/1/DPPHOTGRAPHY-8173.jpg","/jewellry/Cultural/1/DPPHOTGRAPHY-8175.jpg","/jewellry/Cultural/1/DPPHOTGRAPHY-8177.jpg"] },
@@ -46,7 +45,7 @@ const CULTURAL_IMAGES    = interleave(CULTURAL_GROUPS);
 const COMMISIONED_IMAGES = interleave(COMMISIONED_GROUPS);
 
 /* ─── Image Gallery Block ───────────────────────────────────── */
-function CollectionBlock({ id, label, eyebrow, heading, description, images, bgImage, reverse = false, whatsapp }) {
+function CollectionBlock({ id, eyebrow, heading, description, images, bgImage, reverse = false, whatsapp }) {
   const [active, setActive]   = useState(0);
   const [sliderStart, setSliderStart] = useState(0);
   const THUMB_VISIBLE = 5;
@@ -241,12 +240,10 @@ export default function Collections() {
                 }}
               >
                 {tab.label}
-                {activeTab === tab.key && (
-                  <motion.span
-                    layoutId="tab-indicator"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gold"
-                  />
-                )}
+                <span
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-gold transition-opacity duration-200"
+                  style={{ opacity: activeTab === tab.key ? 1 : 0 }}
+                />
               </button>
             ))}
           </div>
@@ -265,7 +262,6 @@ export default function Collections() {
           >
             <CollectionBlock
               id="cultural"
-              label="Cultural"
               eyebrow="Cultural Collection"
               heading="Rooted in Tradition"
               description="Jewelry shaped by temple geometry, Mylapore sanctums, and generations of South Indian goldsmithing. Each piece carries the memory of sacred architecture and the warmth of 22k gold."
@@ -284,7 +280,6 @@ export default function Collections() {
           >
             <CollectionBlock
               id="commisioned"
-              label="Commissioned"
               eyebrow="Commissioned Collection"
               heading="Made for You, by Name"
               description="Client-led pieces where memory, material, and wearability are shaped together from the first conversation. Bespoke work crafted with quiet restraint and deep personal intention."

@@ -29,7 +29,7 @@ export default function MainLayout() {
     <div className="flex flex-col min-h-svh">
       <Navbar />
       <main className="flex-1">
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="sync">
           <PageTransition key={pathname}>
             <Outlet />
           </PageTransition>

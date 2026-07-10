@@ -23,7 +23,7 @@ export default function Heritage() {
       {/* Hero */}
       <section className="relative h-[55vh] min-h-[420px] flex items-end overflow-hidden">
         <img
-          src="/fbanner1.png"
+          src="/imgs/heirloom.jpg"
           alt="Heritage"
           className="absolute inset-0 w-full h-full object-cover"
           fetchpriority="high"
