@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, MessageCircle, Mail, MapPin, Phone, CheckCircle } from "lucide-react";
+import { ArrowUpRight, MessageCircle, Mail, MapPin, Phone, CheckCircle, Loader } from "lucide-react";
 import { brand } from "../data/content";
 import { img } from "../data/images";
 import { fadeUp, fadeLeft, fadeRight, staggerContainer, staggerItem, inView } from "../utils/motion";
+import { sendEmail } from "../utils/emailjs";
 
 const consultationSteps = [
   { step: "01", title: "Share Your Story", body: "Tell us about the piece you have in mind — a family memory, a ceremony, or a feeling you want to translate into gold." },
@@ -13,6 +14,8 @@ const consultationSteps = [
 
 export default function Consultation() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending]     = useState(false);
+  const [sendError, setSendError] = useState("");
   const [form, setForm] = useState({
     name: "", email: "", phone: "", occasion: "", message: "",
   });
@@ -21,10 +24,27 @@ export default function Consultation() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    // In production this would POST to a backend / email service
-    setSubmitted(true);
+    setSending(true);
+    setSendError("");
+
+    const result = await sendEmail({
+      from_name: form.name,
+      from_email: form.email,
+      phone:      form.phone,
+      occasion:   form.occasion,
+      message:    form.message,
+      to_name:    "Murthy Ateliers",
+    });
+
+    setSending(false);
+
+    if (result.success) {
+      setSubmitted(true);
+    } else {
+      setSendError("Something went wrong. Please try WhatsApp or email us directly.");
+    }
   }
 
   return (
@@ -142,10 +162,23 @@ export default function Consultation() {
                   />
                 </div>
 
-                <button type="submit" className="btn-primary w-full justify-center">
-                  Send Your Story
-                  <ArrowUpRight size={14} />
+                <button type="submit" className="btn-primary w-full justify-center" disabled={sending}>
+                  {sending ? (
+                    <>
+                      <Loader size={14} className="animate-spin" />
+                      Sending…
+                    </>
+                  ) : (
+                    <>
+                      Send Your Story
+                      <ArrowUpRight size={14} />
+                    </>
+                  )}
                 </button>
+
+                {sendError && (
+                  <p className="text-xs text-crimson text-center mt-2">{sendError}</p>
+                )}
 
                 <p className="text-xs text-forest/40 text-center">
                   No pricing is discussed until we understand your vision fully.
