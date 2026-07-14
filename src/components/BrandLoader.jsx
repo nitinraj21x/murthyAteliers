@@ -1,199 +1,202 @@
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-/**
- * BrandLoader
- *
- * Renders "Murthy Ateliers" on line 1 and "by 9th" on line 2.
- * Each character animates in staggered left-to-right.
- * Both lines use white-space:nowrap so the name never wraps mid-word.
- * Font scales down on narrow viewports via a tight clamp.
- *
- * Exit: full-screen opacity fade — no reflow, no flash.
- */
+const DRAW_DUR    = 2500;  // ms — stroke draw
+const FILL_DUR    = 1000;   // ms — stroke→fill crossfade
+const MIN_HOLD_MS = DRAW_DUR + FILL_DUR + 1600; // ms before exit
 
-const LINE1 = "Murthy Ateliers";
-const LINE2 = "by 9th";
+export default function BrandLoader({ onDone }) {
+  const containerRef = useRef(null);
+  const [eyebrow, setEyebrow] = useState(false);
 
-// Build per-character variants with a global index offset for line 2
-const charVariants = {
-  hidden: { opacity: 0, y: 14, rotate: -3, filter: "blur(3px)" },
-  visible: (i) => ({
-    opacity: 1,
-    y: 0,
-    rotate: 0,
-    filter: "blur(0px)",
-    transition: {
-      delay: 0.2 + i * 0.05,
-      duration: 0.4,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  }),
-};
+  useEffect(() => {
+    let cancelled = false;
+    const timers  = [];
 
-// Last char index across both lines
-const TOTAL_CHARS = LINE1.length + LINE2.length;
-const UNDERLINE_DELAY = 0.2 + TOTAL_CHARS * 0.05 + 0.3; // after last char
-const UNDERLINE_DUR   = 0.9;
-const EYEBROW_DELAY   = UNDERLINE_DELAY + UNDERLINE_DUR + 0.1;
+    const later = (fn, ms) => {
+      const id = setTimeout(() => { if (!cancelled) fn(); }, ms);
+      timers.push(id);
+    };
 
-function AnimatedLine({ text, startIndex, style }) {
-  return (
-    <div
-      aria-hidden="true"
-      style={{
-        display: "flex",
-        whiteSpace: "nowrap",
-        justifyContent: "center",
-        ...style,
-      }}
-    >
-      {text.split("").map((char, i) => (
-        <motion.span
-          key={i}
-          custom={startIndex + i}
-          variants={charVariants}
-          initial="hidden"
-          animate="visible"
-          style={{
-            display: "inline-block",
-            minWidth: char === " " ? "0.3em" : undefined,
-          }}
-        >
-          {char}
-        </motion.span>
-      ))}
-    </div>
-  );
-}
+    fetch("/text1.svg")
+      .then(r => r.text())
+      .then(svgText => {
+        if (cancelled || !containerRef.current) return;
 
-export default function BrandLoader() {
+        // ── Parse ─────────────────────────────────────────────────
+        const parser  = new DOMParser();
+        const doc     = parser.parseFromString(svgText, "image/svg+xml");
+        const srcSvg  = doc.querySelector("svg");
+        const srcPath = doc.querySelector("path");
+        if (!srcSvg || !srcPath) return;
+
+        // ── Build SVG ─────────────────────────────────────────────
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("viewBox", srcSvg.getAttribute("viewBox"));
+        svg.style.cssText = "width:100%;height:auto;overflow:visible;display:block;";
+        svg.setAttribute("aria-hidden", "true");
+
+        const srcG = doc.querySelector("g");
+        let parent = svg;
+        if (srcG) {
+          const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+          g.setAttribute("transform", srcG.getAttribute("transform") || "");
+          svg.appendChild(g);
+          parent = g;
+        }
+
+        // Strip every Inkscape-generated style / presentation attribute
+        const path = srcPath.cloneNode(true);
+        path.removeAttribute("style");
+        path.removeAttribute("id");
+        ["fill","fill-opacity","stroke","stroke-width","stroke-opacity",
+         "stroke-linecap","stroke-linejoin","stroke-dasharray","stroke-dashoffset",
+        ].forEach(a => path.removeAttribute(a));
+
+        parent.appendChild(path);
+        containerRef.current.innerHTML = "";
+        containerRef.current.appendChild(svg);
+
+        // ── Measure ───────────────────────────────────────────────
+        requestAnimationFrame(() => {
+          if (cancelled) return;
+          const len = path.getTotalLength();
+
+          requestAnimationFrame(() => {
+            if (cancelled) return;
+
+            // ── PHASE 1 : draw stroke ─────────────────────────────
+            // Set base state explicitly via WAAPI so nothing leaks through
+            path.animate([
+              {
+                fill:             "#6a1413",
+                fillOpacity:      "0",
+                stroke:           "#D3af37",
+                strokeWidth:      "1.5px",
+                strokeLinecap:    "round",
+                strokeLinejoin:   "round",
+                strokeOpacity:    "1",
+                strokeDasharray:  `${len}px`,
+                strokeDashoffset: `${len}px`,
+              },
+              {
+                fill:             "#6a1413",
+                fillOpacity:      "0",
+                stroke:           "#D3af37",
+                strokeWidth:      "1.5px",
+                strokeLinecap:    "round",
+                strokeLinejoin:   "round",
+                strokeOpacity:    "1",
+                strokeDasharray:  `${len}px`,
+                strokeDashoffset: "0px",
+              },
+            ], {
+              duration:  DRAW_DUR,
+              easing:    "linear",        // linear = dashoffset reaches 0 at exactly DRAW_DUR ms
+              fill:      "forwards",
+              composite: "replace",
+            });
+
+            // ── PHASE 2 : fill — triggered by setTimeout at DRAW_DUR ─
+            // setTimeout fires at the same wall-clock moment the draw ends.
+            // No onfinish callback lag, no extra frame delay.
+            later(() => {
+              path.animate([
+                {
+                  fill:          "#6a1413",
+                  fillOpacity:   "0",
+                  strokeOpacity: "1",
+                },
+                {
+                  fill:          "#6a1413",
+                  fillOpacity:   "1",
+                  strokeOpacity: "0",
+                },
+              ], {
+                duration:  FILL_DUR,
+                easing:    "ease",
+                fill:      "forwards",
+                composite: "replace",
+              });
+            }, DRAW_DUR);
+
+            // ── Eyebrow ───────────────────────────────────────────
+            later(() => setEyebrow(true), DRAW_DUR + FILL_DUR );
+          });
+        });
+      })
+      .catch(() => { if (!cancelled && onDone) onDone(); });
+
+    return () => {
+      cancelled = true;
+      timers.forEach(clearTimeout);
+    };
+  }, []);
+
+  // Minimum hold before exit
+  useEffect(() => {
+    const t = setTimeout(() => { if (onDone) onDone(); }, MIN_HOLD_MS);
+    return () => clearTimeout(t);
+  }, [onDone]);
+
   return (
     <motion.div
       key="brand-loader"
       initial={{ opacity: 1 }}
-      exit={{ opacity: 0, transition: { duration: 0.5, ease: "easeInOut" } }}
+      exit={{ opacity: 0, transition: { duration: 0.1, ease: "easeInOut" } }}
       style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 9999,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
+        position:        "fixed",
+        inset:           0,
+        zIndex:          9999,
+        display:         "flex",
+        flexDirection:   "column",
+        alignItems:      "center",
+        justifyContent:  "center",
         backgroundColor: "var(--cream)",
-        gap: "0.5rem",
-        overflow: "hidden",
-        // Prevent any layout shift during exit
-        willChange: "opacity",
+        gap:             "1.5rem",
+        overflow:        "hidden",
+        willChange:      "opacity",
       }}
     >
-      {/* Ambient glow */}
       <div
         aria-hidden="true"
         style={{
-          position: "absolute",
-          inset: 0,
-          pointerEvents: "none",
-          backgroundImage:
-            "radial-gradient(ellipse 60% 45% at 50% 50%, rgba(211,175,55,0.09) 0%, transparent 70%)," +
-            "radial-gradient(circle at 20% 80%, rgba(106,20,19,0.06) 0%, transparent 40%)",
+          position:        "absolute",
+          inset:           0,
+          pointerEvents:   "none",
+          backgroundImage: "radial-gradient(ellipse 70% 55% at 50% 50%, rgba(211,175,55,0.08) 0%, transparent 70%)",
         }}
       />
 
-      {/* ── Brand name — two lines, never wraps ── */}
       <div
-        aria-label={`${LINE1} ${LINE2}`}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          // Font: tight clamp — fits on one line even at 320px
-          fontFamily: "Halimun, cursive",
-          fontSize: "clamp(1.6rem, 8.5vw, 4.5rem)",
-          color: "var(--crimson)",
-          lineHeight: 1.15,
-          letterSpacing: "0.02em",
-          userSelect: "none",
-          gap: "0.1em",
-        }}
-      >
-        <AnimatedLine text={LINE1} startIndex={0} />
-        <AnimatedLine
-          text={LINE2}
-          startIndex={LINE1.length}
-          style={{ fontSize: "0.75em", opacity: 0.85 }}
-        />
-      </div>
+        ref={containerRef}
+        role="img"
+        aria-label="Murthy Ateliers"
+        style={{ width: "min(780px, 88vw)", lineHeight: 0 }}
+      />
 
-      {/* ── Gold underline ── */}
-      <svg
-        viewBox="0 0 320 10"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-        style={{ width: "min(320px, 72vw)", height: 10, overflow: "visible", marginTop: "0.25rem" }}
-      >
-        <line x1="0" y1="5" x2="320" y2="5" stroke="rgba(211,175,55,0.15)" strokeWidth="1" />
-        <motion.line
-          x1="0" y1="5" x2="320" y2="5"
-          stroke="var(--gold)"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{
-            pathLength: { delay: UNDERLINE_DELAY, duration: UNDERLINE_DUR, ease: [0.4, 0, 0.2, 1] },
-            opacity:    { delay: UNDERLINE_DELAY, duration: 0.01 },
-          }}
-        />
-      </svg>
-
-      {/* ── Eyebrow ── */}
-      <motion.p
-        initial={{ opacity: 0, y: 6 }}
-        animate={{ opacity: 0.65, y: 0 }}
-        transition={{ delay: EYEBROW_DELAY, duration: 0.5, ease: "easeOut" }}
-        style={{
-          fontFamily: "Jost, sans-serif",
-          fontSize: "clamp(0.5rem, 2vw, 0.62rem)",
-          fontWeight: 500,
-          letterSpacing: "0.32em",
-          textTransform: "uppercase",
-          color: "var(--crimson)",
-          marginTop: "0.6rem",
-          whiteSpace: "nowrap",
-        }}
-      >
-        Heirloom Jewels Crafted to Endure
-      </motion.p>
-
-      {/* ── Shimmer bar ── */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: EYEBROW_DELAY + 0.25, duration: 0.4 }}
-        style={{
-          position: "relative",
-          width: "min(180px, 42vw)",
-          height: "1px",
-          background: "rgba(211,175,55,0.2)",
-          borderRadius: 999,
-          overflow: "hidden",
-          marginTop: "1rem",
-        }}
-      >
-        <motion.span
-          initial={{ x: "-100%" }}
-          animate={{ x: "350%" }}
-          transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.5 }}
-          style={{
-            position: "absolute",
-            top: 0, left: 0,
-            height: "1px",
-            width: "30%",
-            background: "linear-gradient(90deg, transparent, rgba(211,175,55,1), transparent)",
-          }}
-        />
-      </motion.div>
+      <AnimatePresence>
+        {eyebrow && (
+          <motion.p
+            key="eyebrow"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 0.7, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            style={{
+              fontFamily:    "Jost, sans-serif",
+              fontSize:      "clamp(0.5rem, 1.8vw, 0.62rem)",
+              fontWeight:    500,
+              letterSpacing: "0.36em",
+              textTransform: "uppercase",
+              color:         "var(--crimson)",
+              whiteSpace:    "nowrap",
+              margin:        0,
+            }}
+          >
+            Heirloom Jewels Crafted to Endure
+          </motion.p>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }

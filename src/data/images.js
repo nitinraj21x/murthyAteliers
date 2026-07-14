@@ -1,56 +1,61 @@
 /**
  * Image paths for Murthy Ateliers — all local assets from /public
+ * Using WebP versions from /jewellry/Web-Optimised/ for better performance.
  */
+
+const W = "/jewellry/Web-Optimised";          // root webp assets
+const WI = "/jewellry/Web-Optimised/imgs";    // imgs/ webp assets
+const WJ = "/jewellry/Web-Optimised/jewellry"; // jewellry/ webp assets
 
 export const img = {
   // ── Hero & Banners ──────────────────────────────────────────
-  hero1:        "/banner_collection.jpg",
-  hero2:        "/imgs/craftmanship.jpg",
-  hero3:        "/imgs/heirloom.jpg",
-  heroCinematic:"/fbanner1.png",
+  hero1:        `${W}/banner_collection.webp`,
+  hero2:        `${WI}/craftmanship.webp`,
+  hero3:        `${WI}/heirloom.webp`,
+  heroCinematic:`${W}/fbanner1.webp`,
 
   // ── Founder / Heritage ──────────────────────────────────────
-  founder:      "/collection1.jpg",
-  mylapore:     "/store.png",
-  archival:     "/chennai.png",
-  sketch:       "/craft.jpg",
+  founder:      `${W}/collection1.webp`,
+  mylapore:     `${W}/store.webp`,
+  archival:     `${W}/chennai.webp`,
+  sketch:       `${W}/craft.webp`,
 
   // ── Collections ─────────────────────────────────────────────
-  bridal:       "/jewellry/Cultural/1/DPPHOTGRAPHY-8171.jpg",
-  temple:       "/jewellry/Cultural/4/DPPHOTGRAPHY-8194.jpg",
-  everyday:     "/jewellry/Cultural/6/DPPHOTGRAPHY-8212.jpg",
-  custom:       "/jewellry/Commisioned/1/DPPHOTGRAPHY-8089.jpg",
-  heritage:     "/jewellry/Commisioned/4/DPPHOTGRAPHY-8147.jpg",
+  bridal:       `${WJ}/Cultural/1/DPPHOTGRAPHY-8171.webp`,
+  temple:       `${WJ}/Cultural/4/DPPHOTGRAPHY-8194.webp`,
+  everyday:     `${WJ}/Cultural/6/DPPHOTGRAPHY-8212.webp`,
+  custom:       `${WJ}/Commisioned/1/DPPHOTGRAPHY-8089.webp`,
+  heritage:     `${WJ}/Commisioned/4/DPPHOTGRAPHY-8147.webp`,
 
   // ── Jewelry Macro / Detail ───────────────────────────────────
-  goldwork1:    "/jewellry/Cultural/2/DPPHOTGRAPHY-8350.jpg",
-  goldwork2:    "/jewellry/Cultural/3/DPPHOTGRAPHY-8180.jpg",
-  gemstone1:    "/jewellry/Cultural/5/DPPHOTGRAPHY-8202.jpg",
-  gemstone2:    "/jewellry/Cultural/7/DPPHOTGRAPHY-8227.jpg",
-  necklace1:    "/jewellry/Cultural/8/DPPHOTGRAPHY-8254.jpg",
-  necklace2:    "/jewellry/Cultural/9/DPPHOTGRAPHY-8335.jpg",
-  earrings1:    "/jewellry/Commisioned/3/DPPHOTGRAPHY-8130.jpg",
-  bangles1:     "/jewellry/Commisioned/5/DPPHOTGRAPHY-8220.jpg",
-  velvetTray:   "/jewellry/Commisioned/6/DPPHOTGRAPHY-8278.jpg",
+  goldwork1:    `${WJ}/Cultural/2/DPPHOTGRAPHY-8350.webp`,
+  goldwork2:    `${WJ}/Cultural/3/DPPHOTGRAPHY-8180.webp`,
+  gemstone1:    `${WJ}/Cultural/5/DPPHOTGRAPHY-8202.webp`,
+  gemstone2:    `${WJ}/Cultural/7/DPPHOTGRAPHY-8227.webp`,
+  necklace1:    `${WJ}/Cultural/8/DPPHOTGRAPHY-8254.webp`,
+  necklace2:    `${WJ}/Cultural/9/DPPHOTGRAPHY-8335.webp`,
+  earrings1:    `${WJ}/Commisioned/3/DPPHOTGRAPHY-8130.webp`,
+  bangles1:     `${WJ}/Commisioned/5/DPPHOTGRAPHY-8220.webp`,
+  velvetTray:   `${WJ}/Commisioned/6/DPPHOTGRAPHY-8278.webp`,
 
   // ── Craftsmanship / Atelier ──────────────────────────────────
-  artisan1:     "/handCrafted.jpg",
-  artisan2:     "/detailing.jpg",
-  stones:       "/jewellry/Cultural/10/DPPHOTGRAPHY-8340.jpg",
-  finishing:    "/jewellry/Commisioned/2/DPPHOTGRAPHY-8108.jpg",
+  artisan1:     `${W}/handCrafted.webp`,
+  artisan2:     `${W}/detailing.webp`,
+  stones:       `${WJ}/Cultural/10/DPPHOTGRAPHY-8340.webp`,
+  finishing:    `${WJ}/Commisioned/2/DPPHOTGRAPHY-8108.webp`,
 
   // ── Journal / Editorial ──────────────────────────────────────
-  journal1:     "/heirStory.jpg",
-  journal2:     "/imgs/craftmanship.jpg",
-  journal3:     "/antique.jpg",
-  journal4:     "/imgs/heirloom.jpg",
-  journal5:     "/craft.jpg",
-  journal6:     "/lineage.jpg",
+  journal1:     `${W}/heirStory.webp`,
+  journal2:     `${WI}/craftmanship.webp`,
+  journal3:     `${W}/antique.webp`,
+  journal4:     `${WI}/heirloom.webp`,
+  journal5:     `${W}/craft.webp`,
+  journal6:     `${W}/lineage.webp`,
 
   // ── Bespoke / Consultation ───────────────────────────────────
-  bespoke:      "/crafter.png",
-  consultation: "/hero_jewel.png",
+  bespoke:      `${W}/crafter.webp`,
+  consultation: `${W}/hero_jewel.webp`,
 
   // ── Final / Cinematic ────────────────────────────────────────
-  cinematic:    "/fbanner1.png",
+  cinematic:    `${W}/fbanner1.webp`,
 };

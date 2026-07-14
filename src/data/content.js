@@ -60,19 +60,19 @@ export const philosophy = {
       number: "01",
       title:  "Craftsmanship",
       body:   "Handcrafted with attention to detail, preserving traditional artistry while embracing contemporary elegance.",
-      image:  "/imgs/craftmanship.jpg",
+      image:  "/jewellry/Web-Optimised/imgs/craftmanship.webp",
     },
     {
       number: "02",
       title:  "Meaning",
       body:   "Every jewel carries emotion, memory, and personal significance beyond ornamentation.",
-      image:  "/imgs/meaning.jpg",
+      image:  "/jewellry/Web-Optimised/imgs/meaning.webp",
     },
     {
       number: "03",
       title:  "Heirloom Value",
       body:   "Designed not for seasons, but for generations — and the stories they gather along the way.",
-      image:  "/imgs/heirloom.jpg",
+      image:  "/jewellry/Web-Optimised/imgs/heirloom.webp",
     },
   ],
 };
@@ -84,7 +84,7 @@ export const collections = [
     name:    "Bridal Heirlooms",
     tagline: "For wedding mornings, ancestral gold, and measured grandeur.",
     story:   "Layered necklaces, vankis, and jhumkas designed for muhurtham light, silk richness, and the emotional weight of family ceremony. Each piece is composed to feel like it has always belonged to the family.",
-    image:   "/imgs/cat1.png",
+    image:   "/jewellry/Web-Optimised/imgs/cat1.webp",
     accent:  img.necklace1,
   },
   {
@@ -92,7 +92,7 @@ export const collections = [
     name:    "Temple-Inspired Pieces",
     tagline: "Architectural, sculptural, and deeply rooted.",
     story:   "Forms informed by shrine doors, lotus borders, peacock reliefs, and the quiet geometry of Tamil sanctum ornament. Jewelry that carries the memory of sacred spaces.",
-    image:   "/imgs/cat2.jpg",
+    image:   "/jewellry/Web-Optimised/imgs/cat2.webp",
     accent:  img.gemstone2,
     imagePosition: "center center",
   },
@@ -101,7 +101,7 @@ export const collections = [
     name:    "Everyday Classics",
     tagline: "Refined enough for daily rituals, enduring enough for repetition.",
     story:   "Softer collars, diamond accents, and versatile silhouettes that still carry the dignity of heirloom thinking. Pieces that become part of who you are.",
-    image:   "/imgs/cat3.png",
+    image:   "/jewellry/Web-Optimised/imgs/cat3.webp",
     accent:  img.necklace2,
     imagePosition: "center calc(50% - 25px)",
   },
@@ -110,7 +110,7 @@ export const collections = [
     name:    "Custom Commissions",
     tagline: "Personal, collaborative, and made with restraint.",
     story:   "Client-led pieces where memory, material, and wearability are shaped together from the very first conversation. Your story, translated into gold.",
-    image:   "/imgs/cat4.jpg",
+    image:   "/jewellry/Web-Optimised/imgs/cat4.webp",
     accent:  img.earrings1,
   },
   {
@@ -118,7 +118,7 @@ export const collections = [
     name:    "Heritage Revivals",
     tagline: "Museum-like depth with present-day intimacy.",
     story:   "Designs that revive antique language without becoming costume, preserving cultural richness while softening the finish for modern wear.",
-    image:   "/imgs/cat5.jpg",
+    image:   "/jewellry/Web-Optimised/imgs/cat5.webp",
     accent:  img.bangles1,
   },
 ];
@@ -164,7 +164,7 @@ export const bespoke = {
   body:        "Whether reimagining inherited jewels or creating a new legacy piece, we work closely with clients to design jewelry rooted in sentiment and individuality.",
   cta1:        { label: "Begin Your Consultation", href: "/consultation" },
   cta2:        { label: "Share Your Story", href: `mailto:hello@murthyateliers.com?subject=Share%20My%20Story` },
-  image:       "/crafter.png",
+  image:       "/jewellry/Web-Optimised/crafter.webp",
 };
 
 /* ─── Journal ────────────────────────────────────────────────── */
@@ -174,7 +174,7 @@ export const journalArticles = [
     category: "Heritage",
     title:    "The Story of Heirloom Jewelry",
     excerpt:  "Why jewels intended for memory age more beautifully than pieces made for trend cycles. A meditation on permanence and the objects we choose to keep.",
-    image:    "/heirStory.jpg",
+    image:    "/jewellry/Web-Optimised/heirStory.webp",
     readTime: "6 min read",
   },
   {
@@ -182,7 +182,7 @@ export const journalArticles = [
     category: "Culture",
     title:    "Mylapore & Craft Heritage",
     excerpt:  "How street, sanctum, and silk have shaped the visual language of South Indian ornament across centuries of living tradition.",
-    image:    "/imgs/craftmanship.jpg",
+    image:    "/jewellry/Web-Optimised/imgs/craftmanship.webp",
     readTime: "8 min read",
   },
   {
@@ -190,7 +190,7 @@ export const journalArticles = [
     category: "Styling",
     title:    "Styling Antique Jewelry",
     excerpt:  "Layering temple pieces with restraint so the jewel remains the point of focus. Notes on proportion, occasion, and the art of wearing less.",
-    image:    "/antique.jpg",
+    image:    "/jewellry/Web-Optimised/antique.webp",
     readTime: "5 min read",
   },
   {
@@ -198,7 +198,7 @@ export const journalArticles = [
     category: "Care",
     title:    "Caring for Precious Pieces",
     excerpt:  "Warm storage, gentle cleaning, and ritual-minded care that keeps heirlooms luminous across generations of wearing.",
-    image:    "/imgs/heirloom.jpg",
+    image:    "/jewellry/Web-Optimised/imgs/heirloom.webp",
     readTime: "4 min read",
   },
   {
@@ -206,7 +206,7 @@ export const journalArticles = [
     category: "Craft",
     title:    "Behind the Design Process",
     excerpt:  "From the first sketch to the final polish — a look inside the atelier and the slow, deliberate work that makes a piece feel inevitable.",
-    image:    "/craft.jpg",
+    image:    "/jewellry/Web-Optimised/craft.webp",
     readTime: "7 min read",
   },
   {
@@ -214,7 +214,7 @@ export const journalArticles = [
     category: "Legacy",
     title:    "The Emotional Value of Passing Jewelry Through Generations",
     excerpt:  "On the quiet power of objects that carry names, dates, and the warmth of hands that wore them before yours.",
-    image:    "/lineage.jpg",
+    image:    "/jewellry/Web-Optimised/lineage.webp",
     readTime: "9 min read",
   },
 ];
@@ -270,5 +270,5 @@ export const faqs = [
 export const finalMessage = {
   heading: "Some things are too meaningful to be trend-driven.",
   lines:   ["Jewelry should hold memory.", "It should gather stories.", "It should stay."],
-  // image served directly in Home.jsx via hero_jewel.png
+  // image served directly in Home.jsx via hero_jewel.webp
 };

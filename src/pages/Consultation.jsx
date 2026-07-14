@@ -51,7 +51,7 @@ export default function Consultation() {
       {/* Hero */}
       <section className="relative h-[50vh] min-h-[380px] flex items-end overflow-hidden">
         <img
-          src="/bannerConsult.png"
+          src="/jewellry/Web-Optimised/bannerConsult.webp"
           alt="Consultation"
           className="absolute inset-0 w-full h-full object-cover"
           fetchpriority="high"

@@ -15,35 +15,35 @@ const PROCESS_STEPS = [
     step: 1,
     title: 'Concept & Story',
     subtitle: 'கற்பனை',
-    image: '/craft.jpg',
+    image: '/jewellry/Web-Optimised/craft.webp',
     desc: 'Every piece begins not with metal, but with memory. We collect family stories, research historical archives, sketch motifs inspired by Mylapore temple arches, and map out the visual weight and balance of the design on parchment.'
   },
   {
     step: 2,
     title: 'Stone Selection',
     subtitle: 'கல் தேர்வு',
-    image: '/hero_jewel.png',
+    image: '/jewellry/Web-Optimised/hero_jewel.webp',
     desc: 'We source natural, uncut diamonds (Polki), deep red kemp rubies, and premium cabochon emeralds. Each gemstone is chosen for its unique character, saturation of color, and ability to hold warm light under traditional settings.'
   },
   {
     step: 3,
     title: 'Handcrafting',
     subtitle: 'கைவினை',
-    image: '/handCrafted.jpg',
+    image: '/jewellry/Web-Optimised/handCrafted.webp',
     desc: 'Senior master artisans (Thattars) in our Mylapore workshop hand-carve, hammer, and chase the 22k gold. Ancient techniques like repoussé (nakshi) and filigree are utilized to raise three-dimensional gold motifs from flat sheets.'
   },
   {
     step: 4,
     title: 'Finishing & Detailing',
     subtitle: 'மெருகூட்டல்',
-    image: '/detailing.jpg',
+    image: '/jewellry/Web-Optimised/detailing.webp',
     desc: 'Using natural polishing compounds and antique patinas, we bring out the warm, buttery luster of high-carat gold. Stones are set using the ancient Kundan technique, sealing them in layers of pure, pressed gold foil.'
   },
   {
     step: 5,
     title: 'Passed Into Your Hands',
     subtitle: 'சமர்ப்பித்தல்',
-    image: '/lineage.jpg',
+    image: '/jewellry/Web-Optimised/lineage.webp',
     desc: 'The finished heirloom is placed on raw silk inside a wooden presentation box. More than a piece of craft, it is delivered as an unfinished sentence—ready to gather stories and be passed down through generations.'
   }
 ];
@@ -55,7 +55,7 @@ const JOURNAL_POSTS = [
     tag: 'Heritage Lore',
     date: 'May 24, 2026',
     excerpt: 'In South India, jewelry was never mere ornamentation; it was an investment of trust, a store of family memory, and a talisman. We trace the history of passing gold down generations.',
-    image: '/heritage.png',
+    image: '/jewellry/Web-Optimised/heritage.webp',
     body: (
       <>
         <p>Heirloom jewelry is a physical manifestation of time. In South Indian culture, jewelry was never created to be discarded or styled for a single season. It represented the family's honor, its security, and its memory. A piece of gold is melted, reformed, and worn, yet it carries the soul of the hands that held it first.</p>
@@ -70,7 +70,7 @@ const JOURNAL_POSTS = [
     tag: 'Atelier Notes',
     date: 'April 15, 2026',
     excerpt: 'Mylapore is not just a neighborhood; it is a living archive of art. We explore the connection between this sacred geography and the integrity of traditional goldsmithing.',
-    image: '/founder_story.png',
+    image: '/jewellry/Web-Optimised/founder_story.webp',
     body: (
       <>
         <p>Mylapore is a historic neighborhood in Chennai, famous for its grand Kapaleeshwarar Temple, bronze sculptors, and traditional silk weavers. But hidden in its narrow streets are the workshops of the traditional goldsmiths (Thattars) who have built Mylapore's reputation for trust and mastery over generations.</p>
@@ -86,7 +86,7 @@ const JOURNAL_POSTS = [
     tag: 'Care Guide',
     date: 'March 08, 2026',
     excerpt: 'High-carat traditional gold and kemp stones require gentle care to preserve their warm, soft luster. Read our comprehensive care guide from our senior craftsmen.',
-    image: '/preservation.png',
+    image: '/jewellry/Web-Optimised/preservation.webp',
     body: (
       <>
         <p>High-carat gold (22k) is a soft metal, susceptible to scratches if stored improperly. Similarly, traditional South Indian kemp stones are set with thin gold foils (Kundan technique) which must be kept free from moisture to prevent darkening.</p>
@@ -165,7 +165,7 @@ export default function Home() {
          Section 2: Banner Section (proj2)
          ========================================================================== */}
       <section className="hero-sec">
-        <div className="hero-bg" style={{ backgroundImage: `url('/banner_collection.jpg')` }}></div>
+        <div className="hero-bg" style={{ backgroundImage: `url('/jewellry/Web-Optimised/banner_collection.webp')` }}></div>
         <div className="hero-overlay"></div>
         <div className="hero-content">
           <div className="hero-ctas">
@@ -187,7 +187,7 @@ export default function Home() {
         <div className="founder-grid">
           <div className="founder-image-wrapper">
             <div className="founder-img-frame">
-              <img src="/founder_story.png" alt="Archival sketch of Mylapore jewelry workshop" className="founder-img" />
+              <img src="/jewellry/Web-Optimised/founder_story.webp" alt="Archival sketch of Mylapore jewelry workshop" className="founder-img" />
             </div>
           </div>
           <div className="founder-note">
@@ -227,7 +227,7 @@ export default function Home() {
       <section className="shell py-20 sm:py-28 bg-crimson relative overflow-hidden">
         {/* Background image */}
         <img
-          src="/imgs/bgsec1.png"
+          src="/jewellry/Web-Optimised/imgs/bgsec1.webp"
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
@@ -319,7 +319,7 @@ export default function Home() {
               className="group relative overflow-hidden rounded-3xl min-h-[420px] sm:min-h-[500px]"
             >
               <img
-                src="/jewellry/Cultural/1/DPPHOTGRAPHY-8173.jpg"
+                src="/jewellry/Web-Optimised/jewellry/Cultural/1/DPPHOTGRAPHY-8173.webp"
                 alt="Cultural Collection"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
                 loading="lazy"
@@ -354,7 +354,7 @@ export default function Home() {
               className="group relative overflow-hidden rounded-3xl min-h-[420px] sm:min-h-[500px]"
             >
               <img
-                src="/jewellry/Commisioned/4/DPPHOTGRAPHY-8162.jpg"
+                src="/jewellry/Web-Optimised/jewellry/Commisioned/4/DPPHOTGRAPHY-8162.webp"
                 alt="Commissioned Collection"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
                 loading="lazy"
@@ -492,7 +492,7 @@ export default function Home() {
       <section className="shell py-20 sm:py-28 bg-cream-dark relative overflow-hidden">
         {/* Background image */}
         <img
-          src="/imgs/bgsec2.jpg"
+          src="/jewellry/Web-Optimised/imgs/bgsec2.webp"
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
@@ -699,7 +699,7 @@ export default function Home() {
          Section 11: Final Note Section (proj2)
          ========================================================================== */}
       <section className="emotional-sec">
-        <div className="emotional-bg" style={{ backgroundImage: `url('/fbanner1.png')` }}></div>
+        <div className="emotional-bg" style={{ backgroundImage: `url('/jewellry/Web-Optimised/fbanner1.webp')` }}></div>
         <div className="emotional-overlay"></div>
         <div className="emotional-content">
           <p className="emotional-text">

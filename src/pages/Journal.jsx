@@ -66,7 +66,7 @@ function JournalIndex() {
       {/* Hero */}
       <section className="relative h-[55vh] min-h-[420px] flex items-end overflow-hidden">
         <img
-          src="/heirStory.jpg"
+          src="/jewellry/Web-Optimised/heirStory.webp"
           alt="Journal"
           className="absolute inset-0 w-full h-full object-cover"
           fetchpriority="high"

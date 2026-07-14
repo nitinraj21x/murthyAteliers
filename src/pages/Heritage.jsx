@@ -8,12 +8,12 @@ const heritagePoints = [
   {
     title: "D.K. Murthy & E.A. Swamy Jewelers",
     body:  "Founded in the heart of Mylapore, Chennai, the original house built its reputation on the trust of families, the integrity of craft, and beauty made to outlast the hands that made it.",
-    image: "/store.png",
+    image: "/jewellry/Web-Optimised/store.webp",
   },
   {
     title: "The Legacy of Mylapore",
     body:  "Mylapore is not just a location — it is a living archive of South Indian culture, temple tradition, and artisanal craft. The streets, the sanctums, and the silk have shaped the visual language of our jewelry.",
-    image: "/chennai.png",
+    image: "/jewellry/Web-Optimised/chennai.webp",
   },
 ];
 
@@ -23,7 +23,7 @@ export default function Heritage() {
       {/* Hero */}
       <section className="relative h-[55vh] min-h-[420px] flex items-end overflow-hidden">
         <img
-          src="/imgs/heirloom.jpg"
+          src="/jewellry/Web-Optimised/imgs/heirloom.webp"
           alt="Heritage"
           className="absolute inset-0 w-full h-full object-cover"
           fetchpriority="high"
@@ -51,7 +51,7 @@ export default function Heritage() {
           <motion.div variants={fadeLeft} {...inView} className="relative">
             <div className="relative overflow-hidden rounded-3xl shadow-luxury">
               <img
-                src="/collection1.jpg"
+                src="/jewellry/Web-Optimised/collection1.webp"
                 alt="A Legacy Continued"
                 className="w-full h-[520px] object-cover"
                 loading="lazy"

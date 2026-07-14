@@ -8,7 +8,7 @@
   src: url("/fonts/halimun/Halimun.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 /* ─── Root Variables ─────────────────────────────────────────── */

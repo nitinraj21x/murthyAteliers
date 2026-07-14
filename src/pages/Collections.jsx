@@ -6,26 +6,26 @@ import { brand } from "../data/content";
 import { fadeUp, inView, scaleIn } from "../utils/motion";
 /* ─── Image data ────────────────────────────────────────────── */
 const CULTURAL_GROUPS = [
-  { label: "Set 1",  images: ["/jewellry/Cultural/1/DPPHOTGRAPHY-8171.jpg","/jewellry/Cultural/1/DPPHOTGRAPHY-8173.jpg","/jewellry/Cultural/1/DPPHOTGRAPHY-8175.jpg","/jewellry/Cultural/1/DPPHOTGRAPHY-8177.jpg"] },
-  { label: "Set 2",  images: ["/jewellry/Cultural/2/DPPHOTGRAPHY-8350.jpg","/jewellry/Cultural/2/DPPHOTGRAPHY-8354.jpg","/jewellry/Cultural/2/DPPHOTGRAPHY-8356.jpg","/jewellry/Cultural/2/DPPHOTGRAPHY-8358.jpg"] },
-  { label: "Set 3",  images: ["/jewellry/Cultural/3/DPPHOTGRAPHY-8180.jpg","/jewellry/Cultural/3/DPPHOTGRAPHY-8186.jpg","/jewellry/Cultural/3/DPPHOTGRAPHY-8190.jpg"] },
-  { label: "Set 4",  images: ["/jewellry/Cultural/4/DPPHOTGRAPHY-8194.jpg","/jewellry/Cultural/4/DPPHOTGRAPHY-8196.jpg","/jewellry/Cultural/4/DPPHOTGRAPHY-8199.jpg","/jewellry/Cultural/4/DPPHOTGRAPHY-8200.jpg"] },
-  { label: "Set 5",  images: ["/jewellry/Cultural/5/DPPHOTGRAPHY-8202.jpg","/jewellry/Cultural/5/DPPHOTGRAPHY-8206.jpg","/jewellry/Cultural/5/DPPHOTGRAPHY-8209.jpg"] },
-  { label: "Set 6",  images: ["/jewellry/Cultural/6/DPPHOTGRAPHY-8212.jpg","/jewellry/Cultural/6/DPPHOTGRAPHY-8214.jpg","/jewellry/Cultural/6/DPPHOTGRAPHY-8224.jpg"] },
-  { label: "Set 7",  images: ["/jewellry/Cultural/7/DPPHOTGRAPHY-8227.jpg","/jewellry/Cultural/7/DPPHOTGRAPHY-8229.jpg","/jewellry/Cultural/7/DPPHOTGRAPHY-8233.jpg","/jewellry/Cultural/7/DPPHOTGRAPHY-8237.jpg"] },
-  { label: "Set 8",  images: ["/jewellry/Cultural/8/DPPHOTGRAPHY-8254.jpg","/jewellry/Cultural/8/DPPHOTGRAPHY-8259.jpg","/jewellry/Cultural/8/DPPHOTGRAPHY-8262.jpg","/jewellry/Cultural/8/DPPHOTGRAPHY-8265.jpg","/jewellry/Cultural/8/DPPHOTGRAPHY-8266.jpg"] },
-  { label: "Set 9",  images: ["/jewellry/Cultural/9/DPPHOTGRAPHY-8335.jpg","/jewellry/Cultural/9/DPPHOTGRAPHY-8338.jpg"] },
-  { label: "Set 10", images: ["/jewellry/Cultural/10/DPPHOTGRAPHY-8340.jpg","/jewellry/Cultural/10/DPPHOTGRAPHY-8343.jpg","/jewellry/Cultural/10/DPPHOTGRAPHY-8346.jpg","/jewellry/Cultural/10/DPPHOTGRAPHY-8348.jpg"] },
+  { label: "Set 1",  images: ["/jewellry/Web-Optimised/jewellry/Cultural/1/DPPHOTGRAPHY-8171.webp","/jewellry/Web-Optimised/jewellry/Cultural/1/DPPHOTGRAPHY-8173.webp","/jewellry/Web-Optimised/jewellry/Cultural/1/DPPHOTGRAPHY-8175.webp","/jewellry/Web-Optimised/jewellry/Cultural/1/DPPHOTGRAPHY-8177.webp"] },
+  { label: "Set 2",  images: ["/jewellry/Web-Optimised/jewellry/Cultural/2/DPPHOTGRAPHY-8350.webp","/jewellry/Web-Optimised/jewellry/Cultural/2/DPPHOTGRAPHY-8354.webp","/jewellry/Web-Optimised/jewellry/Cultural/2/DPPHOTGRAPHY-8356.webp","/jewellry/Web-Optimised/jewellry/Cultural/2/DPPHOTGRAPHY-8358.webp"] },
+  { label: "Set 3",  images: ["/jewellry/Web-Optimised/jewellry/Cultural/3/DPPHOTGRAPHY-8180.webp","/jewellry/Web-Optimised/jewellry/Cultural/3/DPPHOTGRAPHY-8186.webp","/jewellry/Web-Optimised/jewellry/Cultural/3/DPPHOTGRAPHY-8190.webp"] },
+  { label: "Set 4",  images: ["/jewellry/Web-Optimised/jewellry/Cultural/4/DPPHOTGRAPHY-8194.webp","/jewellry/Web-Optimised/jewellry/Cultural/4/DPPHOTGRAPHY-8196.webp","/jewellry/Web-Optimised/jewellry/Cultural/4/DPPHOTGRAPHY-8199.webp","/jewellry/Web-Optimised/jewellry/Cultural/4/DPPHOTGRAPHY-8200.webp"] },
+  { label: "Set 5",  images: ["/jewellry/Web-Optimised/jewellry/Cultural/5/DPPHOTGRAPHY-8202.webp","/jewellry/Web-Optimised/jewellry/Cultural/5/DPPHOTGRAPHY-8206.webp","/jewellry/Web-Optimised/jewellry/Cultural/5/DPPHOTGRAPHY-8209.webp"] },
+  { label: "Set 6",  images: ["/jewellry/Web-Optimised/jewellry/Cultural/6/DPPHOTGRAPHY-8212.webp","/jewellry/Web-Optimised/jewellry/Cultural/6/DPPHOTGRAPHY-8214.webp","/jewellry/Web-Optimised/jewellry/Cultural/6/DPPHOTGRAPHY-8224.webp"] },
+  { label: "Set 7",  images: ["/jewellry/Web-Optimised/jewellry/Cultural/7/DPPHOTGRAPHY-8227.webp","/jewellry/Web-Optimised/jewellry/Cultural/7/DPPHOTGRAPHY-8229.webp","/jewellry/Web-Optimised/jewellry/Cultural/7/DPPHOTGRAPHY-8233.webp","/jewellry/Web-Optimised/jewellry/Cultural/7/DPPHOTGRAPHY-8237.webp"] },
+  { label: "Set 8",  images: ["/jewellry/Web-Optimised/jewellry/Cultural/8/DPPHOTGRAPHY-8254.webp","/jewellry/Web-Optimised/jewellry/Cultural/8/DPPHOTGRAPHY-8259.webp","/jewellry/Web-Optimised/jewellry/Cultural/8/DPPHOTGRAPHY-8262.webp","/jewellry/Web-Optimised/jewellry/Cultural/8/DPPHOTGRAPHY-8265.webp","/jewellry/Web-Optimised/jewellry/Cultural/8/DPPHOTGRAPHY-8266.webp"] },
+  { label: "Set 9",  images: ["/jewellry/Web-Optimised/jewellry/Cultural/9/DPPHOTGRAPHY-8335.webp","/jewellry/Web-Optimised/jewellry/Cultural/9/DPPHOTGRAPHY-8338.webp"] },
+  { label: "Set 10", images: ["/jewellry/Web-Optimised/jewellry/Cultural/10/DPPHOTGRAPHY-8340.webp","/jewellry/Web-Optimised/jewellry/Cultural/10/DPPHOTGRAPHY-8343.webp","/jewellry/Web-Optimised/jewellry/Cultural/10/DPPHOTGRAPHY-8346.webp","/jewellry/Web-Optimised/jewellry/Cultural/10/DPPHOTGRAPHY-8348.webp"] },
 ];
 
 const COMMISIONED_GROUPS = [
-  { label: "Set 1", images: ["/jewellry/Commisioned/1/DPPHOTGRAPHY-8089.jpg","/jewellry/Commisioned/1/DPPHOTGRAPHY-8091.jpg","/jewellry/Commisioned/1/DPPHOTGRAPHY-8094.jpg","/jewellry/Commisioned/1/DPPHOTGRAPHY-8095.jpg","/jewellry/Commisioned/1/DPPHOTGRAPHY-8098.jpg","/jewellry/Commisioned/1/DPPHOTGRAPHY-8102.jpg","/jewellry/Commisioned/1/DPPHOTGRAPHY-8107.jpg"] },
-  { label: "Set 2", images: ["/jewellry/Commisioned/2/DPPHOTGRAPHY-8108.jpg","/jewellry/Commisioned/2/DPPHOTGRAPHY-8111.jpg","/jewellry/Commisioned/2/DPPHOTGRAPHY-8115.jpg","/jewellry/Commisioned/2/DPPHOTGRAPHY-8118.jpg"] },
-  { label: "Set 3", images: ["/jewellry/Commisioned/3/DPPHOTGRAPHY-8130.jpg","/jewellry/Commisioned/3/DPPHOTGRAPHY-8133.jpg","/jewellry/Commisioned/3/DPPHOTGRAPHY-8135.jpg","/jewellry/Commisioned/3/DPPHOTGRAPHY-8142.jpg"] },
-  { label: "Set 4", images: ["/jewellry/Commisioned/4/DPPHOTGRAPHY-8147.jpg","/jewellry/Commisioned/4/DPPHOTGRAPHY-8152.jpg","/jewellry/Commisioned/4/DPPHOTGRAPHY-8156.jpg","/jewellry/Commisioned/4/DPPHOTGRAPHY-8158.jpg","/jewellry/Commisioned/4/DPPHOTGRAPHY-8160.jpg","/jewellry/Commisioned/4/DPPHOTGRAPHY-8162.jpg","/jewellry/Commisioned/4/DPPHOTGRAPHY-8168.jpg"] },
-  { label: "Set 5", images: ["/jewellry/Commisioned/5/DPPHOTGRAPHY-8220.jpg","/jewellry/Commisioned/5/DPPHOTGRAPHY-8270.jpg","/jewellry/Commisioned/5/DPPHOTGRAPHY-8273.jpg","/jewellry/Commisioned/5/DPPHOTGRAPHY-8275.jpg"] },
-  { label: "Set 6", images: ["/jewellry/Commisioned/6/DPPHOTGRAPHY-8278.jpg","/jewellry/Commisioned/6/DPPHOTGRAPHY-8286.jpg","/jewellry/Commisioned/6/DPPHOTGRAPHY-8290.jpg"] },
-  { label: "Set 7", images: ["/jewellry/Commisioned/7/DPPHOTGRAPHY-8404.jpg","/jewellry/Commisioned/7/DPPHOTGRAPHY-8407.jpg"] },
+  { label: "Set 1", images: ["/jewellry/Web-Optimised/jewellry/Commisioned/1/DPPHOTGRAPHY-8089.webp","/jewellry/Web-Optimised/jewellry/Commisioned/1/DPPHOTGRAPHY-8091.webp","/jewellry/Web-Optimised/jewellry/Commisioned/1/DPPHOTGRAPHY-8094.webp","/jewellry/Web-Optimised/jewellry/Commisioned/1/DPPHOTGRAPHY-8095.webp","/jewellry/Web-Optimised/jewellry/Commisioned/1/DPPHOTGRAPHY-8098.webp","/jewellry/Web-Optimised/jewellry/Commisioned/1/DPPHOTGRAPHY-8102.webp","/jewellry/Web-Optimised/jewellry/Commisioned/1/DPPHOTGRAPHY-8107.webp"] },
+  { label: "Set 2", images: ["/jewellry/Web-Optimised/jewellry/Commisioned/2/DPPHOTGRAPHY-8108.webp","/jewellry/Web-Optimised/jewellry/Commisioned/2/DPPHOTGRAPHY-8111.webp","/jewellry/Web-Optimised/jewellry/Commisioned/2/DPPHOTGRAPHY-8115.webp","/jewellry/Web-Optimised/jewellry/Commisioned/2/DPPHOTGRAPHY-8118.webp"] },
+  { label: "Set 3", images: ["/jewellry/Web-Optimised/jewellry/Commisioned/3/DPPHOTGRAPHY-8130.webp","/jewellry/Web-Optimised/jewellry/Commisioned/3/DPPHOTGRAPHY-8133.webp","/jewellry/Web-Optimised/jewellry/Commisioned/3/DPPHOTGRAPHY-8135.webp","/jewellry/Web-Optimised/jewellry/Commisioned/3/DPPHOTGRAPHY-8142.webp"] },
+  { label: "Set 4", images: ["/jewellry/Web-Optimised/jewellry/Commisioned/4/DPPHOTGRAPHY-8147.webp","/jewellry/Web-Optimised/jewellry/Commisioned/4/DPPHOTGRAPHY-8152.webp","/jewellry/Web-Optimised/jewellry/Commisioned/4/DPPHOTGRAPHY-8156.webp","/jewellry/Web-Optimised/jewellry/Commisioned/4/DPPHOTGRAPHY-8158.webp","/jewellry/Web-Optimised/jewellry/Commisioned/4/DPPHOTGRAPHY-8160.webp","/jewellry/Web-Optimised/jewellry/Commisioned/4/DPPHOTGRAPHY-8162.webp","/jewellry/Web-Optimised/jewellry/Commisioned/4/DPPHOTGRAPHY-8168.webp"] },
+  { label: "Set 5", images: ["/jewellry/Web-Optimised/jewellry/Commisioned/5/DPPHOTGRAPHY-8220.webp","/jewellry/Web-Optimised/jewellry/Commisioned/5/DPPHOTGRAPHY-8270.webp","/jewellry/Web-Optimised/jewellry/Commisioned/5/DPPHOTGRAPHY-8273.webp","/jewellry/Web-Optimised/jewellry/Commisioned/5/DPPHOTGRAPHY-8275.webp"] },
+  { label: "Set 6", images: ["/jewellry/Web-Optimised/jewellry/Commisioned/6/DPPHOTGRAPHY-8278.webp","/jewellry/Web-Optimised/jewellry/Commisioned/6/DPPHOTGRAPHY-8286.webp","/jewellry/Web-Optimised/jewellry/Commisioned/6/DPPHOTGRAPHY-8290.webp"] },
+  { label: "Set 7", images: ["/jewellry/Web-Optimised/jewellry/Commisioned/7/DPPHOTGRAPHY-8404.webp","/jewellry/Web-Optimised/jewellry/Commisioned/7/DPPHOTGRAPHY-8407.webp"] },
 ];
 
 // Flatten all images for a collection into a single array for the slider
@@ -201,7 +201,7 @@ export default function Collections() {
       {/* Page Hero */}
       <section className="relative h-[50vh] min-h-[380px] flex items-end overflow-hidden">
         <img
-          src="/bannerCollection.jpg"
+          src="/jewellry/Web-Optimised/bannerCollection.webp"
           alt="Collections"
           className="absolute inset-0 w-full h-full object-cover"
           fetchpriority="high"
@@ -266,7 +266,7 @@ export default function Collections() {
               heading="Rooted in Tradition"
               description="Jewelry shaped by temple geometry, Mylapore sanctums, and generations of South Indian goldsmithing. Each piece carries the memory of sacred architecture and the warmth of 22k gold."
               images={CULTURAL_IMAGES}
-              bgImage="/jewellry/Cultural/1/DPPHOTGRAPHY-8173.jpg"
+              bgImage="/jewellry/Web-Optimised/jewellry/Cultural/1/DPPHOTGRAPHY-8173.webp"
               whatsapp={brand.whatsapp}
             />
           </motion.div>
@@ -284,7 +284,7 @@ export default function Collections() {
               heading="Made for You, by Name"
               description="Client-led pieces where memory, material, and wearability are shaped together from the first conversation. Bespoke work crafted with quiet restraint and deep personal intention."
               images={COMMISIONED_IMAGES}
-              bgImage="/jewellry/Commisioned/4/DPPHOTGRAPHY-8152.jpg"
+              bgImage="/jewellry/Web-Optimised/jewellry/Commisioned/4/DPPHOTGRAPHY-8152.webp"
               reverse
               whatsapp={brand.whatsapp}
             />
