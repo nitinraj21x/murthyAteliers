@@ -61,6 +61,8 @@ export default function BrandLoader({ onDone }) {
         requestAnimationFrame(() => {
           if (cancelled) return;
           const len = path.getTotalLength();
+          console.log("Length:", path.getTotalLength());
+console.log("BBox:", path.getBBox());
 
           requestAnimationFrame(() => {
             if (cancelled) return;
@@ -114,7 +116,6 @@ export default function BrandLoader({ onDone }) {
                 },
               ], {
                 duration:  FILL_DUR,
-                easing:    "ease",
                 fill:      "forwards",
                 composite: "replace",
               });

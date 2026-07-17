@@ -354,7 +354,7 @@ export default function Home() {
               className="group relative overflow-hidden rounded-3xl min-h-[420px] sm:min-h-[500px]"
             >
               <img
-                src="/jewellry/Web-Optimised/jewellry/Commisioned/4/DPPHOTGRAPHY-8162.webp"
+                src="/jewellry/Web-Optimised/jewellry/Commisioned/6/DPPHOTGRAPHY-8286.webp"
                 alt="Commissioned Collection"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
                 loading="lazy"

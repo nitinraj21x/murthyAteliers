@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, BookOpen } from "lucide-react";
 import { brand } from "../data/content";
-import { fadeUp, inView, scaleIn } from "../utils/motion";
+import { catalogueIntro, catalogueJewels, catalogueClosingNote } from "../data/jewellsCatalogue";
+import { fadeUp, inView, scaleIn, staggerContainer, staggerItem } from "../utils/motion";
 /* ─── Image data ────────────────────────────────────────────── */
 const CULTURAL_GROUPS = [
   { label: "Set 1",  images: ["/jewellry/Web-Optimised/jewellry/Cultural/1/DPPHOTGRAPHY-8171.webp","/jewellry/Web-Optimised/jewellry/Cultural/1/DPPHOTGRAPHY-8173.webp","/jewellry/Web-Optimised/jewellry/Cultural/1/DPPHOTGRAPHY-8175.webp","/jewellry/Web-Optimised/jewellry/Cultural/1/DPPHOTGRAPHY-8177.webp"] },
@@ -192,6 +193,154 @@ function CollectionBlock({ id, eyebrow, heading, description, images, bgImage, r
   );
 }
 
+/* ─── Jewels Catalogue Tab ──────────────────────────────────── */
+function JewelCard({ jewel, index }) {
+  const [expanded, setExpanded] = useState(false);
+  const [activeImg, setActiveImg] = useState(0);
+
+  return (
+    <motion.div variants={staggerItem} className="card-parchment rounded-3xl overflow-hidden shadow-luxury">
+      {/* Image strip */}
+      <div className="relative h-64 overflow-hidden">
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={jewel.images[activeImg]}
+            src={jewel.images[activeImg]}
+            alt={jewel.name}
+            className="absolute inset-0 w-full h-full object-cover"
+            initial={{ opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            loading="lazy"
+          />
+        </AnimatePresence>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+        {/* Image dots */}
+        {jewel.images.length > 1 && (
+          <div className="absolute bottom-3 right-3 flex gap-1.5">
+            {jewel.images.map((_, i) => (
+              <button key={i} onClick={() => setActiveImg(i)}
+                className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${i === activeImg ? "bg-gold scale-125" : "bg-white/50"}`}
+                aria-label={`View image ${i + 1}`} />
+            ))}
+          </div>
+        )}
+        {/* Number badge */}
+        <span className="absolute top-4 left-4 eyebrow text-gold bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-full text-[0.6rem]">
+          {jewel.number}
+        </span>
+        <span className="absolute top-4 right-4 text-xs text-white/60 bg-black/40 backdrop-blur-sm px-2 py-1 rounded-full">
+          {jewel.category}
+        </span>
+      </div>
+
+      {/* Content */}
+      <div className="p-6">
+        <h3 className="font-display text-forest text-xl leading-tight mb-1">{jewel.name}</h3>
+        <p className="text-xs text-gold/70 italic mb-3">{jewel.caption}</p>
+
+        <div className="flex flex-wrap gap-3 mb-4">
+          <div className="flex items-center gap-1.5 text-xs text-forest/50">
+            <BookOpen size={10} className="text-gold/60" />
+            <span>{jewel.stone}</span>
+          </div>
+        </div>
+
+        <div className="ornament mb-4" />
+
+        <p className="text-sm leading-7 text-forest/70 mb-3">{jewel.summary}</p>
+
+        <AnimatePresence>
+          {expanded && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="overflow-hidden"
+            >
+              <p className="text-sm leading-7 text-forest/65 pb-2">{jewel.detail}</p>
+              <div className="mt-3 pt-3 border-t border-gold/15 flex flex-wrap gap-4 text-xs text-forest/45">
+                <span><span className="text-gold/60 font-medium">Worn by:</span> {jewel.wornBy}</span>
+                <span><span className="text-gold/60 font-medium">Occasion:</span> {jewel.occasion}</span>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <button
+          onClick={() => setExpanded((p) => !p)}
+          className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium tracking-widest uppercase text-crimson hover:text-forest transition-colors"
+        >
+          {expanded ? "Show Less" : "Read More"}
+          {expanded ? <ChevronUp size={11} /> : <ChevronDown size={11} />}
+        </button>
+      </div>
+    </motion.div>
+  );
+}
+
+function JewelsTab() {
+  const categories = [...new Set(catalogueJewels.map((j) => j.category))];
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  const filtered =
+    activeCategory === "All"
+      ? catalogueJewels
+      : catalogueJewels.filter((j) => j.category === activeCategory);
+
+  return (
+    <section className="shell py-16 sm:py-20">
+      <div className="frame">
+        {/* Intro */}
+        <motion.div variants={fadeUp} {...inView} className="max-w-2xl mb-14">
+          <p className="eyebrow text-gold mb-4">{catalogueIntro.eyebrow}</p>
+          <h2 className="display-lg text-cream mb-5">{catalogueIntro.heading}</h2>
+          <div className="ornament mb-6 opacity-40" />
+          <p className="text-sm leading-8 text-cream/60">{catalogueIntro.body}</p>
+        </motion.div>
+
+        {/* Category filter */}
+        <div className="flex flex-wrap gap-2 mb-10">
+          {["All", ...categories].map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className="px-4 py-2 rounded-full text-xs font-medium tracking-widest uppercase transition-all duration-200"
+              style={{
+                background: activeCategory === cat ? "var(--gold)" : "rgba(255,255,255,0.06)",
+                color: activeCategory === cat ? "var(--forest)" : "rgba(250,248,237,0.55)",
+                border: activeCategory === cat ? "1px solid var(--gold)" : "1px solid rgba(211,175,55,0.2)",
+              }}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Grid */}
+        <motion.div variants={staggerContainer} {...inView}
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {filtered.map((jewel, i) => (
+            <JewelCard key={jewel.id} jewel={jewel} index={i} />
+          ))}
+        </motion.div>
+
+        {/* Closing note */}
+        <motion.div variants={fadeUp} {...inView}
+          className="mt-16 max-w-3xl mx-auto text-center">
+          <div className="ornament mb-8" />
+          <p className="font-display italic text-cream/60 text-lg sm:text-xl leading-9">
+            "{catalogueClosingNote}"
+          </p>
+          <div className="ornament mt-8" />
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 /* ─── Page ──────────────────────────────────────────────────── */
 export default function Collections() {
   const [activeTab, setActiveTab] = useState("cultural");
@@ -230,6 +379,7 @@ export default function Collections() {
             {[
               { key: "cultural",    label: "Cultural" },
               { key: "commisioned", label: "Commissioned" },
+              { key: "jewels",      label: "Jewels" },
             ].map((tab) => (
               <button
                 key={tab.key}
@@ -270,7 +420,7 @@ export default function Collections() {
               whatsapp={brand.whatsapp}
             />
           </motion.div>
-        ) : (
+        ) : activeTab === "commisioned" ? (
           <motion.div
             key="commisioned"
             initial={{ opacity: 0 }}
@@ -288,6 +438,17 @@ export default function Collections() {
               reverse
               whatsapp={brand.whatsapp}
             />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="jewels"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="bg-forest min-h-screen"
+          >
+            <JewelsTab />
           </motion.div>
         )}
       </AnimatePresence>
