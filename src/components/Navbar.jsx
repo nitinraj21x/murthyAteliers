@@ -27,7 +27,7 @@ export default function Navbar() {
     <header
       className={`fixed top-0 inset-x-0 z-40 transition-all duration-500 ${
         scrolled
-          ? "bg-cream/92 backdrop-blur-md border-b border-gold/15 shadow-sm"
+          ? "bg-forest/95 backdrop-blur-md border-b border-gold/20 shadow-sm"
           : "bg-transparent"
       }`}
     >
@@ -42,7 +42,7 @@ export default function Navbar() {
           >
             <span
               className={`logo-brand script-brand whitespace-nowrap transition-colors duration-500 ${
-                scrolled ? "text-crimson" : "text-cream"
+                scrolled ? "text-gold-dark" : "text-gold"
               }`}
               style={{ fontSize: "clamp(1rem, 4.5vw, 1.6rem)", lineHeight: 1 }}
             >
@@ -51,7 +51,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className={`hidden lg:flex items-center gap-8 ${scrolled ? "nav-scrolled" : ""}`}>
+          <nav className="hidden lg:flex items-center gap-8">
             {navigation.map((item) => (
               <NavLink
                 key={item.href}
@@ -94,7 +94,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:hidden overflow-hidden border-t border-gold/15 bg-cream/96 backdrop-blur-md"
+            className="lg:hidden overflow-hidden border-t border-gold/15 bg-forest/95 backdrop-blur-md"
           >
             <div className="shell py-3">
               <div className="frame flex flex-col gap-1">
@@ -106,10 +106,11 @@ export default function Navbar() {
                     className={({ isActive }) =>
                       `block px-4 py-2.5 rounded-2xl text-xs font-medium tracking-widest uppercase transition ${
                         isActive
-                          ? "bg-crimson/8 text-crimson"
-                          : "text-forest/80 hover:bg-gold/8 hover:text-forest"
+                          ? "bg-gold/15 text-gold"
+                          : "text-cream hover:bg-gold/10 hover:text-gold"
                       }`
                     }
+                    style={{ textShadow: "0 1px 3px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.5)" }}
                   >
                     {item.label}
                   </NavLink>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight, MessageCircle, Mail, MapPin, Phone, CheckCircle, Loader } from "lucide-react";
 import { brand } from "../data/content";
@@ -12,11 +13,18 @@ const consultationSteps = [
 ];
 
 export default function Consultation() {
+  const location = useLocation();
+  const prefill  = location.state?.prefill || {};
+
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending]     = useState(false);
   const [sendError, setSendError] = useState("");
   const [form, setForm] = useState({
-    name: "", email: "", phone: "", occasion: "", message: "",
+    name:    "",
+    email:   "",
+    phone:   "",
+    occasion: prefill.occasion || "",
+    message:  prefill.message  || "",
   });
 
   function handleChange(e) {
@@ -54,7 +62,7 @@ export default function Consultation() {
           src="/jewellry/Web-Optimised/bannerConsult.webp"
           alt="Consultation"
           className="absolute inset-0 w-full h-full object-cover"
-          fetchpriority="high"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/50 to-forest/20" />
         <div className="relative z-10 shell pb-14 w-full">

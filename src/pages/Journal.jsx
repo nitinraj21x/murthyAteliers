@@ -11,7 +11,7 @@ function StoryView({ story }) {
     <>
       <section className="relative h-[50vh] min-h-[380px] flex items-end overflow-hidden">
         <img src={story.image} alt={story.title}
-          className="absolute inset-0 w-full h-full object-cover" fetchpriority="high" />
+          className="absolute inset-0 w-full h-full object-cover" fetchPriority="high" />
         <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/50 to-forest/20" />
         <div className="relative z-10 shell pb-12 w-full">
           <div className="frame">
@@ -78,7 +78,7 @@ function ArticleView({ article }) {
     <>
       <section className="relative h-[50vh] min-h-[380px] flex items-end overflow-hidden">
         <img src={article.image} alt={article.title}
-          className="absolute inset-0 w-full h-full object-cover" fetchpriority="high" />
+          className="absolute inset-0 w-full h-full object-cover" fetchPriority="high" />
         <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/50 to-forest/20" />
         <div className="relative z-10 shell pb-12 w-full">
           <div className="frame">
@@ -127,7 +127,7 @@ function JournalIndex() {
       {/* Hero */}
       <section className="relative h-[55vh] min-h-[420px] flex items-end overflow-hidden">
         <img src="/jewellry/Web-Optimised/heirStory.webp" alt="Journal"
-          className="absolute inset-0 w-full h-full object-cover" fetchpriority="high" />
+          className="absolute inset-0 w-full h-full object-cover" fetchPriority="high" />
         <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/50 to-forest/20" />
         <div className="relative z-10 shell pb-14 w-full">
           <div className="frame">

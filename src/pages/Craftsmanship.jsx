@@ -39,7 +39,7 @@ export default function Craftsmanship() {
           src="/jewellry/Web-Optimised/detailing.webp"
           alt="Craftsmanship"
           className="absolute inset-0 w-full h-full object-cover"
-          fetchpriority="high"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/50 to-forest/20" />
         <div className="relative z-10 shell pb-14 w-full">

@@ -23,15 +23,8 @@ export const navigation = [
   { label: "Consultation",   href: "/consultation" },
 ];
 
-/* ─── Hero ───────────────────────────────────────────────────── */
-export const hero = {
-  eyebrow:    "Murthy Ateliers by 9th",
-  heading:    "Heirloom Jewels for Generations to Come",
-  subheading: "Crafted with memory, intention, and timeless artistry — Murthy Ateliers creates jewels meant to be worn, loved, and passed on.",
-  cta1:       { label: "Explore Collections", href: "/collections" },
-  cta2:       { label: "Book a Consultation", href: "/consultation" },
-  images:     [img.hero1, img.hero2, img.hero3, img.heroCinematic],
-};
+/* ─── Hero — used in Home.jsx directly with inline data ─────── */
+// hero export removed — Home.jsx uses local PROCESS_STEPS and JOURNAL_POSTS constants
 
 /* ─── Founder Story ──────────────────────────────────────────── */
 export const founderStory = {
@@ -77,51 +70,8 @@ export const philosophy = {
   ],
 };
 
-/* ─── Collections ────────────────────────────────────────────── */
-export const collections = [
-  {
-    id:      "bridal-heirlooms",
-    name:    "Bridal Heirlooms",
-    tagline: "For wedding mornings, ancestral gold, and measured grandeur.",
-    story:   "Layered necklaces, vankis, and jhumkas designed for muhurtham light, silk richness, and the emotional weight of family ceremony. Each piece is composed to feel like it has always belonged to the family.",
-    image:   "/jewellry/Web-Optimised/imgs/cat1.webp",
-    accent:  img.necklace1,
-  },
-  {
-    id:      "temple-inspired",
-    name:    "Temple-Inspired Pieces",
-    tagline: "Architectural, sculptural, and deeply rooted.",
-    story:   "Forms informed by shrine doors, lotus borders, peacock reliefs, and the quiet geometry of Tamil sanctum ornament. Jewelry that carries the memory of sacred spaces.",
-    image:   "/jewellry/Web-Optimised/imgs/cat2.webp",
-    accent:  img.gemstone2,
-    imagePosition: "center center",
-  },
-  {
-    id:      "everyday-classics",
-    name:    "Everyday Classics",
-    tagline: "Refined enough for daily rituals, enduring enough for repetition.",
-    story:   "Softer collars, diamond accents, and versatile silhouettes that still carry the dignity of heirloom thinking. Pieces that become part of who you are.",
-    image:   "/jewellry/Web-Optimised/imgs/cat3.webp",
-    accent:  img.necklace2,
-    imagePosition: "center calc(50% - 25px)",
-  },
-  {
-    id:      "custom-commissions",
-    name:    "Custom Commissions",
-    tagline: "Personal, collaborative, and made with restraint.",
-    story:   "Client-led pieces where memory, material, and wearability are shaped together from the very first conversation. Your story, translated into gold.",
-    image:   "/jewellry/Web-Optimised/imgs/cat4.webp",
-    accent:  img.earrings1,
-  },
-  {
-    id:      "heritage-revivals",
-    name:    "Heritage Revivals",
-    tagline: "Museum-like depth with present-day intimacy.",
-    story:   "Designs that revive antique language without becoming costume, preserving cultural richness while softening the finish for modern wear.",
-    image:   "/jewellry/Web-Optimised/imgs/cat5.webp",
-    accent:  img.bangles1,
-  },
-];
+/* ─── Collections preview (home page uses inline JSX) ───────── */
+// collections export removed — Home.jsx Section 5 uses inline JSX cards
 
 /* ─── Process Steps ──────────────────────────────────────────── */
 export const processSteps = [
@@ -398,9 +348,5 @@ export const jewelleryStories = [
   },
 ];
 
-/* ─── Final Message ──────────────────────────────────────────── */
-export const finalMessage = {
-  heading: "Some things are too meaningful to be trend-driven.",
-  lines:   ["Jewelry should hold memory.", "It should gather stories.", "It should stay."],
-  // image served directly in Home.jsx via hero_jewel.webp
-};
+/* ─── Final Message (unused — kept as reference only) ────────── */
+// finalMessage export removed — not consumed by any page
