@@ -131,20 +131,15 @@ function HamburgerIcon({ isOpen, isHovered }) {
 
 const BANNER_IDS = ["home-banner", "page-hero"];
 
-/* Sections whose top edge is close to the header — used to detect overlap */
-const CONTENT_SECTION_IDS = ["story", "collections", "process", "journal", "faq"];
-
 export default function SiteHeader() {
   const { pathname } = useLocation();
 
   const [bannerVisible, setBannerVisible] = useState(true);
   const [drawerOpen, setDrawerOpen]       = useState(false);
   const [btnHovered, setBtnHovered]       = useState(false);
-  const [logoFaded, setLogoFaded]         = useState(false);
 
   const drawerRef = useRef(null);
   const obsRef    = useRef(null);
-  const logoObsRef= useRef(null);
 
   /* Watch whichever banner element exists on the current page */
   useLayoutEffect(() => {
@@ -180,32 +175,6 @@ export default function SiteHeader() {
   useLayoutEffect(() => {
     const raf = requestAnimationFrame(() => setDrawerOpen(false));
     return () => cancelAnimationFrame(raf);
-  }, [pathname]);
-
-  /* Watch content sections — fade logo when one is near the top */
-  useLayoutEffect(() => {
-    logoObsRef.current?.disconnect();
-
-    const targets = CONTENT_SECTION_IDS
-      .map((id) => document.getElementById(id))
-      .filter(Boolean);
-
-    if (!targets.length) return;
-
-    /* rootMargin: top=-48px bottom=-80% means the section is within 48px
-       of the top of the viewport — that's when the logo would overlap */
-    const obs = new IntersectionObserver(
-      (entries) => {
-        const anyNearTop = entries.some((e) => e.isIntersecting);
-        setLogoFaded(anyNearTop);
-      },
-      { threshold: 0, rootMargin: "-48px 0px -80% 0px" }
-    );
-
-    targets.forEach((el) => obs.observe(el));
-    logoObsRef.current = obs;
-
-    return () => obs.disconnect();
   }, [pathname]);
 
   /* Lock body scroll when drawer open */
@@ -294,10 +263,13 @@ export default function SiteHeader() {
 
                 <Link
                   to="/"
-                  className={`site-logo-link${logoFaded ? " site-logo-link--faded" : ""}`}
+                  className="site-logo-link"
                   aria-label="Murthy Ateliers — Home"
                 >
-                  <span className="site-logo-text script-brand">{brand.fullName}</span>
+                  <span className="site-logo-text script-brand">
+                    <span className="site-logo-line1">Murthy Ateliers</span>
+                    <span className="site-logo-line2">by 9th</span>
+                  </span>
                 </Link>
               </motion.div>
             )}
@@ -337,7 +309,10 @@ export default function SiteHeader() {
               {/* Header */}
               <div className="nav-drawer-header">
                 <Link to="/" onClick={() => setDrawerOpen(false)} className="site-logo-link">
-                  <span className="site-logo-text script-brand">{brand.fullName}</span>
+                  <span className="site-logo-text script-brand">
+                    <span className="site-logo-line1">Murthy Ateliers</span>
+                    <span className="site-logo-line2">by 9th</span>
+                  </span>
                 </Link>
                 <button
                   type="button"

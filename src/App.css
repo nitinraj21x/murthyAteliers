@@ -2712,12 +2712,12 @@ textarea.form-input {
   overflow: hidden;
 }
 
-/* Logo inside the drawer — clamp size tighter so it never overflows */
-.nav-drawer-header .site-logo-text {
-  font-size: clamp(0.7rem, 4.5vw, 1rem);
-  max-width: calc(100% - 3rem);
-  overflow: hidden;
-  text-overflow: ellipsis;
+/* Logo inside the drawer — slightly smaller lines */
+.nav-drawer-header .site-logo-line1 {
+  font-size: clamp(0.72rem, 4vw, 0.95rem);
+}
+.nav-drawer-header .site-logo-line2 {
+  font-size: clamp(0.5rem, 2.8vw, 0.68rem);
 }
 
 .nav-drawer-close {
@@ -3894,10 +3894,32 @@ textarea.form-input {
   text-decoration: none;
   display: flex;
   align-items: center;
-  transition: opacity 0.35s ease, transform 0.35s ease;
 }
-.site-logo-link--faded {
-  opacity: 0;
-  transform: translateX(-14px);
-  pointer-events: none;
+
+/* Two-line logo block */
+.site-logo-text {
+  font-family: var(--font-logo);
+  color: var(--color-gold);
+  line-height: 1;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Line 1: "Murthy Ateliers" */
+.site-logo-line1 {
+  font-size: clamp(0.78rem, 2.6vw, 1.1rem);
+  white-space: nowrap;
+  display: block;
+}
+
+/* Line 2: "by 9th" — slightly smaller, right-aligned */
+.site-logo-line2 {
+  font-size: clamp(0.55rem, 1.8vw, 0.78rem);
+  white-space: nowrap;
+  display: block;
+  align-self: flex-end;   /* pushes to the right edge of the container */
+  margin-top: 0.05em;
+  opacity: 0.80;
 }
