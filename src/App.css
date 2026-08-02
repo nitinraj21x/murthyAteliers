@@ -2712,12 +2712,14 @@ textarea.form-input {
   overflow: hidden;
 }
 
-/* Logo inside the drawer — slightly smaller lines */
-.nav-drawer-header .site-logo-line1 {
-  font-size: clamp(0.72rem, 4vw, 0.95rem);
-}
-.nav-drawer-header .site-logo-line2 {
-  font-size: clamp(0.5rem, 2.8vw, 0.68rem);
+/* Logo inside the drawer — single line, full name */
+.nav-drawer-logo-text {
+  font-size: clamp(0.78rem, 4vw, 1.05rem);
+  flex-direction: row;       /* override the column layout */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 3.5rem);
 }
 
 .nav-drawer-close {

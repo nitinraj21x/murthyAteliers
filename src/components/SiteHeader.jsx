@@ -309,9 +309,8 @@ export default function SiteHeader() {
               {/* Header */}
               <div className="nav-drawer-header">
                 <Link to="/" onClick={() => setDrawerOpen(false)} className="site-logo-link">
-                  <span className="site-logo-text script-brand">
-                    <span className="site-logo-line1">Murthy Ateliers</span>
-                    <span className="site-logo-line2">by 9th</span>
+                  <span className="site-logo-text script-brand nav-drawer-logo-text">
+                    {brand.fullName}
                   </span>
                 </Link>
                 <button
