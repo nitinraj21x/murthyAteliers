@@ -2714,12 +2714,12 @@ textarea.form-input {
 
 /* Logo inside the drawer — single line, full name */
 .nav-drawer-logo-text {
-  font-size: clamp(0.78rem, 4vw, 1.05rem);
-  flex-direction: row;       /* override the column layout */
+  display: block;            /* override the flex-column from site-logo-text */
+  font-size: clamp(0.78rem, 4vw, 1.1rem);
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: calc(100% - 3.5rem);
+  overflow: visible;         /* let it breathe — the header has overflow:hidden as safety net */
+  text-overflow: clip;
+  max-width: none;
 }
 
 .nav-drawer-close {
