@@ -2608,11 +2608,14 @@ textarea.form-input {
 
 .site-logo-text {
   font-family: var(--font-logo);
-  font-size: var(--ma-header-logo-size, clamp(0.95rem, 3.5vw, 1.45rem));
+  font-size: clamp(0.75rem, 2.5vw, 1.1rem);
   color: var(--color-gold);
   line-height: 1;
   white-space: nowrap;
   text-shadow: 0 1px 8px rgba(0,0,0,0.65);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: clamp(120px, 30vw, 220px);
 }
 
 /* Icon-mode standalone hamburger (shown while banner is visible) */
@@ -2705,6 +2708,16 @@ textarea.form-input {
   padding: 1.25rem 1.5rem;
   border-bottom: 1px solid rgba(211, 175, 55, 0.12);
   flex-shrink: 0;
+  gap: 0.75rem;
+  overflow: hidden;
+}
+
+/* Logo inside the drawer — clamp size tighter so it never overflows */
+.nav-drawer-header .site-logo-text {
+  font-size: clamp(0.7rem, 4.5vw, 1rem);
+  max-width: calc(100% - 3rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .nav-drawer-close {
@@ -3513,8 +3526,8 @@ textarea.form-input {
 @media(min-width:1024px){ .coll-block-right { width:56%; } }
 
 .coll-tabbar { position:sticky; top:0; z-index:30; background:rgba(61,75,42,0.95); backdrop-filter:blur(12px); border-bottom:1px solid rgba(211,175,55,0.20); }
-.coll-tabbar-inner { display:flex; align-items:center; gap:0.25rem; padding-block:0.25rem; }
-.coll-tab { position:relative; padding:0.875rem 1.5rem; font-size:0.75rem; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; background:none; border:none; transition:color 0.2s ease; }
+.coll-tabbar-inner { display:flex; align-items:center; padding-block:0.25rem; }
+.coll-tab { position:relative; flex:1; text-align:center; padding:0.875rem 1.5rem; font-size:0.75rem; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; background:none; border:none; transition:color 0.2s ease; }
 .coll-tab-underline { position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--color-gold); transition:opacity 0.2s ease; }
 .coll-cta-sec { padding-block:5rem; }
 .coll-cta-card { position:relative; overflow:hidden; border-radius:1.5rem; background:var(--crimson); padding:2.5rem; text-align:center; }
@@ -3835,3 +3848,56 @@ textarea.form-input {
 .home-bespoke-overlay    { opacity:0.25; }
 .home-phil-card-overlay  { opacity:0.70; }
 .heri-pillar-overlay     { opacity:0.20; }
+
+/* ==========================================================================
+   Home FAB — fixed bottom-right "back to top / home" button
+   ========================================================================== */
+.home-fab {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  z-index: 55;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: rgba(30, 34, 27, 0.82);
+  border: 1px solid rgba(211, 175, 55, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--color-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.22s ease, border-color 0.22s ease,
+              transform 0.22s ease, box-shadow 0.22s ease,
+              opacity 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+.home-fab:hover {
+  background: rgba(61, 75, 42, 0.92);
+  border-color: var(--color-gold);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+}
+.home-fab--hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+}
+
+/* ==========================================================================
+   Site logo — fade+slide left when near content overlap
+   ========================================================================== */
+.site-logo-link {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.site-logo-link--faded {
+  opacity: 0;
+  transform: translateX(-14px);
+  pointer-events: none;
+}
