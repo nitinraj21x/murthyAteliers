@@ -15,25 +15,25 @@ export const img = {
   heroCinematic:`${W}/fbanner1.webp`,
 
   // ── Founder / Heritage ──────────────────────────────────────
-  founder:      `${W}/collection1.webp`,
+  founder:      `${W}/collection1-opt.webp`,
   mylapore:     `${W}/store.webp`,
   archival:     `${W}/chennai.webp`,
   sketch:       `${W}/craft.webp`,
 
-  // ── Collections ─────────────────────────────────────────────
-  bridal:       `${WJ}/Cultural/1/DPPHOTGRAPHY-8171.webp`,
-  temple:       `${WJ}/Cultural/4/DPPHOTGRAPHY-8194.webp`,
-  everyday:     `${WJ}/Cultural/6/DPPHOTGRAPHY-8212.webp`,
+  // ── Collections — updated to folder-name paths ───────────────
+  bridal:       `${WJ}/Cultural/Saradu Malai/DPPHOTGRAPHY-8171.webp`,
+  temple:       `${WJ}/Cultural/Studded Mango Saradu/DPPHOTGRAPHY-8194.webp`,
+  everyday:     `${WJ}/Cultural/Adigai blue/DPPHOTGRAPHY-8212.webp`,
   custom:       `${WJ}/Commisioned/1/DPPHOTGRAPHY-8089.webp`,
   heritage:     `${WJ}/Commisioned/4/DPPHOTGRAPHY-8147.webp`,
 
   // ── Jewelry Macro / Detail ───────────────────────────────────
-  goldwork1:    `${WJ}/Cultural/2/DPPHOTGRAPHY-8350.webp`,
-  goldwork2:    `${WJ}/Cultural/3/DPPHOTGRAPHY-8180.webp`,
-  gemstone1:    `${WJ}/Cultural/5/DPPHOTGRAPHY-8202.webp`,
-  gemstone2:    `${WJ}/Cultural/7/DPPHOTGRAPHY-8227.webp`,
-  necklace1:    `${WJ}/Cultural/8/DPPHOTGRAPHY-8254.webp`,
-  necklace2:    `${WJ}/Cultural/9/DPPHOTGRAPHY-8335.webp`,
+  goldwork1:    `${WJ}/Cultural/Mango Saradu Malai/DPPHOTGRAPHY-8350.webp`,
+  goldwork2:    `${WJ}/Cultural/Manga Malai/DPPHOTGRAPHY-8180.webp`,
+  gemstone1:    `${WJ}/Cultural/Studded Saradu Malai/DPPHOTGRAPHY-8202.webp`,
+  gemstone2:    `${WJ}/Cultural/Poothali/DPPHOTGRAPHY-8227.webp`,
+  necklace1:    `${WJ}/Cultural/Manga Malai Small/DPPHOTGRAPHY-8254.webp`,
+  necklace2:    `${WJ}/Cultural/Aalaya Aabharanam/DPPHOTGRAPHY-8335.webp`,
   earrings1:    `${WJ}/Commisioned/3/DPPHOTGRAPHY-8130.webp`,
   bangles1:     `${WJ}/Commisioned/5/DPPHOTGRAPHY-8220.webp`,
   velvetTray:   `${WJ}/Commisioned/6/DPPHOTGRAPHY-8278.webp`,
@@ -41,11 +41,11 @@ export const img = {
   // ── Craftsmanship / Atelier ──────────────────────────────────
   artisan1:     `${W}/handCrafted.webp`,
   artisan2:     `${W}/detailing.webp`,
-  stones:       `${WJ}/Cultural/10/DPPHOTGRAPHY-8340.webp`,
+  stones:       `${WJ}/Cultural/Poothali Blue/DPPHOTGRAPHY-8340.webp`,
   finishing:    `${WJ}/Commisioned/2/DPPHOTGRAPHY-8108.webp`,
 
   // ── Journal / Editorial ──────────────────────────────────────
-  journal1:     `${W}/heirStory.webp`,
+  journal1:     `${W}/heirStory-opt.webp`,
   journal2:     `${WI}/craftmanship.webp`,
   journal3:     `${W}/antique.webp`,
   journal4:     `${WI}/heirloom.webp`,

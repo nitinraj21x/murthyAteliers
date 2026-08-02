@@ -1,0 +1,127 @@
+/**
+ * ═══════════════════════════════════════════════════════════════
+ *  Murthy Ateliers — Global Theme Configuration
+ *  Developers: edit this file to change colours, fonts, sizes,
+ *  and banner images site-wide. No other files need touching.
+ * ═══════════════════════════════════════════════════════════════
+ */
+
+:root {
+
+  /* ── Colour Palette ───────────────────────────────────────── */
+  --ma-cream:         #faf8ed;
+  --ma-cream-dark:    #f0ecda;
+  --ma-gold:          #D3af37;
+  --ma-gold-hover:    #bda030;
+  --ma-sage:          #919d7b;
+  --ma-forest:        #3d4b2a;
+  --ma-forest-dark:   #2e3820;
+  --ma-crimson:       #6a1413;
+  --ma-crimson-hover: #4e0f0e;
+  --ma-charcoal:      #1e221b;
+
+  /* Aliases used throughout App.css / index.css */
+  --cream:              var(--ma-cream);
+  --cream-dark:         var(--ma-cream-dark);
+  --gold:               var(--ma-gold);
+  --gold-hover:         var(--ma-gold-hover);
+  --sage:               var(--ma-sage);
+  --forest:             var(--ma-forest);
+  --crimson:            var(--ma-crimson);
+
+  --color-bg-light:     var(--ma-cream);
+  --color-gold:         var(--ma-gold);
+  --color-gold-hover:   var(--ma-gold-hover);
+  --color-gray-green:   var(--ma-sage);
+  --color-dark-gray-green: var(--ma-forest);
+  --color-dark-red:     var(--ma-crimson);
+  --color-dark-red-hover: var(--ma-crimson-hover);
+  --color-charcoal:     var(--ma-charcoal);
+  --color-light-overlay: rgba(250, 248, 237, 0.9);
+  --color-dark-overlay:  rgba(30, 34, 27, 0.85);
+
+  /* ── Typography ───────────────────────────────────────────── */
+  --ma-font-serif:  'Cormorant Garamond', Georgia, serif;
+  --ma-font-script: 'Pinyon Script', cursive;
+  --ma-font-logo:   'Halimun', 'Pinyon Script', cursive;
+  --ma-font-sans:   'Jost', 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Aliases */
+  --font-serif:  var(--ma-font-serif);
+  --font-script: var(--ma-font-script);
+  --font-logo:   var(--ma-font-logo);
+  --font-sans:   var(--ma-font-sans);
+
+  /* ── Font Sizes ───────────────────────────────────────────── */
+  /* Body / paragraph text */
+  --ma-text-body:        1rem;        /* base <p> size */
+  --ma-text-body-lg:     1.1rem;      /* founder body, journal body */
+  --ma-text-small:       0.875rem;    /* captions, card excerpts */
+  --ma-text-eyebrow:     0.75rem;     /* all-caps eyebrow labels */
+  --ma-text-button:      0.6875rem;   /* button labels */
+
+  /* Heading scale */
+  --ma-text-display-xl:  clamp(3rem, 7vw, 6.5rem);
+  --ma-text-display-lg:  clamp(2.25rem, 5vw, 3rem);
+  --ma-text-display-md:  clamp(1.75rem, 3.5vw, 3rem);
+  --ma-text-section:     clamp(2.2rem, 4vw, 3.5rem);
+
+  /* ── Spacing & Layout ─────────────────────────────────────── */
+  --ma-max-width:        1400px;
+  --max-width:           var(--ma-max-width);
+
+  /* ── Transitions ──────────────────────────────────────────── */
+  --ma-ease-smooth:      cubic-bezier(0.25, 0.8, 0.25, 1);
+  --ma-ease-spring:      cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-smooth:   all 0.5s var(--ma-ease-smooth);
+  --transition-fast:     all 0.25s ease;
+
+  /* ── Banner Images ────────────────────────────────────────── */
+  /* Change the url() values here to swap banner images globally */
+
+  /** Home page hero banner (100vw × 50vh) */
+  --ma-banner-home:      url('/imgs/banner_collection.webp');
+
+  /** Collections page banner */
+  --ma-banner-collections: url('/jewellry/Web-Optimised/bannerCollection-opt.webp');
+
+  /** Craftsmanship page banner */
+  --ma-banner-craft:     url('/imgs/bannerCraft.webp');
+
+  /** Heritage page banner */
+  --ma-banner-heritage:  url('/imgs/heriBanner.webp');
+
+  /** Journal page banner */
+  --ma-banner-journal:   url('/jewellry/Web-Optimised/heirStory-opt.webp');
+
+  /** Consultation page banner */
+  --ma-banner-consult:   url('/jewellry/Web-Optimised/bannerConsult.webp');
+
+  /** Final / emotional section background */
+  --ma-banner-emotional: url('/jewellry/Web-Optimised/fbanner1.webp');
+
+  /** Philosophy section background texture (low-opacity overlay) */
+  --ma-bg-philosophy:    url('/imgs/bgsec1.webp');
+
+  /* ── Banner Positioning ───────────────────────────────────── */
+  --ma-banner-home-position:        center center;
+  --ma-banner-collections-position: center center;
+  --ma-banner-craft-position:       center center;
+  --ma-banner-heritage-position:    center center;
+  --ma-banner-journal-position:     center center;
+  --ma-banner-consult-position:     center center;
+  --ma-banner-emotional-position:   center center;
+
+  /* ── Site Header ──────────────────────────────────────────── */
+  --ma-header-logo-size:    clamp(0.95rem, 3.5vw, 1.45rem);
+  --ma-nav-drawer-width-desktop: 25vw;
+  --ma-nav-drawer-width-mobile:  min(80vw, 340px);
+
+  /* ── Collections Section ──────────────────────────────────── */
+  --ma-collections-bg:   var(--ma-crimson);
+  /* Background image for collections section — set url() or leave empty */
+  --ma-collections-bg-image: none;
+
+  /* ── Expand animation duration (seconds) ─────────────────── */
+  --ma-collections-expand-duration: 0.5s;
+}

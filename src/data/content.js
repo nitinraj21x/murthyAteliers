@@ -124,7 +124,7 @@ export const journalArticles = [
     category: "Heritage",
     title:    "The Story of Heirloom Jewelry",
     excerpt:  "Why jewels intended for memory age more beautifully than pieces made for trend cycles. A meditation on permanence and the objects we choose to keep.",
-    image:    "/jewellry/Web-Optimised/heirStory.webp",
+    image:    "/jewellry/Web-Optimised/heirStory-opt.webp",
     readTime: "6 min read",
   },
   {
@@ -224,7 +224,7 @@ export const jewelleryStories = [
     title:    "The Swan Who Could Drink Only the Milk",
     jewel:    "Hamsa Pendant (No. 1) and Hamsa Earrings (No. 5)",
     excerpt:  "Long before she was ever carved in gold, Saraswati was given a choice of how to travel through the world. She chose the humblest-looking of all the divine mounts: a plain white swan — and the reason is everything.",
-    image:    "/jewellry/Web-Optimised/heirStory.webp",
+    image:    "/jewellry/Web-Optimised/heirStory-opt.webp",
     readTime: "4 min read",
     body: [
       "Long before she was ever carved in gold, Saraswati was given a choice of how to travel through the world. She could have chosen the lion, like Durga. She could have chosen the elephant, like Indra. Instead, the goddess of knowledge chose the humblest-looking of all the divine mounts: a plain white swan.",
@@ -305,7 +305,7 @@ export const jewelleryStories = [
     title:    "The Creature Who Carries the River Down From Heaven",
     jewel:    "Makarakanti Padakkam (Nos. 22 & 23) and the Guardian Arches of Every Temple",
     excerpt:  "The river Ganga did not always flow on earth. She lived once only in the heavens, until a king undertook a penance so long and so severe that even the gods took notice.",
-    image:    "/jewellry/Web-Optimised/collection1.webp",
+    image:    "/jewellry/Web-Optimised/collection1-opt.webp",
     readTime: "5 min read",
     body: [
       "The river Ganga did not always flow on earth. She lived once only in the heavens, until a king named Bhagiratha, desperate to free the souls of his sixty thousand ancestors who could find no peace until they were touched by her sacred water, undertook a penance so long and so severe that even the gods took notice.",

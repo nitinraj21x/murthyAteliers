@@ -5,12 +5,24 @@ import { ArrowUpRight, MessageCircle, Mail, MapPin, Phone, CheckCircle, Loader }
 import { brand } from "../data/content";
 import { fadeUp, fadeLeft, fadeRight, staggerContainer, staggerItem, inView } from "../utils/motion";
 import { sendEmail } from "../utils/emailjs";
+import {
+  sanitizeText,
+  sanitizeMultiline,
+  validateName,
+  validateEmail,
+  validatePhone,
+  validateTextField,
+  validateTextarea,
+  COUNTRY_CODES,
+} from "../utils/sanitize";
 
 const consultationSteps = [
   { step: "01", title: "Share Your Story", body: "Tell us about the piece you have in mind — a family memory, a ceremony, or a feeling you want to translate into gold." },
   { step: "02", title: "Design Conversation", body: "We review silhouettes, motif references, and ceremonial context together, refining the direction until it feels right." },
   { step: "03", title: "Craft & Deliver", body: "The piece is made slowly, by hand, and delivered with care advice, styling notes, and space for it to become yours." },
 ];
+
+const todayStr = new Date().toISOString().split('T')[0];
 
 export default function Consultation() {
   const location = useLocation();
@@ -19,29 +31,72 @@ export default function Consultation() {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending]     = useState(false);
   const [sendError, setSendError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState({});
   const [form, setForm] = useState({
-    name:    "",
-    email:   "",
-    phone:   "",
-    occasion: prefill.occasion || "",
-    message:  prefill.message  || "",
+    name:         "",
+    email:        "",
+    phoneCountry: "+91",
+    phone:        "",
+    occasion:     prefill.occasion ? sanitizeText(prefill.occasion).slice(0, 120) : "",
+    message:      prefill.message  ? sanitizeMultiline(prefill.message).slice(0, 2000) : "",
   });
 
   function handleChange(e) {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    let clean = value;
+    if (name === 'phone') {
+      clean = value.replace(/[^\d\s\-\.\(\)]/g, '').slice(0, 15);
+    } else if (name === 'name') {
+      clean = value.slice(0, 80);
+    } else if (name === 'email') {
+      clean = value.slice(0, 254).replace(/\s/g, '');
+    } else if (name === 'occasion') {
+      clean = value.slice(0, 120);
+    } else if (name === 'message') {
+      clean = value.slice(0, 2000);
+    }
+    setForm((prev) => ({ ...prev, [name]: clean }));
+    if (fieldErrors[name]) {
+      setFieldErrors((prev) => ({ ...prev, [name]: null }));
+    }
+  }
+
+  function validateAll() {
+    const errors = {};
+    const nameErr = validateName(form.name);
+    if (nameErr) errors.name = nameErr;
+    const emailErr = validateEmail(form.email);
+    if (emailErr) errors.email = emailErr;
+    // Phone is optional on consultation page but if filled must be 10 digits
+    if (form.phone.trim()) {
+      const phoneErr = validatePhone(form.phone);
+      if (phoneErr) errors.phone = phoneErr;
+    }
+    const occasionErr = validateTextField(form.occasion, 'Occasion', { required: false, max: 120 });
+    if (occasionErr) errors.occasion = occasionErr;
+    const messageErr = validateTextarea(form.message, 'Your Story', { required: true, max: 2000 });
+    if (messageErr) errors.message = messageErr;
+    setFieldErrors(errors);
+    return Object.keys(errors).length === 0;
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (!validateAll()) return;
+
     setSending(true);
     setSendError("");
 
+    const fullPhone = form.phone.trim()
+      ? `${form.phoneCountry} ${form.phone.trim()}`
+      : '';
+
     const result = await sendEmail({
-      from_name: form.name,
-      from_email: form.email,
-      phone:      form.phone,
-      occasion:   form.occasion,
-      message:    form.message,
+      from_name: sanitizeText(form.name),
+      from_email: sanitizeText(form.email),
+      phone:      sanitizeText(fullPhone),
+      occasion:   sanitizeText(form.occasion),
+      message:    sanitizeMultiline(form.message),
       to_name:    "Murthy Ateliers",
     });
 
@@ -57,12 +112,13 @@ export default function Consultation() {
   return (
     <>
       {/* Hero */}
-      <section className="relative h-[50vh] min-h-[380px] flex items-end overflow-hidden">
+      <section id="page-hero" className="page-hero-sec">
         <img
           src="/jewellry/Web-Optimised/bannerConsult.webp"
           alt="Consultation"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="hero-banner-img hero-banner-img--consult"
           fetchPriority="high"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/50 to-forest/20" />
         <div className="relative z-10 shell pb-14 w-full">
@@ -123,50 +179,110 @@ export default function Consultation() {
                 </p>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                {[
-                  { name: "name",    label: "Your Name",         type: "text",  required: true },
-                  { name: "email",   label: "Email Address",     type: "email", required: true },
-                  { name: "phone",   label: "Phone / WhatsApp",  type: "tel",   required: false },
-                  { name: "occasion",label: "Occasion or Intent",type: "text",  required: false, placeholder: "e.g. Bridal, Heirloom redesign, Gift…" },
-                ].map((field) => (
-                  <div key={field.name}>
-                    <label
-                      htmlFor={field.name}
-                      className="block text-xs tracking-widest uppercase text-forest/60 mb-2"
-                    >
-                      {field.label} {field.required && <span className="text-crimson">*</span>}
-                    </label>
-                    <input
-                      id={field.name}
-                      name={field.name}
-                      type={field.type}
-                      required={field.required}
-                      placeholder={field.placeholder || ""}
-                      value={form[field.name]}
+              <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+
+                {/* Name */}
+                <div>
+                  <label htmlFor="name" className="block text-xs tracking-widest uppercase text-forest/60 mb-2">
+                    Your Name <span className="text-crimson">*</span>
+                  </label>
+                  <input
+                    id="name" name="name" type="text" required
+                    autoComplete="name"
+                    maxLength={80}
+                    placeholder="e.g. Shanthi Shankar"
+                    value={form.name}
+                    onChange={handleChange}
+                    className={`w-full px-5 py-4 rounded-2xl border bg-cream focus:outline-none focus:ring-2 focus:ring-gold/15 text-forest text-sm placeholder:text-forest/30 transition-all duration-200 ${fieldErrors.name ? 'border-crimson/70' : 'border-gold/25 focus:border-gold/60'}`}
+                    aria-describedby={fieldErrors.name ? 'err-name' : undefined}
+                  />
+                  {fieldErrors.name && <p id="err-name" className="mt-1 text-xs text-crimson" role="alert">{fieldErrors.name}</p>}
+                </div>
+
+                {/* Email */}
+                <div>
+                  <label htmlFor="email" className="block text-xs tracking-widest uppercase text-forest/60 mb-2">
+                    Email Address <span className="text-crimson">*</span>
+                  </label>
+                  <input
+                    id="email" name="email" type="email" required
+                    autoComplete="email" inputMode="email"
+                    maxLength={254}
+                    placeholder="e.g. shanthi@mylapore.com"
+                    value={form.email}
+                    onChange={handleChange}
+                    className={`w-full px-5 py-4 rounded-2xl border bg-cream focus:outline-none focus:ring-2 focus:ring-gold/15 text-forest text-sm placeholder:text-forest/30 transition-all duration-200 ${fieldErrors.email ? 'border-crimson/70' : 'border-gold/25 focus:border-gold/60'}`}
+                    aria-describedby={fieldErrors.email ? 'err-email' : undefined}
+                  />
+                  {fieldErrors.email && <p id="err-email" className="mt-1 text-xs text-crimson" role="alert">{fieldErrors.email}</p>}
+                </div>
+
+                {/* Phone with country code */}
+                <div>
+                  <label htmlFor="phone" className="block text-xs tracking-widest uppercase text-forest/60 mb-2">
+                    Phone / WhatsApp <span className="text-forest/40 normal-case">(optional)</span>
+                  </label>
+                  <div className="flex gap-2">
+                    <select
+                      name="phoneCountry"
+                      value={form.phoneCountry}
                       onChange={handleChange}
-                      className="w-full px-5 py-4 rounded-2xl border border-gold/25 bg-cream focus:outline-none focus:border-gold/60 focus:ring-2 focus:ring-gold/15 text-forest text-sm placeholder:text-forest/30 transition-all duration-200"
+                      className="px-3 py-4 rounded-2xl border border-gold/25 bg-cream focus:outline-none focus:border-gold/60 text-forest text-sm transition-all duration-200 shrink-0"
+                      style={{ width: '23%', minWidth: '80px' }}
+                      aria-label="Country code"
+                    >
+                      {COUNTRY_CODES.map((c) => (
+                        <option key={c.code} value={c.code}>{c.label}</option>
+                      ))}
+                    </select>
+                    <input
+                      id="phone" name="phone" type="tel"
+                      autoComplete="tel-national" inputMode="numeric"
+                      maxLength={15}
+                      placeholder="10-digit number"
+                      value={form.phone}
+                      onChange={handleChange}
+                      className={`flex-1 px-5 py-4 rounded-2xl border bg-cream focus:outline-none focus:ring-2 focus:ring-gold/15 text-forest text-sm placeholder:text-forest/30 transition-all duration-200 ${fieldErrors.phone ? 'border-crimson/70' : 'border-gold/25 focus:border-gold/60'}`}
+                      aria-describedby={fieldErrors.phone ? 'err-phone' : undefined}
                     />
                   </div>
-                ))}
+                  {fieldErrors.phone && <p id="err-phone" className="mt-1 text-xs text-crimson" role="alert">{fieldErrors.phone}</p>}
+                </div>
 
+                {/* Occasion */}
                 <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-xs tracking-widest uppercase text-forest/60 mb-2"
-                  >
-                    Your Story <span className="text-crimson">*</span>
+                  <label htmlFor="occasion" className="block text-xs tracking-widest uppercase text-forest/60 mb-2">
+                    Occasion or Intent
+                  </label>
+                  <input
+                    id="occasion" name="occasion" type="text"
+                    maxLength={120}
+                    placeholder="e.g. Bridal, Heirloom redesign, Gift…"
+                    value={form.occasion}
+                    onChange={handleChange}
+                    className={`w-full px-5 py-4 rounded-2xl border bg-cream focus:outline-none focus:ring-2 focus:ring-gold/15 text-forest text-sm placeholder:text-forest/30 transition-all duration-200 ${fieldErrors.occasion ? 'border-crimson/70' : 'border-gold/25 focus:border-gold/60'}`}
+                    aria-describedby={fieldErrors.occasion ? 'err-occasion' : undefined}
+                  />
+                  {fieldErrors.occasion && <p id="err-occasion" className="mt-1 text-xs text-crimson" role="alert">{fieldErrors.occasion}</p>}
+                </div>
+
+                {/* Message / Your Story */}
+                <div>
+                  <label htmlFor="message" className="block text-xs tracking-widest uppercase text-forest/60 mb-2 flex justify-between">
+                    <span>Your Story <span className="text-crimson">*</span></span>
+                    <span className="normal-case text-forest/35 font-normal">{form.message.length}/2000</span>
                   </label>
                   <textarea
-                    id="message"
-                    name="message"
-                    required
+                    id="message" name="message" required
                     rows={5}
+                    maxLength={2000}
                     placeholder="Share the memory, ceremony, or feeling behind the piece you have in mind…"
                     value={form.message}
                     onChange={handleChange}
-                    className="w-full px-5 py-4 rounded-2xl border border-gold/25 bg-cream focus:outline-none focus:border-gold/60 focus:ring-2 focus:ring-gold/15 text-forest text-sm placeholder:text-forest/30 transition-all duration-200 resize-none"
+                    className={`w-full px-5 py-4 rounded-2xl border bg-cream focus:outline-none focus:ring-2 focus:ring-gold/15 text-forest text-sm placeholder:text-forest/30 transition-all duration-200 resize-none ${fieldErrors.message ? 'border-crimson/70' : 'border-gold/25 focus:border-gold/60'}`}
+                    aria-describedby={fieldErrors.message ? 'err-message' : undefined}
                   />
+                  {fieldErrors.message && <p id="err-message" className="mt-1 text-xs text-crimson" role="alert">{fieldErrors.message}</p>}
                 </div>
 
                 <button type="submit" className="btn-primary w-full justify-center" disabled={sending}>
@@ -231,13 +347,7 @@ export default function Consultation() {
 
             {/* Brand name card — same style as navbar logo */}
             <div className="relative overflow-hidden rounded-3xl shadow-luxury bg-crimson flex items-center justify-center" style={{ minHeight: "13rem" }}>
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(circle at 20% 80%, rgba(106,20,19,0.06) 0%, transparent 40%)",
-                }}
-              />
+              <div className="glow-consult-brand-card" />
               <div className="relative z-10 flex flex-col items-center gap-2 p-8 text-center">
                 <span
                   className="script-brand text-cream whitespace-nowrap"

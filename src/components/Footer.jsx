@@ -1,19 +1,55 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { sendEmail } from "../utils/emailjs";
+import {
+  sanitizeText,
+  sanitizeMultiline,
+  validateName,
+  validateEmail,
+  validatePhone,
+  validateTextField,
+  validateTextarea,
+  COUNTRY_CODES,
+} from "../utils/sanitize";
+
+// Allowed service values — used to reject spoofed submissions
+const ALLOWED_SERVICES = [
+  'Consultation',
+  'Bespoke Design',
+  'Heirloom Redesign',
+  'Inquiry',
+  'Share Story',
+  'Bespoke Consultation',
+  'Redesign Consultation',
+];
+
+// Today's date string for min-date on date picker
+const todayStr = new Date().toISOString().split('T')[0];
 
 export default function Footer() {
-  // Booking modal states
+  // ── Modal open / status states ──────────────────────────────────────────
   const [isBookingOpen, setIsBookingOpen]   = useState(false);
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [bookingSending, setBookingSending] = useState(false);
   const [bookingError, setBookingError]     = useState("");
+
+  // ── Form field values ───────────────────────────────────────────────────
   const [bookingForm, setBookingForm] = useState({
-    name: '', email: '', phone: '', service: 'Consultation', date: '', notes: ''
+    name: '', email: '', phoneCountry: '+91', phone: '',
+    service: 'Consultation', date: '', notes: '',
   });
 
+  // ── Per-field validation errors ─────────────────────────────────────────
+  const [fieldErrors, setFieldErrors] = useState({});
+
+  // ── Helpers ─────────────────────────────────────────────────────────────
   const openBookingModal = (serviceType = 'Consultation', notesPrefill = '') => {
-    setBookingForm({ name: '', email: '', phone: '', service: serviceType, date: '', notes: notesPrefill });
+    const service = ALLOWED_SERVICES.includes(serviceType) ? serviceType : 'Consultation';
+    setBookingForm({
+      name: '', email: '', phoneCountry: '+91', phone: '',
+      service, date: '', notes: sanitizeMultiline(notesPrefill).slice(0, 2000),
+    });
+    setFieldErrors({});
     setBookingSuccess(false);
     setBookingError("");
     setIsBookingOpen(true);
@@ -23,26 +59,78 @@ export default function Footer() {
     setIsBookingOpen(false);
     setBookingSuccess(false);
     setBookingError("");
+    setFieldErrors({});
   };
 
+  // Generic change handler with per-field sanitization
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setBookingForm((prev) => ({ ...prev, [name]: value }));
+
+    let clean = value;
+    if (name === 'phone') {
+      // Allow only digits, spaces, hyphens, dots, parentheses
+      clean = value.replace(/[^\d\s\-\.\(\)]/g, '').slice(0, 15);
+    } else if (name === 'notes') {
+      clean = value.slice(0, 2000); // hard cap; sanitize on submit
+    } else if (name === 'name') {
+      clean = value.slice(0, 80);
+    } else if (name === 'email') {
+      clean = value.slice(0, 254).replace(/\s/g, '');
+    } else if (name === 'date') {
+      // Keep as-is; validated below
+      clean = value;
+    }
+
+    setBookingForm((prev) => ({ ...prev, [name]: clean }));
+
+    // Clear the error for this field as the user types
+    if (fieldErrors[name]) {
+      setFieldErrors((prev) => ({ ...prev, [name]: null }));
+    }
+  };
+
+  // Validate all fields; return true if valid
+  const validateAll = () => {
+    const errors = {};
+
+    const nameErr = validateName(bookingForm.name);
+    if (nameErr) errors.name = nameErr;
+
+    const emailErr = validateEmail(bookingForm.email);
+    if (emailErr) errors.email = emailErr;
+
+    const phoneErr = validatePhone(bookingForm.phone);
+    if (phoneErr) errors.phone = phoneErr;
+
+    const notesErr = validateTextarea(bookingForm.notes, 'Narrative', { required: false, max: 2000 });
+    if (notesErr) errors.notes = notesErr;
+
+    // Date: must be today or future (if provided)
+    if (bookingForm.date && bookingForm.date < todayStr) {
+      errors.date = 'Please choose today or a future date.';
+    }
+
+    setFieldErrors(errors);
+    return Object.keys(errors).length === 0;
   };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    if (!validateAll()) return;
+
     setBookingSending(true);
     setBookingError("");
 
+    const fullPhone = `${bookingForm.phoneCountry} ${bookingForm.phone.trim()}`;
+
     const result = await sendEmail({
-      from_name:      bookingForm.name,
-      from_email:     bookingForm.email,
-      phone:          bookingForm.phone,
-      service:        bookingForm.service,
-      preferred_date: bookingForm.date,
-      notes:          bookingForm.notes,
-      message:        bookingForm.notes, // alias so template works for both forms
+      from_name:      sanitizeText(bookingForm.name),
+      from_email:     sanitizeText(bookingForm.email),
+      phone:          sanitizeText(fullPhone),
+      service:        sanitizeText(bookingForm.service),
+      preferred_date: sanitizeText(bookingForm.date),
+      notes:          sanitizeMultiline(bookingForm.notes),
+      message:        sanitizeMultiline(bookingForm.notes),
       to_name:        "Murthy Ateliers",
     });
 
@@ -141,7 +229,7 @@ export default function Footer() {
         </div>
       </footer>
 
-      {/* Booking Dialog Modal (Global) */}
+      {/* ── Booking Dialog Modal (Global) ───────────────────────────────── */}
       {isBookingOpen && (
         <div className="modal-backdrop" onClick={closeBookingModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -160,56 +248,95 @@ export default function Footer() {
                     </p>
                   </div>
 
-                  <form className="modal-form" onSubmit={handleFormSubmit}>
+                  <form className="modal-form" onSubmit={handleFormSubmit} noValidate>
+
+                    {/* Full Name */}
                     <div className="form-group">
                       <label className="form-label" htmlFor="booking-name">Your Full Name *</label>
-                      <input 
-                        type="text" 
-                        id="booking-name" 
-                        name="name" 
-                        required 
-                        className="form-input" 
-                        placeholder="e.g. Shanthi Shankar" 
+                      <input
+                        type="text"
+                        id="booking-name"
+                        name="name"
+                        required
+                        autoComplete="name"
+                        className={`form-input${fieldErrors.name ? ' form-input-error' : ''}`}
+                        placeholder="e.g. Shanthi Shankar"
                         value={bookingForm.name}
                         onChange={handleInputChange}
+                        maxLength={80}
+                        aria-describedby={fieldErrors.name ? 'booking-name-err' : undefined}
                       />
+                      {fieldErrors.name && (
+                        <span id="booking-name-err" className="form-field-error" role="alert">{fieldErrors.name}</span>
+                      )}
                     </div>
 
                     <div className="form-row">
+                      {/* Email */}
                       <div className="form-group">
                         <label className="form-label" htmlFor="booking-email">Email Address *</label>
-                        <input 
-                          type="email" 
-                          id="booking-email" 
-                          name="email" 
-                          required 
-                          className="form-input" 
-                          placeholder="e.g. shanthi@mylapore.com" 
+                        <input
+                          type="email"
+                          id="booking-email"
+                          name="email"
+                          required
+                          autoComplete="email"
+                          inputMode="email"
+                          className={`form-input${fieldErrors.email ? ' form-input-error' : ''}`}
+                          placeholder="e.g. shanthi@mylapore.com"
                           value={bookingForm.email}
                           onChange={handleInputChange}
+                          maxLength={254}
+                          aria-describedby={fieldErrors.email ? 'booking-email-err' : undefined}
                         />
+                        {fieldErrors.email && (
+                          <span id="booking-email-err" className="form-field-error" role="alert">{fieldErrors.email}</span>
+                        )}
                       </div>
+
+                      {/* Phone with country code */}
                       <div className="form-group">
                         <label className="form-label" htmlFor="booking-phone">Phone / WhatsApp *</label>
-                        <input 
-                          type="tel" 
-                          id="booking-phone" 
-                          name="phone" 
-                          required 
-                          className="form-input" 
-                          placeholder="e.g. +91 98410 24790" 
-                          value={bookingForm.phone}
-                          onChange={handleInputChange}
-                        />
+                        <div className="phone-input-row">
+                          <select
+                            name="phoneCountry"
+                            value={bookingForm.phoneCountry}
+                            onChange={handleInputChange}
+                            className="form-input phone-country-select"
+                            aria-label="Country code"
+                          >
+                            {COUNTRY_CODES.map((c) => (
+                              <option key={c.code} value={c.code}>{c.label}</option>
+                            ))}
+                          </select>
+                          <input
+                            type="tel"
+                            id="booking-phone"
+                            name="phone"
+                            required
+                            autoComplete="tel-national"
+                            inputMode="numeric"
+                            className={`form-input phone-digits-input${fieldErrors.phone ? ' form-input-error' : ''}`}
+                            placeholder="10-digit number"
+                            value={bookingForm.phone}
+                            onChange={handleInputChange}
+                            maxLength={15}
+                            aria-describedby={fieldErrors.phone ? 'booking-phone-err' : undefined}
+                          />
+                        </div>
+                        {fieldErrors.phone && (
+                          <span id="booking-phone-err" className="form-field-error" role="alert">{fieldErrors.phone}</span>
+                        )}
                       </div>
                     </div>
 
                     <div className="form-row">
+                      {/* Service */}
                       <div className="form-group">
                         <label className="form-label" htmlFor="booking-service">Service / Collection Interest</label>
-                        <select 
-                          id="booking-service" 
-                          name="service" 
+                        <select
+                          id="booking-service"
+                          name="service"
                           className="form-input"
                           value={bookingForm.service}
                           onChange={handleInputChange}
@@ -221,37 +348,59 @@ export default function Footer() {
                           <option value="Share Story">Share Story</option>
                         </select>
                       </div>
+
+                      {/* Preferred date — must be today or future */}
                       <div className="form-group">
                         <label className="form-label" htmlFor="booking-date">Preferred Date</label>
-                        <input 
-                          type="date" 
-                          id="booking-date" 
-                          name="date" 
-                          className="form-input" 
+                        <input
+                          type="date"
+                          id="booking-date"
+                          name="date"
+                          className={`form-input${fieldErrors.date ? ' form-input-error' : ''}`}
                           value={bookingForm.date}
                           onChange={handleInputChange}
+                          min={todayStr}
+                          aria-describedby={fieldErrors.date ? 'booking-date-err' : undefined}
                         />
+                        {fieldErrors.date && (
+                          <span id="booking-date-err" className="form-field-error" role="alert">{fieldErrors.date}</span>
+                        )}
                       </div>
                     </div>
 
+                    {/* Notes / narrative */}
                     <div className="form-group">
-                      <label className="form-label" htmlFor="booking-notes">Narrative & Preferences</label>
-                      <textarea 
-                        id="booking-notes" 
-                        name="notes" 
-                        className="form-input" 
-                        placeholder="Please share any design ideas, ancestral gold details, or specific pieces you would like to discuss..."
+                      <label className="form-label" htmlFor="booking-notes">
+                        Narrative &amp; Preferences
+                        <span className="form-char-count">{bookingForm.notes.length}/2000</span>
+                      </label>
+                      <textarea
+                        id="booking-notes"
+                        name="notes"
+                        className={`form-input${fieldErrors.notes ? ' form-input-error' : ''}`}
+                        placeholder="Please share any design ideas, ancestral gold details, or specific pieces you would like to discuss…"
                         value={bookingForm.notes}
                         onChange={handleInputChange}
+                        maxLength={2000}
+                        rows={4}
+                        aria-describedby={fieldErrors.notes ? 'booking-notes-err' : undefined}
                       />
+                      {fieldErrors.notes && (
+                        <span id="booking-notes-err" className="form-field-error" role="alert">{fieldErrors.notes}</span>
+                      )}
                     </div>
 
-                    <button type="submit" className="btn btn-primary" style={{ marginTop: '1rem', width: '100%' }} disabled={bookingSending}>
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      style={{ marginTop: '1rem', width: '100%' }}
+                      disabled={bookingSending}
+                    >
                       {bookingSending ? 'Sending…' : 'Request Appointment'}
                     </button>
 
                     {bookingError && (
-                      <p style={{ color: 'var(--color-dark-red)', fontSize: '0.8rem', textAlign: 'center', marginTop: '0.5rem' }}>
+                      <p style={{ color: 'var(--color-dark-red)', fontSize: '0.8rem', textAlign: 'center', marginTop: '0.5rem' }} role="alert">
                         {bookingError}
                       </p>
                     )}
@@ -264,7 +413,7 @@ export default function Footer() {
                   </div>
                   <h3 className="success-title">வாழ்க வளமுடன்</h3>
                   <p className="success-desc">
-                    Thank you for sharing your story, <strong>{bookingForm.name}</strong>. We have received your request for a {bookingForm.service === 'Consultation' ? 'private consultation' : bookingForm.service.toLowerCase()}. 
+                    Thank you for sharing your story, <strong>{sanitizeText(bookingForm.name)}</strong>. We have received your request for a {bookingForm.service === 'Consultation' ? 'private consultation' : bookingForm.service.toLowerCase()}.
                   </p>
                   <p className="success-desc" style={{ fontSize: '0.9rem', opacity: 0.8 }}>
                     Vidya or our senior atelier curator will review your details and contact you via WhatsApp/Email within 24 hours to coordinate dates.

@@ -12,13 +12,11 @@ export default function JournalCard({ article, featured = false }) {
       }`}
     >
       {/* Image */}
-      <div className={`relative overflow-hidden shrink-0 ${
-        featured ? "h-56 lg:h-auto lg:w-72" : "h-52"
-      }`}>
+      <div className={`journal-card-img-wrap ${featured ? "journal-card-img-wrap--featured" : ""}`}>
         <img
           src={article.image}
           alt={article.title}
-          className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+          className="journal-card-component-img"
           loading="lazy"
         />
         <div className="absolute inset-0 img-overlay-dark opacity-40" />

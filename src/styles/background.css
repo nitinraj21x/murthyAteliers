@@ -1,0 +1,37 @@
+/**
+ * ═══════════════════════════════════════════════════════════════
+ *  Murthy Ateliers — Background Image Reference
+ *
+ *  Background images are set in two ways in this project:
+ *
+ *  1. CSS — .emotional-bg (below) and App.css for the emotional
+ *     section. Edit background-position here to reposition it.
+ *
+ *  2. INLINE <img> TAGS in JSX
+ *     All page hero banners and section textures use <img> tags
+ *     with object-fit:cover for LCP performance. Edit src= in
+ *     the relevant page component.
+ *
+ *  FILE MAP
+ *  ─────────────────────────────────────────────────────────────
+ *  Section                  File                     Where
+ *  ─────────────────────────────────────────────────────────────
+ *  Home hero banner         Home.jsx                 <img src>
+ *  Collections hero banner  Collections.jsx          <img src>
+ *  Craftsmanship hero       Craftsmanship.jsx        <img src>
+ *  Heritage hero            Heritage.jsx             <img src>
+ *  Journal hero             Journal.jsx              <img src>
+ *  Consultation hero        Consultation.jsx         <img src>
+ *  Home philosophy texture  Home.jsx                 <img src> opacity 0.18
+ *  Home bespoke texture     Home.jsx                 <img src> opacity 0.12
+ *  Home emotional section   App.css → .emotional-bg  background-image ← also here
+ *  Collections block bg     Collections.jsx          bgImage prop → inline style
+ * ═══════════════════════════════════════════════════════════════
+ */
+
+/* ── Emotional section background position override ─────────── */
+/* App.css defines the full .emotional-bg rule. Only add position
+   overrides here to avoid duplication. */
+.emotional-bg {
+  background-position: center center; /* ← adjust to reposition the image */
+}

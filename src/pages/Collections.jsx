@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { fadeUp, inView, scaleIn } from "../utils/motion";
 import { culturalCollection, commissionedCollection } from "../data/collections";
@@ -40,7 +40,7 @@ function JewelViewer({ jewel, imgActive, setImgActive }) {
           key={images[active]}
           src={images[active]}
           alt={`${jewel.name} — ${active + 1}`}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="coll-jewel-viewer-img"
           initial={{ opacity: 0, scale: 1.04 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.97 }}
@@ -100,7 +100,7 @@ function JewelStrip({ items, activeIdx, onSelect }) {
               aria-label={`Select ${item.name}`}>
               <div className="aspect-square overflow-hidden">
                 <img src={item.images[0]} alt={item.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="coll-strip-thumb-img"
                   loading="lazy" />
               </div>
             </button>
@@ -143,8 +143,8 @@ function CollectionBlock({ id, eyebrow, heading, description, bgImage, items }) 
 
   return (
     <section id={id} className="relative overflow-hidden" style={{ minHeight: "90vh" }}>
-      <div className="absolute inset-0"
-        style={{ backgroundImage: `url(${bgImage})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+      <div className="coll-block-bg"
+        style={{ backgroundImage: `url(${bgImage})` }} />
       <div className="absolute inset-0" style={{ background: "rgba(10,8,5,0.82)" }} />
 
       <div className="relative z-10 shell py-20 sm:py-24">
@@ -186,7 +186,7 @@ function CollectionBlock({ id, eyebrow, heading, description, bgImage, items }) 
                 <div className="flex-shrink-0 min-w-0">
                   <p className="eyebrow text-gold/60 mb-3">{eyebrow}</p>
                   <AnimatedTitle
-                    text={`Collection — ${current.id}`}
+                    text={current.name}
                     className="display-lg text-cream mb-5 break-words leading-tight"
                   />
                   <div className="ornament mb-5 opacity-40" />
@@ -225,14 +225,30 @@ function CollectionBlock({ id, eyebrow, heading, description, bgImage, items }) 
 
 /* ─── Page ───────────────────────────────────────────────────── */
 export default function Collections() {
-  const [activeTab, setActiveTab] = useState("cultural");
+  const location   = useLocation();
+  const [activeTab, setActiveTab] = useState(
+    location.state?.tab === "commisioned" ? "commisioned" : "cultural"
+  );
+
+  // Scroll to the collection block after mount if a tab was passed
+  useEffect(() => {
+    if (location.state?.tab) {
+      const target = location.state.tab; // "cultural" | "commisioned"
+      // Short delay lets the page render and sticky tab-bar settle
+      const t = setTimeout(() => {
+        const el = document.getElementById(target);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 180);
+      return () => clearTimeout(t);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
       {/* Hero */}
-      <section className="relative h-[50vh] min-h-[380px] flex items-end overflow-hidden">
-        <img src="/jewellry/Web-Optimised/bannerCollection.webp" alt="Collections"
-          className="absolute inset-0 w-full h-full object-cover" fetchPriority="high" />
+      <section id="page-hero" className="page-hero-sec">
+        <img src="/jewellry/Web-Optimised/bannerCollection-opt.webp" alt="Collections"
+          className="hero-banner-img hero-banner-img--collections" fetchPriority="high" decoding="async" />
         <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/50 to-forest/15" />
         <div className="relative z-10 shell pb-12 w-full">
           <div className="frame">
@@ -272,7 +288,7 @@ export default function Collections() {
               eyebrow="Cultural Collection"
               heading="Rooted in Tradition"
               description="Jewelry shaped by temple geometry, Mylapore sanctums, and generations of South Indian goldsmithing. Each piece carries the memory of sacred architecture and the warmth of 22k gold."
-              bgImage="/jewellry/Web-Optimised/jewellry/Cultural/1/DPPHOTGRAPHY-8173.webp"
+              bgImage="/jewellry/Web-Optimised/jewellry/Cultural/Saradu Malai/DPPHOTGRAPHY-8173.webp"
               items={culturalCollection}
             />
           </motion.div>
@@ -296,8 +312,7 @@ export default function Collections() {
         <div className="frame">
           <motion.div variants={scaleIn} {...inView}
             className="relative overflow-hidden rounded-3xl bg-crimson p-10 sm:p-16 text-center">
-            <div className="absolute inset-0 opacity-20 pointer-events-none"
-              style={{ backgroundImage: "radial-gradient(circle at 50% 50%, rgba(211,175,55,0.3) 0%, transparent 60%)" }} />
+            <div className="glow-collections-cta" />
             <div className="relative z-10">
               <p className="eyebrow text-gold/70 mb-4">Don't see what you're looking for?</p>
               <h2 className="display-md text-cream mb-6">Every piece can be made for you.</h2>

@@ -2,118 +2,127 @@
 export const culturalCollection = [
   {
     id: "C-001",
-    name: "Kundavai Haram",
+    name: "Saradu Malai",
     description:
-      "A layered temple necklace inspired by the grand harems of the Chola court, set with uncut kemp stones and freshwater pearls. Designed for the muhurtham moment when every eye finds the bride.",
+      "A layered temple necklace in the classic saradu tradition, set with uncut kemp stones and freshwater pearls. Designed for the muhurtham moment when every eye finds the bride.",
     images: [
-      "/jewellry/Web-Optimised/jewellry/Cultural/1/DPPHOTGRAPHY-8171.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/1/DPPHOTGRAPHY-8173.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/1/DPPHOTGRAPHY-8175.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/1/DPPHOTGRAPHY-8177.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Saradu Malai/DPPHOTGRAPHY-8171.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Saradu Malai/DPPHOTGRAPHY-8173.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Saradu Malai/DPPHOTGRAPHY-8175.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Saradu Malai/DPPHOTGRAPHY-8177.webp",
     ],
   },
   {
     id: "C-002",
-    name: "Meenakshi Vanki",
+    name: "Mango Saradu Malai",
     description:
-      "An upper-arm armlet in 22k gold, its inverted-V silhouette traced directly from Chola bronze sculpture. Each panel is hand-chased with a lotus motif and flanked by pearl drops.",
+      "A mango-motif saradu necklace in 22k gold, each panel hand-chased with a classic paisley-mango form. Flanked by pearl drops and uncut kemp, this piece carries the full weight of South Indian bridal tradition.",
     images: [
-      "/jewellry/Web-Optimised/jewellry/Cultural/2/DPPHOTGRAPHY-8350.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/2/DPPHOTGRAPHY-8354.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/2/DPPHOTGRAPHY-8356.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/2/DPPHOTGRAPHY-8358.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Mango Saradu Malai/DPPHOTGRAPHY-8350.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Mango Saradu Malai/DPPHOTGRAPHY-8354.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Mango Saradu Malai/DPPHOTGRAPHY-8356.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Mango Saradu Malai/DPPHOTGRAPHY-8358.webp",
     ],
   },
   {
     id: "C-003",
-    name: "Saraswati Jimikki Set",
+    name: "Manga Malai",
     description:
-      "Bell-shaped jhumka earrings with three concentric rows of red kemp stones and a fringe of pearl clusters. Accompanied by a matching mattal hair-chain in the same stone setting.",
+      "A classic manga malai necklace with three concentric rows of red kemp stones and a fringe of pearl clusters. The original South Indian fertility garland, each mango link cast in 22k gold.",
     images: [
-      "/jewellry/Web-Optimised/jewellry/Cultural/3/DPPHOTGRAPHY-8180.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/3/DPPHOTGRAPHY-8186.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/3/DPPHOTGRAPHY-8190.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Manga Malai/DPPHOTGRAPHY-8180.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Manga Malai/DPPHOTGRAPHY-8186.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Manga Malai/DPPHOTGRAPHY-8190.webp",
     ],
   },
   {
     id: "C-004",
-    name: "Padmavathi Oddiyanam",
+    name: "Studded Mango Saradu",
     description:
-      "A hinged gold waist belt with nine articulated panels, each cast with a goddess figure in repoussé relief. Replicates the form of the sacred girdle donated to the Brihadeeswarar Temple in 1010 CE.",
+      "A hinged gold saradu with studded mango panels, each cast with a goddess figure in repoussé relief and set with uncut rubies. A wearable devotion to the architecture that inspired the entire temple-jewellery tradition.",
     images: [
-      "/jewellry/Web-Optimised/jewellry/Cultural/4/DPPHOTGRAPHY-8194.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/4/DPPHOTGRAPHY-8196.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/4/DPPHOTGRAPHY-8199.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/4/DPPHOTGRAPHY-8200.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Studded Mango Saradu/DPPHOTGRAPHY-8194.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Studded Mango Saradu/DPPHOTGRAPHY-8196.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Studded Mango Saradu/DPPHOTGRAPHY-8199.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Studded Mango Saradu/DPPHOTGRAPHY-8200.webp",
     ],
   },
   {
     id: "C-005",
-    name: "Hamsa Nethi Chutti",
+    name: "Studded Saradu Malai",
     description:
-      "A forehead ornament featuring a central swan-form pendant at the hair-parting, flanked by Surya and Chandra discs. The traditional Bharatanatyam head ensemble, adapted for bridal wear.",
+      "A forehead-to-chest saradu malai with studded panels in 22k gold. Each section is individually articulated and set with kemp rubies, adapted from the Bharatanatyam temple ensemble for bridal wear.",
     images: [
-      "/jewellry/Web-Optimised/jewellry/Cultural/5/DPPHOTGRAPHY-8202.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/5/DPPHOTGRAPHY-8206.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/5/DPPHOTGRAPHY-8209.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Studded Saradu Malai/DPPHOTGRAPHY-8202.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Studded Saradu Malai/DPPHOTGRAPHY-8206.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Studded Saradu Malai/DPPHOTGRAPHY-8209.webp",
     ],
   },
   {
     id: "C-006",
-    name: "Maanga Malai (Full Length)",
+    name: "Manga Malai Small",
     description:
-      "A 27-inch coin necklace, each link cast in the classic paisley-mango form. Single uncut white stone at the centre of each mango, ringed by red kemp. The original South Indian fertility garland, worn low on the chest.",
+      "A compact manga malai, each link cast in the classic paisley-mango form with a single uncut white stone at the centre, ringed by red kemp. Worn closer to the collarbone — intimate and precisely weighted.",
     images: [
-      "/jewellry/Web-Optimised/jewellry/Cultural/6/DPPHOTGRAPHY-8212.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/6/DPPHOTGRAPHY-8214.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/6/DPPHOTGRAPHY-8224.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Manga Malai Small/DPPHOTGRAPHY-8254.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Manga Malai Small/DPPHOTGRAPHY-8259.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Manga Malai Small/DPPHOTGRAPHY-8262.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Manga Malai Small/DPPHOTGRAPHY-8265.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Manga Malai Small/DPPHOTGRAPHY-8266.webp",
     ],
   },
   {
     id: "C-007",
-    name: "Nataraja Kankana",
+    name: "Poothali",
     description:
-      "A set of bangles in 22k gold, each panel engraved with a standing Nataraja figure in repoussé. Worn as a pair at the wrists, they carry the rhythm of the cosmic dance into every gesture.",
+      "A set of poothali bangles in 22k gold, each panel engraved with floral motifs in repoussé. Worn as a pair at the wrists, they carry the cadence of traditional goldsmithing into every gesture.",
     images: [
-      "/jewellry/Web-Optimised/jewellry/Cultural/7/DPPHOTGRAPHY-8227.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/7/DPPHOTGRAPHY-8229.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/7/DPPHOTGRAPHY-8233.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/7/DPPHOTGRAPHY-8237.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Poothali/DPPHOTGRAPHY-8227.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Poothali/DPPHOTGRAPHY-8229.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Poothali/DPPHOTGRAPHY-8233.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Poothali/DPPHOTGRAPHY-8237.webp",
     ],
   },
   {
     id: "C-008",
-    name: "Lakshmi Kasu Malai",
+    name: "Adigai Blue",
     description:
-      "A dense coin garland of 108 Lakshmi coins in 22k gold, each bearing the seated goddess in repoussé relief. The number 108 is sacred in Hindu tradition — once around the neck for each name of the goddess.",
+      "An adigai necklace set with deep blue stones and uncut kemp in 22k gold. The cool tone of the stones against warm gold creates a rare contrast — a piece that reads equally well under temple light and wedding mandap.",
     images: [
-      "/jewellry/Web-Optimised/jewellry/Cultural/8/DPPHOTGRAPHY-8254.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/8/DPPHOTGRAPHY-8259.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/8/DPPHOTGRAPHY-8262.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/8/DPPHOTGRAPHY-8265.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/8/DPPHOTGRAPHY-8266.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Adigai blue/DPPHOTGRAPHY-8212.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Adigai blue/DPPHOTGRAPHY-8214.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Adigai blue/DPPHOTGRAPHY-8224.webp",
     ],
   },
   {
     id: "C-009",
-    name: "Chandrashekhara Pendant",
+    name: "Aalaya Aabharanam",
     description:
-      "A crescent-moon padakkam in 22k gold, directly referencing the moon Shiva wears in his matted hair. Uncut rubies set across the arc, with a fringe of seed pearls along the lower edge.",
+      "A temple-inspired ornament set in 22k gold, referencing the sacred geometry of Mylapore sanctums. Uncut rubies set across the arc, with a fringe of seed pearls along the lower edge.",
     images: [
-      "/jewellry/Web-Optimised/jewellry/Cultural/9/DPPHOTGRAPHY-8335.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/9/DPPHOTGRAPHY-8338.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Aalaya Aabharanam/DPPHOTGRAPHY-8335.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Aalaya Aabharanam/DPPHOTGRAPHY-8338.webp",
     ],
   },
   {
     id: "C-010",
-    name: "Temple Gopuram Set",
+    name: "Poothali Blue",
     description:
-      "A full parure — necklace, earrings and head ornament — each piece cast with a miniature gopuram (temple tower) silhouette in 22k gold. A wearable devotion to the architecture that inspired the entire temple-jewellery tradition.",
+      "A full poothali set — necklace and matching pieces — each cast with blue stone inlays in 22k gold. A wearable expression of South Indian devotional craft, rendered in an unusually cool palette.",
     images: [
-      "/jewellry/Web-Optimised/jewellry/Cultural/10/DPPHOTGRAPHY-8340.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/10/DPPHOTGRAPHY-8343.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/10/DPPHOTGRAPHY-8346.webp",
-      "/jewellry/Web-Optimised/jewellry/Cultural/10/DPPHOTGRAPHY-8348.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Poothali Blue/DPPHOTGRAPHY-8340.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Poothali Blue/DPPHOTGRAPHY-8343.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Poothali Blue/DPPHOTGRAPHY-8346.webp",
+      "/jewellry/Web-Optimised/jewellry/Cultural/Poothali Blue/DPPHOTGRAPHY-8348.webp",
+    ],
+  },
+  {
+    id: "C-011",
+    name: "Devi Aabharanam",
+    description:
+      "A singular devotional ornament in 22k gold, its form drawn directly from the goddess iconography of Mylapore temple sculpture. One image, one piece — made to be worn at the most sacred ceremonies.",
+    images: [
+      "/jewellry/Web-Optimised/jewellry/Cultural/Devi Aabharanam/DPPHOTGRAPHY-8084.webp",
     ],
   },
 ];

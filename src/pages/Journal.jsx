@@ -9,9 +9,9 @@ import { fadeUp, staggerContainer, staggerItem, inView } from "../utils/motion";
 function StoryView({ story }) {
   return (
     <>
-      <section className="relative h-[50vh] min-h-[380px] flex items-end overflow-hidden">
+      <section className="page-hero-sec">
         <img src={story.image} alt={story.title}
-          className="absolute inset-0 w-full h-full object-cover" fetchPriority="high" />
+          className="hero-banner-img hero-banner-img--article" fetchPriority="high" />
         <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/50 to-forest/20" />
         <div className="relative z-10 shell pb-12 w-full">
           <div className="frame">
@@ -76,9 +76,9 @@ function StoryView({ story }) {
 function ArticleView({ article }) {
   return (
     <>
-      <section className="relative h-[50vh] min-h-[380px] flex items-end overflow-hidden">
+      <section className="page-hero-sec">
         <img src={article.image} alt={article.title}
-          className="absolute inset-0 w-full h-full object-cover" fetchPriority="high" />
+          className="hero-banner-img hero-banner-img--article" fetchPriority="high" />
         <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/50 to-forest/20" />
         <div className="relative z-10 shell pb-12 w-full">
           <div className="frame">
@@ -125,9 +125,9 @@ function JournalIndex() {
   return (
     <>
       {/* Hero */}
-      <section className="relative h-[55vh] min-h-[420px] flex items-end overflow-hidden">
-        <img src="/jewellry/Web-Optimised/heirStory.webp" alt="Journal"
-          className="absolute inset-0 w-full h-full object-cover" fetchPriority="high" />
+      <section id="page-hero" className="page-hero-sec page-hero-sec--tall">
+        <img src="/jewellry/Web-Optimised/heirStory-opt.webp" alt="Journal"
+          className="hero-banner-img hero-banner-img--journal" fetchPriority="high" decoding="async" />
         <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/50 to-forest/20" />
         <div className="relative z-10 shell pb-14 w-full">
           <div className="frame">
@@ -146,9 +146,9 @@ function JournalIndex() {
           <p className="eyebrow text-crimson mb-6">Featured</p>
           <motion.article {...fadeUp} {...inView}
             className="group grid gap-0 lg:grid-cols-[1.2fr_0.8fr] overflow-hidden rounded-3xl shadow-luxury card-parchment">
-            <div className="relative overflow-hidden h-72 lg:h-auto">
+            <div className="journal-featured-img-wrap">
               <img src={featured.image} alt={featured.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+                className="journal-featured-img" loading="lazy" />
               <div className="absolute inset-0 img-overlay-dark opacity-30" />
               <span className="absolute top-5 left-5 eyebrow text-gold bg-crimson/70 backdrop-blur-sm px-3 py-1.5 rounded-full text-[0.6rem]">
                 {featured.category}
@@ -184,8 +184,7 @@ function JournalIndex() {
 
       {/* ── Stories Behind the Jewels ── */}
       <section className="shell py-20 sm:py-28 bg-forest relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 pointer-events-none"
-          style={{ backgroundImage: "radial-gradient(circle at 30% 60%, rgba(211,175,55,0.2) 0%, transparent 55%)" }} />
+        <div className="glow-journal-stories" />
         <div className="frame relative z-10">
           <motion.p {...fadeUp} {...inView} className="eyebrow text-gold/70 mb-4">
             Stories Behind the Jewels
@@ -203,9 +202,9 @@ function JournalIndex() {
                 <Link to={`/journal/story-${story.slug}`} className="group block h-full">
                   <article className="h-full rounded-3xl overflow-hidden border border-gold/15 hover:border-gold/35 transition-all duration-300"
                     style={{ background: "rgba(255,255,255,0.03)" }}>
-                    <div className="relative h-52 overflow-hidden">
+                    <div className="journal-story-card-img-wrap">
                       <img src={story.image} alt={story.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+                        className="journal-story-card-img" loading="lazy" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                       <span className="absolute top-4 left-4 eyebrow text-gold/80 text-[0.6rem] bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-full">
                         {story.category}

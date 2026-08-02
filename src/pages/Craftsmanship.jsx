@@ -34,12 +34,13 @@ export default function Craftsmanship() {
   return (
     <>
       {/* Hero */}
-      <section className="relative h-[55vh] min-h-[420px] flex items-end overflow-hidden">
+      <section id="page-hero" className="page-hero-sec page-hero-sec--tall">
         <img
-          src="/jewellry/Web-Optimised/detailing.webp"
+          src="/imgs/bannerCraft.webp"
           alt="Craftsmanship"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="hero-banner-img hero-banner-img--craft"
           fetchPriority="high"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/50 to-forest/20" />
         <div className="relative z-10 shell pb-14 w-full">
@@ -90,13 +91,7 @@ export default function Craftsmanship() {
 
       {/* Craft techniques */}
       <section className="shell py-24 bg-crimson relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-15 pointer-events-none"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 20% 50%, rgba(211,175,55,0.2) 0%, transparent 50%)",
-          }}
-        />
+        <div className="glow-gold-left" />
         <div className="frame relative z-10">
           <SectionHeading
             eyebrow="Techniques"
@@ -120,7 +115,7 @@ export default function Craftsmanship() {
                   <img
                     src={detail.image}
                     alt={detail.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="craft-technique-img"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 img-overlay-forest opacity-60" />
@@ -143,7 +138,7 @@ export default function Craftsmanship() {
             <img
               src={img.artisan2}
               alt="Atelier"
-              className="w-full h-[480px] object-cover"
+              className="craft-atelier-img"
               loading="lazy"
             />
           </motion.div>

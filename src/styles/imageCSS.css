@@ -1,0 +1,645 @@
+/**
+ * ═══════════════════════════════════════════════════════════════
+ *  Murthy Ateliers — Image CSS
+ *
+ *  Single source of truth for every image's sizing, positioning,
+ *  object-fit behaviour, and background-image declarations.
+ *  No Tailwind utility classes used here.
+ *
+ *  HOW TO USE
+ *  ──────────
+ *  Apply the class directly to the <img> or container element in JSX.
+ *  To reposition or rescale any image, edit only this file.
+ *
+ *  SECTIONS
+ *  ─────────────────────────────────────────────────────────────
+ *  1.  Page Hero Banners
+ *  2.  Home Page Images
+ *  3.  Collections Page Images
+ *  4.  Craftsmanship Page Images
+ *  5.  Heritage Page Images
+ *  6.  Journal Page Images
+ *  7.  Consultation Page Images
+ *  8.  Shared / Reusable Patterns
+ *  9.  Decorative Radial Glow Overlays
+ *  10. Emotional / Final Section
+ * ═══════════════════════════════════════════════════════════════
+ */
+
+
+/* ─────────────────────────────────────────────────────────────
+   1. PAGE HERO BANNERS
+   Used on all inner-page hero sections (Collections, Heritage,
+   Craftsmanship, Journal, Consultation).
+   Container must be: position:relative; overflow:hidden.
+   ───────────────────────────────────────────────────────────── */
+
+/* Shared base for all page-hero <img> elements */
+.hero-banner-img {
+  position:        absolute;
+  inset:           0;
+  width:           100%;
+  height:          100%;
+  object-fit:      cover;
+  object-position: center center;
+  display:         block;
+}
+
+/* Collections hero (/jewellry/Web-Optimised/bannerCollection-opt.webp) */
+.hero-banner-img--collections {
+  object-position: center 30%;   /* pull the jewellery into view */
+}
+
+/* Heritage hero (/imgs/heriBanner.webp) */
+.hero-banner-img--heritage {
+  object-position: center 40%;
+}
+
+/* Craftsmanship hero (/imgs/bannerCraft.webp) */
+.hero-banner-img--craft {
+  object-position: center center;
+}
+
+/* Journal hero (/jewellry/Web-Optimised/heirStory-opt.webp) */
+.hero-banner-img--journal {
+  object-position: center 35%;
+}
+
+/* Consultation hero (/jewellry/Web-Optimised/bannerConsult.webp) */
+.hero-banner-img--consult {
+  object-position: center center;
+}
+
+/* Story/Article hero within Journal — dynamic src, same treatment */
+.hero-banner-img--article {
+  object-position: center 40%;
+}
+
+/* Hero section container — 50vh height variant */
+.page-hero-sec {
+  position:   relative;
+  height:     50vh;
+  min-height: 380px;
+  display:    flex;
+  align-items: flex-end;
+  overflow:   hidden;
+}
+
+/* Hero section container — 55vh height variant */
+.page-hero-sec--tall {
+  position:   relative;
+  height:     55vh;
+  min-height: 420px;
+  display:    flex;
+  align-items: flex-end;
+  overflow:   hidden;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   2. HOME PAGE IMAGES
+   ───────────────────────────────────────────────────────────── */
+
+/* Home hero banner (/imgs/banner_collection.webp)
+   Rendered as <img> inside .home-banner-sec (defined in App.css) */
+.home-banner-img {
+  position:        absolute;
+  inset:           0;
+  width:           100%;
+  height:          100%;
+  object-fit:      cover;
+  object-position: center center;  /* ← adjust to reposition */
+  display:         block;
+}
+
+/* Philosophy section texture overlay (/imgs/bgsec1.webp)
+   Low-opacity decorative background — sits behind philosophy cards */
+.home-philosophy-texture {
+  position:        absolute;
+  inset:           0;
+  width:           100%;
+  height:          100%;
+  object-fit:      cover;
+  object-position: center center;
+  display:         block;
+  pointer-events:  none;
+  opacity:         0.18;
+}
+
+/* Bespoke section texture overlay (/jewellry/Web-Optimised/imgs/bgsec2.webp) */
+.home-bespoke-texture {
+  position:        absolute;
+  inset:           0;
+  width:           100%;
+  height:          100%;
+  object-fit:      cover;
+  object-position: center center;
+  display:         block;
+  pointer-events:  none;
+  opacity:         0.12;
+}
+
+/* Founder portrait (/jewellry/Web-Optimised/founder_story.webp) */
+.home-founder-img {
+  width:           100%;
+  aspect-ratio:    4 / 5;
+  object-fit:      cover;
+  object-position: center top;  /* ← keep face in frame */
+  display:         block;
+}
+
+/* Bespoke / crafter image (/jewellry/Web-Optimised/crafter.webp) */
+.home-bespoke-img {
+  width:           100%;
+  height:          480px;
+  object-fit:      cover;
+  object-position: center center;
+  display:         block;
+}
+@media (max-width: 767px) {
+  .home-bespoke-img {
+    height: 260px;
+  }
+}
+
+/* Collections section preview cards
+   (Cultural: Saradu Malai / Commissioned: DPPHOTGRAPHY-8286) */
+.coll-preview-card-img {
+  position:        absolute;
+  inset:           0;
+  width:           100%;
+  height:          100%;
+  object-fit:      cover;
+  object-position: center center;
+  display:         block;
+  transition:      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.collection-card-new--clickable:hover .coll-preview-card-img {
+  transform: scale(1.05);
+}
+
+/* Philosophy pillar images — in grid cards */
+.home-philosophy-card-img {
+  width:           100%;
+  height:          100%;
+  object-fit:      cover;
+  object-position: center center;
+  display:         block;
+  transition:      transform 0.7s ease;
+}
+.group:hover .home-philosophy-card-img {
+  transform: scale(1.05);
+}
+
+/* Journal card images on Home page */
+.home-journal-card-img {
+  width:        100%;
+  aspect-ratio: 3 / 2;
+  object-fit:   cover;
+  object-position: center center;
+  display:      block;
+}
+
+/* Journal drawer image */
+.home-journal-drawer-img {
+  width:        100%;
+  aspect-ratio: 16 / 9;
+  object-fit:   cover;
+  object-position: center center;
+  display:      block;
+  margin-bottom: 3rem;
+  border: 1px solid rgba(211, 175, 55, 0.2);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   3. COLLECTIONS PAGE IMAGES
+   ───────────────────────────────────────────────────────────── */
+
+/* Full-bleed background behind each CollectionBlock section.
+   Applied via inline style backgroundImage= (dynamic bgImage prop).
+   These rules control the sizing/positioning — URL stays in JSX. */
+.coll-block-bg {
+  position:        absolute;
+  inset:           0;
+  background-size:     cover;
+  background-position: center center;  /* ← adjust per collection */
+  background-repeat:   no-repeat;
+}
+
+/* Cultural collection block background position */
+.coll-block-bg--cultural {
+  background-position: center 30%;
+}
+
+/* Commissioned collection block background position */
+.coll-block-bg--commissioned {
+  background-position: center center;
+}
+
+/* Jewel viewer — main large image inside CollectionBlock */
+.coll-jewel-viewer-img {
+  position:        absolute;
+  inset:           0;
+  width:           100%;
+  height:          100%;
+  object-fit:      cover;
+  object-position: center center;
+  display:         block;
+}
+
+/* Thumbnail strip images */
+.coll-strip-thumb-img {
+  width:           100%;
+  height:          100%;
+  object-fit:      cover;
+  object-position: center center;
+  display:         block;
+  transition:      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.coll-strip-thumb-img:hover {
+  transform: scale(1.05);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   4. CRAFTSMANSHIP PAGE IMAGES
+   ───────────────────────────────────────────────────────────── */
+
+/* Craft technique card images (Temple Geometry, Kasu Rhythm etc.) */
+.craft-technique-img {
+  width:           100%;
+  aspect-ratio:    1 / 1;
+  object-fit:      cover;
+  object-position: center center;
+  display:         block;
+  transition:      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .craft-technique-img {
+  transform: scale(1.05);
+}
+
+/* Atelier / workshop image */
+.craft-atelier-img {
+  width:           100%;
+  height:          480px;
+  object-fit:      cover;
+  object-position: center center;
+  display:         block;
+}
+
+/* Process step images */
+.craft-process-img {
+  width:           100%;
+  height:          100%;
+  object-fit:      cover;
+  object-position: center center;
+  display:         block;
+  transition:      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .craft-process-img {
+  transform: scale(1.05);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   5. HERITAGE PAGE IMAGES
+   ───────────────────────────────────────────────────────────── */
+
+/* Legacy / founder image (collection1-opt.webp) */
+.heritage-founder-img {
+  width:           100%;
+  height:          520px;
+  object-fit:      cover;
+  object-position: center top;
+  display:         block;
+}
+
+/* "Where We Come From" grid images (store.webp, chennai.webp) */
+.heritage-pillar-img {
+  width:           100%;
+  height:          320px;
+  object-fit:      cover;
+  object-position: center center;
+  display:         block;
+}
+@media (max-width: 767px) {
+  .heritage-pillar-img {
+    height: 256px;
+  }
+}
+
+/* Ornament profile portrait images (3:4 aspect ratio) */
+.heritage-ornament-img {
+  width:           100%;
+  height:          100%;
+  object-fit:      cover;
+  object-position: center top;  /* keep ornament details visible */
+  display:         block;
+}
+
+/* Regional variations portrait images (3:4 aspect ratio) */
+.heritage-regional-img {
+  width:           100%;
+  height:          100%;
+  object-fit:      cover;
+  object-position: center center;
+  display:         block;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   6. JOURNAL PAGE IMAGES
+   ───────────────────────────────────────────────────────────── */
+
+/* Featured article image */
+.journal-featured-img {
+  width:           100%;
+  height:          100%;
+  min-height:      288px;   /* h-72 equivalent */
+  object-fit:      cover;
+  object-position: center center;
+  display:         block;
+  transition:      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .journal-featured-img {
+  transform: scale(1.05);
+}
+
+/* Regular article card thumbnail */
+.journal-card-thumb-img {
+  width:           100%;
+  height:          208px;  /* h-52 equivalent */
+  object-fit:      cover;
+  object-position: center center;
+  display:         block;
+  transition:      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .journal-card-thumb-img {
+  transform: scale(1.05);
+}
+
+/* JournalCard component reusable card image */
+.journal-card-component-img {
+  width:           100%;
+  height:          100%;
+  object-fit:      cover;
+  object-position: center center;
+  display:         block;
+  transition:      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .journal-card-component-img {
+  transform: scale(1.05);
+}
+
+/* Story card thumbnail (9 legends grid) */
+.journal-story-card-img {
+  width:           100%;
+  height:          208px;  /* h-52 equivalent */
+  object-fit:      cover;
+  object-position: center center;
+  display:         block;
+  transition:      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .journal-story-card-img {
+  transform: scale(1.05);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   7. CONSULTATION PAGE IMAGES
+   No actual <img> elements on this page — the hero uses the
+   shared .hero-banner-img class. The brand card background
+   is a purely decorative radial gradient (see section 9).
+   ───────────────────────────────────────────────────────────── */
+
+
+/* ─────────────────────────────────────────────────────────────
+   8. SHARED / REUSABLE PATTERNS
+   ───────────────────────────────────────────────────────────── */
+
+/* ProcessStep component image */
+.process-step-img {
+  width:           100%;
+  height:          100%;
+  object-fit:      cover;
+  object-position: center center;
+  display:         block;
+  transition:      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .process-step-img {
+  transform: scale(1.05);
+}
+
+/* Any full-bleed absolute fill image (used across all page heroes
+   and section overlays — covers the parent container) */
+.img-fill {
+  position:        absolute;
+  inset:           0;
+  width:           100%;
+  height:          100%;
+  object-fit:      cover;
+  object-position: center center;
+  display:         block;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   9. DECORATIVE RADIAL GLOW OVERLAYS
+   These are non-image decorative pseudo-backgrounds applied to
+   absolutely-positioned divs. They don't carry URL images but
+   are image-layer concerns.
+   ───────────────────────────────────────────────────────────── */
+
+/* Gold accent glow — used on timeline, why-gold, atelier sections
+   in Heritage; also Craftsmanship technique section */
+.glow-gold-left {
+  position:         absolute;
+  inset:            0;
+  pointer-events:   none;
+  opacity:          0.10;
+  background-image: radial-gradient(
+    circle at 20% 50%,
+    rgba(211, 175, 55, 0.25) 0%,
+    transparent 50%
+  );
+}
+
+.glow-gold-right {
+  position:         absolute;
+  inset:            0;
+  pointer-events:   none;
+  opacity:          0.10;
+  background-image: radial-gradient(
+    circle at 80% 30%,
+    rgba(211, 175, 55, 0.25) 0%,
+    transparent 50%
+  );
+}
+
+.glow-gold-center-low {
+  position:         absolute;
+  inset:            0;
+  pointer-events:   none;
+  opacity:          0.15;
+  background-image: radial-gradient(
+    circle at 25% 60%,
+    rgba(211, 175, 55, 0.20) 0%,
+    transparent 55%
+  );
+}
+
+.glow-gold-center-high {
+  position:         absolute;
+  inset:            0;
+  pointer-events:   none;
+  opacity:          0.15;
+  background-image: radial-gradient(
+    circle at 75% 40%,
+    rgba(211, 175, 55, 0.20) 0%,
+    transparent 55%
+  );
+}
+
+/* Philosophy section — two-point gold radial (Home.jsx) */
+.glow-philosophy {
+  position:         absolute;
+  inset:            0;
+  pointer-events:   none;
+  opacity:          0.20;
+  background-image:
+    radial-gradient(circle at 15% 50%, rgba(211, 175, 55, 0.20) 0%, transparent 45%),
+    radial-gradient(circle at 85% 30%, rgba(250, 248, 237, 0.06) 0%, transparent 40%);
+}
+
+/* Journal — stories section glow */
+.glow-journal-stories {
+  position:         absolute;
+  inset:            0;
+  pointer-events:   none;
+  opacity:          0.10;
+  background-image: radial-gradient(
+    circle at 30% 60%,
+    rgba(211, 175, 55, 0.20) 0%,
+    transparent 55%
+  );
+}
+
+/* Collections page CTA radial highlight */
+.glow-collections-cta {
+  position:         absolute;
+  inset:            0;
+  pointer-events:   none;
+  background-image: radial-gradient(
+    circle at 50% 50%,
+    rgba(211, 175, 55, 0.30) 0%,
+    transparent 60%
+  );
+  opacity:          0.20;
+}
+
+/* Consultation brand card glow */
+.glow-consult-brand-card {
+  position:         absolute;
+  inset:            0;
+  pointer-events:   none;
+  background-image: radial-gradient(
+    circle at 20% 80%,
+    rgba(106, 20, 19, 0.06) 0%,
+    transparent 40%
+  );
+}
+
+/* BrandLoader — elliptical gold glow */
+.glow-brand-loader {
+  position:         absolute;
+  inset:            0;
+  pointer-events:   none;
+  background-image: radial-gradient(
+    ellipse 70% 55% at 50% 50%,
+    rgba(211, 175, 55, 0.09) 0%,
+    transparent 70%
+  );
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   10. EMOTIONAL / FINAL SECTION
+   .emotional-bg is defined in App.css.
+   Only the background-position override lives here so App.css
+   provides the full declaration and this file provides the
+   fine-tuning control point.
+   ───────────────────────────────────────────────────────────── */
+
+/* Emotional section background image
+   Source: /jewellry/Web-Optimised/fbanner1.webp
+   Full rule (background-image, size, repeat) is in App.css.
+   Adjust position here without touching App.css. */
+.emotional-bg {
+  background-position: center center;  /* ← adjust to reposition */
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   11. COMPONENT IMAGE CONTAINERS
+   Fixed-height wrappers — replaces Tailwind h-52, h-56 classes.
+   ───────────────────────────────────────────────────────────── */
+
+/* JournalCard image container — standard card */
+.journal-card-img-wrap {
+  position:    relative;
+  overflow:    hidden;
+  flex-shrink: 0;
+  height:      208px;   /* h-52 */
+}
+
+/* JournalCard image container — featured variant */
+.journal-card-img-wrap--featured {
+  height: 224px;        /* h-56 */
+}
+@media (min-width: 1024px) {
+  .journal-card-img-wrap--featured {
+    height: auto;
+    width:  288px;      /* lg:w-72 */
+  }
+}
+
+/* Philosophy pillar card image container (Home.jsx) */
+.home-philosophy-card-wrap {
+  position: relative;
+  height:   256px;   /* h-64 */
+  overflow: hidden;
+}
+
+/* Featured article image container (Journal.jsx) */
+.journal-featured-img-wrap {
+  position:    relative;
+  overflow:    hidden;
+  flex-shrink: 0;
+  height:      288px;   /* h-72 */
+}
+@media (min-width: 1024px) {
+  .journal-featured-img-wrap {
+    height: auto;   /* lg:h-auto — fills the grid row */
+  }
+}
+
+/* Story card image container (Journal.jsx — 9 legends grid) */
+.journal-story-card-img-wrap {
+  position: relative;
+  height:   208px;   /* h-52 */
+  overflow: hidden;
+}
+
+/* ProcessStep image container (ProcessStep.jsx) */
+.process-step-img-wrap {
+  position:      relative;
+  overflow:      hidden;
+  border-radius: 1rem;   /* rounded-2xl */
+  height:        208px;  /* h-52 */
+}
+@media (min-width: 640px) {
+  .process-step-img-wrap {
+    height: 240px;  /* sm:h-60 */
+  }
+}

@@ -134,12 +134,7 @@ export default function BrandLoader({ onDone }) {
       {/* Subtle radial glow */}
       <div
         aria-hidden="true"
-        style={{
-          position:        "absolute",
-          inset:           0,
-          pointerEvents:   "none",
-          backgroundImage: "radial-gradient(ellipse 70% 55% at 50% 50%, rgba(211,175,55,0.09) 0%, transparent 70%)",
-        }}
+        className="glow-brand-loader"
       />
 
       {/* SVG container */}

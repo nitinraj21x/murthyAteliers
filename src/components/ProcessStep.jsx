@@ -8,11 +8,11 @@ export default function ProcessStep({ step }) {
       className="group relative flex flex-col"
     >
       {/* Image */}
-      <div className="relative overflow-hidden rounded-2xl h-52 sm:h-60">
+      <div className="process-step-img-wrap">
         <img
           src={step.image}
           alt={step.title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          className="process-step-img"
           loading="lazy"
         />
         <div className="absolute inset-0 img-overlay-forest opacity-60" />

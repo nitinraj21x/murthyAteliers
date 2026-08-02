@@ -1,3 +1,6 @@
+/* ─── Theme variables (edit src/styles/theme.css to customise) ── */
+@import "./styles/theme.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -20,9 +23,8 @@
   --crimson:    #6a1413;
   --cream-dark: #f0ecda;
 
-  /* proj2 CSS Variables */
+  /* proj2 CSS Variables — these supplement theme.css; do not redefine values already in theme.css */
   --color-bg-light: #faf8ed;
-  --color-gold: #D3af37;
   --color-gold-hover: #bda030;
   --color-gray-green: #919d7b;
   --color-dark-gray-green: #3d4b2a;
@@ -31,16 +33,10 @@
   --color-charcoal: #1e221b;
   --color-light-overlay: rgba(250, 248, 237, 0.9);
   --color-dark-overlay: rgba(30, 34, 27, 0.85);
-  
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-script: 'Pinyon Script', cursive;
-  --font-logo: 'Halimun', 'Pinyon Script', cursive;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  
-  --transition-smooth: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-  --transition-fast: all 0.25s ease;
-  
-  --max-width: 1400px;
+  /* Note: --color-gold, --cream, --forest, --crimson, --sage, --cream-dark,
+     --font-serif, --font-script, --font-logo, --font-sans, --max-width,
+     --transition-smooth, --transition-fast are all set in theme.css.
+     Do not redeclare them here. */
 }
 
 /* ─── Base ───────────────────────────────────────────────────── */
@@ -110,12 +106,15 @@ img, video { display: block; max-width: 100%; }
 
 .eyebrow {
   font-family: "Jost", sans-serif;
-  font-size: 0.6875rem;
+  font-size: var(--ma-text-eyebrow);
   font-weight: 500;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--crimson);
+  color: var(--ma-gold);
 }
+
+/* When explicitly set to crimson (inside light sections) */
+.eyebrow.text-crimson { color: var(--ma-crimson); }
 
 /* ─── Cards ──────────────────────────────────────────────────── */
 .card-parchment {
@@ -253,17 +252,6 @@ img, video { display: block; max-width: 100%; }
 .nav-link:hover::after,
 .nav-link.active::after { transform: scaleX(1); }
 
-/* Scrolled header — dark text with drop shadow for contrast on any section */
-.nav-scrolled .nav-link {
-  color: rgba(61, 75, 42, 0.9);
-  text-shadow: 0 1px 6px rgba(255,255,255,0.9), 0 0 12px rgba(255,255,255,0.7);
-}
-.nav-scrolled .nav-link:hover,
-.nav-scrolled .nav-link.active {
-  color: var(--crimson);
-  text-shadow: 0 1px 6px rgba(255,255,255,0.9), 0 0 12px rgba(255,255,255,0.7);
-}
-
 /* ─── Swiper overrides ───────────────────────────────────────── */
 .swiper-pagination-bullet {
   background: var(--gold) !important;
@@ -377,7 +365,14 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
   color: var(--color-charcoal);
-  opacity: 0.85;
+  /* Note: no global opacity here — use Tailwind text-forest/70 etc. per component */
+  font-size: var(--ma-text-body);
+}
+
+/* Eyebrow labels inside banner/hero sections should always be gold */
+.relative .eyebrow,
+section .eyebrow {
+  color: var(--ma-gold);
 }
 
 /* ─── Layout utilities ───────────────────────────────────────── */

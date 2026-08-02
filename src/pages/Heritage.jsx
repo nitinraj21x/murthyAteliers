@@ -48,8 +48,7 @@ function JewelleryTimeline() {
   const [activeIdx, setActiveIdx] = useState(null);
   return (
     <section className="shell py-20 sm:py-28 bg-forest relative overflow-hidden">
-      <div className="absolute inset-0 opacity-10 pointer-events-none"
-        style={{ backgroundImage: "radial-gradient(circle at 20% 50%, rgba(211,175,55,0.25) 0%, transparent 50%)" }} />
+      <div className="glow-gold-left" />
       <div className="frame relative z-10">
         <motion.p {...fadeUp} {...inView} className="eyebrow text-gold/70 mb-4">A Two-Thousand Year Story</motion.p>
         <motion.h2 {...fadeUp} {...inView} className="display-lg text-cream mb-4">Timeline: The Evolution of South Indian Jewellery</motion.h2>
@@ -141,8 +140,7 @@ function AtelierSection() {
   const [openIdx, setOpenIdx] = useState(null);
   return (
     <section className="shell py-20 sm:py-28 bg-forest relative overflow-hidden">
-      <div className="absolute inset-0 opacity-10 pointer-events-none"
-        style={{ backgroundImage: "radial-gradient(circle at 80% 30%, rgba(211,175,55,0.25) 0%, transparent 50%)" }} />
+      <div className="glow-gold-right" />
       <div className="frame relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <motion.div variants={fadeLeft} {...inView}>
@@ -226,19 +224,18 @@ function TempleToBridalSection() {
 /* ── The Jewels Themselves (Ornament Profiles) ──────────────── */
 function OrnamentProfiles() {
   const imgs = [
-    "/jewellry/Web-Optimised/jewellry/Cultural/1/DPPHOTGRAPHY-8171.webp",
-    "/jewellry/Web-Optimised/jewellry/Cultural/2/DPPHOTGRAPHY-8354.webp",
-    "/jewellry/Web-Optimised/jewellry/Cultural/3/DPPHOTGRAPHY-8186.webp",
-    "/jewellry/Web-Optimised/jewellry/Cultural/4/DPPHOTGRAPHY-8196.webp",
-    "/jewellry/Web-Optimised/jewellry/Cultural/5/DPPHOTGRAPHY-8206.webp",
-    "/jewellry/Web-Optimised/jewellry/Cultural/6/DPPHOTGRAPHY-8214.webp",
-    "/jewellry/Web-Optimised/jewellry/Cultural/7/DPPHOTGRAPHY-8229.webp",
-    "/jewellry/Web-Optimised/jewellry/Cultural/8/DPPHOTGRAPHY-8259.webp",
+    "/jewellry/Web-Optimised/jewellry/Cultural/Saradu Malai/DPPHOTGRAPHY-8171.webp",
+    "/jewellry/Web-Optimised/jewellry/Cultural/Mango Saradu Malai/DPPHOTGRAPHY-8354.webp",
+    "/jewellry/Web-Optimised/jewellry/Cultural/Manga Malai/DPPHOTGRAPHY-8186.webp",
+    "/jewellry/Web-Optimised/jewellry/Cultural/Studded Mango Saradu/DPPHOTGRAPHY-8196.webp",
+    "/jewellry/Web-Optimised/jewellry/Cultural/Studded Saradu Malai/DPPHOTGRAPHY-8206.webp",
+    "/jewellry/Web-Optimised/jewellry/Cultural/Adigai blue/DPPHOTGRAPHY-8214.webp",
+    "/jewellry/Web-Optimised/jewellry/Cultural/Poothali/DPPHOTGRAPHY-8229.webp",
+    "/jewellry/Web-Optimised/jewellry/Cultural/Manga Malai Small/DPPHOTGRAPHY-8259.webp",
   ];
   return (
     <section className="shell py-20 sm:py-28 bg-crimson relative overflow-hidden">
-      <div className="absolute inset-0 opacity-15 pointer-events-none"
-        style={{ backgroundImage: "radial-gradient(circle at 25% 60%, rgba(211,175,55,0.2) 0%, transparent 55%)" }} />
+      <div className="glow-gold-center-low" />
       <div className="frame relative z-10">
         <motion.p {...fadeUp} {...inView} className="eyebrow text-gold/70 mb-4">Ornament Profiles</motion.p>
         <motion.h2 {...fadeUp} {...inView} className="display-lg text-cream mb-4">The Jewels Themselves</motion.h2>
@@ -254,7 +251,7 @@ function OrnamentProfiles() {
                 className={`flex flex-col lg:flex-row gap-8 xl:gap-14 items-center ${isReverse ? "lg:flex-row-reverse" : ""}`}>
                 <div className="w-full lg:w-[28%] flex-shrink-0">
                   <div className="relative overflow-hidden rounded-3xl aspect-[3/4]">
-                    <img src={img} alt={orn.name} className="w-full h-full object-cover" loading="lazy" />
+                    <img src={img} alt={orn.name} className="heritage-ornament-img" loading="lazy" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                     <div className="absolute bottom-4 left-4 right-4">
                       <p className="eyebrow text-gold/80 text-[0.58rem]">{orn.period}</p>
@@ -336,8 +333,7 @@ function FiveGenerationsSection() {
 function RegionalVariations() {
   return (
     <section className="shell py-20 sm:py-28 bg-crimson relative overflow-hidden">
-      <div className="absolute inset-0 opacity-15 pointer-events-none"
-        style={{ backgroundImage: "radial-gradient(circle at 75% 40%, rgba(211,175,55,0.2) 0%, transparent 55%)" }} />
+      <div className="glow-gold-center-high" />
       <div className="frame relative z-10">
         <motion.p {...fadeUp} {...inView} className="eyebrow text-gold/70 mb-4">Regional Variations</motion.p>
         <motion.h2 {...fadeUp} {...inView} className="display-lg text-cream mb-4">Across South India</motion.h2>
@@ -352,7 +348,7 @@ function RegionalVariations() {
                 className={`flex flex-col lg:flex-row gap-8 xl:gap-14 items-center ${isReverse ? "lg:flex-row-reverse" : ""}`}>
                 <div className="w-full lg:w-[28%] flex-shrink-0">
                   <div className="relative overflow-hidden rounded-3xl aspect-[3/4]">
-                    <img src={item.image} alt={item.ornament} className="w-full h-full object-cover" loading="lazy" />
+                    <img src={item.image} alt={item.ornament} className="heritage-regional-img" loading="lazy" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                     <div className="absolute bottom-4 left-4">
                       <p className="eyebrow text-gold/80">{item.ornament}</p>
@@ -387,9 +383,9 @@ export default function Heritage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative h-[55vh] min-h-[420px] flex items-end overflow-hidden">
-        <img src="/jewellry/Web-Optimised/imgs/heirloom.webp" alt="Heritage"
-          className="absolute inset-0 w-full h-full object-cover" fetchPriority="high" />
+      <section id="page-hero" className="page-hero-sec page-hero-sec--tall">
+        <img src="/imgs/heriBanner.webp" alt="Heritage"
+          className="hero-banner-img hero-banner-img--heritage" fetchPriority="high" decoding="async" />
         <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/50 to-forest/20" />
         <div className="relative z-10 shell pb-14 w-full">
           <div className="frame">
@@ -405,8 +401,8 @@ export default function Heritage() {
         <div className="frame grid gap-10 lg:grid-cols-[0.9fr_1.1fr] items-start">
           <motion.div variants={fadeLeft} {...inView} className="relative">
             <div className="relative overflow-hidden rounded-3xl shadow-luxury">
-              <img src="/jewellry/Web-Optimised/collection1.webp" alt="A Legacy Continued"
-                className="w-full h-[520px] object-cover" loading="lazy" />
+              <img src="/jewellry/Web-Optimised/collection1-opt.webp" alt="A Legacy Continued"
+                className="heritage-founder-img" loading="lazy" decoding="async" />
             </div>
             <div className="absolute -bottom-6 -right-4 sm:-right-8 card-parchment rounded-2xl p-5 max-w-[200px] shadow-luxury">
               <p className="script-brand text-crimson text-2xl leading-tight">{founderStory.blessingTamil}</p>
@@ -447,8 +443,7 @@ export default function Heritage() {
 
       {/* 2 — Where We Come From */}
       <section className="shell py-20 sm:py-24 bg-crimson relative overflow-hidden">
-        <div className="absolute inset-0 opacity-15 pointer-events-none"
-          style={{ backgroundImage: "radial-gradient(circle at 80% 30%, rgba(211,175,55,0.2) 0%, transparent 50%)" }} />
+        <div className="glow-gold-right" />
         <div className="frame relative z-10">
           <motion.p {...fadeUp} {...inView} className="eyebrow text-gold/70 mb-4">Two Pillars of Our Story</motion.p>
           <motion.h2 {...fadeUp} {...inView} className="display-lg text-cream mb-12">Where We Come From</motion.h2>
@@ -457,7 +452,7 @@ export default function Heritage() {
               <motion.div key={point.title} variants={staggerItem}
                 className={`grid gap-6 lg:grid-cols-2 items-center ${i % 2 === 1 ? "lg:[direction:rtl]" : ""}`}>
                 <div className="relative overflow-hidden rounded-3xl lg:[direction:ltr]">
-                  <img src={point.image} alt={point.title} className="w-full h-64 sm:h-80 object-cover" loading="lazy" />
+                  <img src={point.image} alt={point.title} className="heritage-pillar-img" loading="lazy" />
                   <div className="absolute inset-0 img-overlay-dark opacity-20" />
                 </div>
                 <div className="lg:[direction:ltr] space-y-4">
