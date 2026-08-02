@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight, MessageCircle, Mail, MapPin, Phone, CheckCircle, Loader } from "lucide-react";
@@ -109,28 +109,21 @@ export default function Consultation() {
     }
   }
 
+
   return (
     <>
       {/* Hero */}
       <section id="page-hero" className="page-hero-sec">
-        <img
-          src="/jewellry/Web-Optimised/bannerConsult.webp"
-          alt="Consultation"
-          className="hero-banner-img hero-banner-img--consult"
-          fetchPriority="high"
-          decoding="async"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/50 to-forest/20" />
-        <div className="relative z-10 shell pb-14 w-full">
+        <img src="/jewellry/Web-Optimised/bannerConsult.webp" alt="Consultation"
+          className="hero-banner-img hero-banner-img--consult" fetchPriority="high" decoding="async" />
+        <div className="gradient-hero-overlay-dark page-hero-gradient" />
+        <div className="page-hero-content shell">
           <div className="frame">
-            <motion.p {...fadeUp} className="eyebrow text-gold/70 mb-4">
+            <motion.p {...fadeUp} className="eyebrow" style={{ color: "rgba(211,175,55,0.70)", marginBottom: "1rem" }}>
               Create Something Personal
             </motion.p>
-            <motion.h1
-              {...fadeUp}
-              transition={{ delay: 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="display-xl text-cream"
-            >
+            <motion.h1 {...fadeUp} transition={{ delay: 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="display-xl" style={{ color: "var(--cream)" }}>
               Begin Your Consultation
             </motion.h1>
           </div>
@@ -138,19 +131,15 @@ export default function Consultation() {
       </section>
 
       {/* Process steps */}
-      <section className="shell py-16 bg-cream-dark">
+      <section className="shell consult-steps-sec">
         <div className="frame">
-          <motion.div
-            variants={staggerContainer}
-            {...inView}
-            className="grid gap-6 sm:grid-cols-3"
-          >
+          <motion.div variants={staggerContainer} {...inView} className="consult-steps-grid">
             {consultationSteps.map((step) => (
-              <motion.div key={step.step} variants={staggerItem} className="card-parchment rounded-3xl p-7">
-                <span className="font-display text-gold/50 text-5xl leading-none">{step.step}</span>
-                <h3 className="font-display text-forest text-2xl mt-4">{step.title}</h3>
-                <div className="ornament-sm mt-3 mb-3" />
-                <p className="text-sm leading-7 text-forest/65">{step.body}</p>
+              <motion.div key={step.step} variants={staggerItem} className="card-parchment consult-step-card">
+                <span className="font-display consult-step-num">{step.step}</span>
+                <h3 className="font-display consult-step-title">{step.title}</h3>
+                <div className="ornament-sm consult-step-ornament" />
+                <p className="consult-step-body">{step.body}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -158,205 +147,144 @@ export default function Consultation() {
       </section>
 
       {/* Main content: form + contact */}
-      <section className="shell py-20 sm:py-28">
-        <div className="frame grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-start">
+      <section className="shell consult-main-sec">
+        <div className="frame consult-main-grid">
 
           {/* Form */}
           <motion.div variants={fadeLeft} {...inView}>
-            <p className="eyebrow text-crimson mb-4">Inquiry Form</p>
-            <h2 className="display-md text-forest mb-8">Tell Us Your Story</h2>
+            <p className="eyebrow" style={{ color: "var(--crimson)", marginBottom: "1rem" }}>Inquiry Form</p>
+            <h2 className="display-md" style={{ color: "var(--forest)", marginBottom: "2rem" }}>Tell Us Your Story</h2>
 
             {submitted ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="card-parchment rounded-3xl p-10 text-center"
-              >
-                <CheckCircle size={40} className="text-forest mx-auto mb-4" />
-                <h3 className="font-display text-forest text-2xl mb-3">Thank you, {form.name}.</h3>
-                <p className="text-sm leading-7 text-forest/65">
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
+                className="card-parchment consult-success">
+                <CheckCircle size={40} className="consult-success-icon" />
+                <h3 className="font-display consult-success-title">Thank you, {form.name}.</h3>
+                <p className="consult-success-body">
                   We've received your inquiry and will be in touch within 2–3 working days to begin the conversation.
                 </p>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+              <form onSubmit={handleSubmit} className="consult-form" noValidate>
 
                 {/* Name */}
-                <div>
-                  <label htmlFor="name" className="block text-xs tracking-widest uppercase text-forest/60 mb-2">
-                    Your Name <span className="text-crimson">*</span>
+                <div className="form-field">
+                  <label htmlFor="name" className="form-field-label">
+                    Your Name <span className="form-required">*</span>
                   </label>
-                  <input
-                    id="name" name="name" type="text" required
-                    autoComplete="name"
-                    maxLength={80}
-                    placeholder="e.g. Shanthi Shankar"
-                    value={form.name}
-                    onChange={handleChange}
-                    className={`w-full px-5 py-4 rounded-2xl border bg-cream focus:outline-none focus:ring-2 focus:ring-gold/15 text-forest text-sm placeholder:text-forest/30 transition-all duration-200 ${fieldErrors.name ? 'border-crimson/70' : 'border-gold/25 focus:border-gold/60'}`}
-                    aria-describedby={fieldErrors.name ? 'err-name' : undefined}
-                  />
-                  {fieldErrors.name && <p id="err-name" className="mt-1 text-xs text-crimson" role="alert">{fieldErrors.name}</p>}
+                  <input id="name" name="name" type="text" required autoComplete="name" maxLength={80}
+                    placeholder="e.g. Shanthi Shankar" value={form.name} onChange={handleChange}
+                    className={`form-input-field${fieldErrors.name ? " form-input-field--error" : ""}`}
+                    aria-describedby={fieldErrors.name ? "err-name" : undefined} />
+                  {fieldErrors.name && <p id="err-name" className="form-field-error" role="alert">{fieldErrors.name}</p>}
                 </div>
 
                 {/* Email */}
-                <div>
-                  <label htmlFor="email" className="block text-xs tracking-widest uppercase text-forest/60 mb-2">
-                    Email Address <span className="text-crimson">*</span>
+                <div className="form-field">
+                  <label htmlFor="email" className="form-field-label">
+                    Email Address <span className="form-required">*</span>
                   </label>
-                  <input
-                    id="email" name="email" type="email" required
-                    autoComplete="email" inputMode="email"
-                    maxLength={254}
-                    placeholder="e.g. shanthi@mylapore.com"
-                    value={form.email}
-                    onChange={handleChange}
-                    className={`w-full px-5 py-4 rounded-2xl border bg-cream focus:outline-none focus:ring-2 focus:ring-gold/15 text-forest text-sm placeholder:text-forest/30 transition-all duration-200 ${fieldErrors.email ? 'border-crimson/70' : 'border-gold/25 focus:border-gold/60'}`}
-                    aria-describedby={fieldErrors.email ? 'err-email' : undefined}
-                  />
-                  {fieldErrors.email && <p id="err-email" className="mt-1 text-xs text-crimson" role="alert">{fieldErrors.email}</p>}
+                  <input id="email" name="email" type="email" required autoComplete="email" inputMode="email"
+                    maxLength={254} placeholder="e.g. shanthi@mylapore.com" value={form.email} onChange={handleChange}
+                    className={`form-input-field${fieldErrors.email ? " form-input-field--error" : ""}`}
+                    aria-describedby={fieldErrors.email ? "err-email" : undefined} />
+                  {fieldErrors.email && <p id="err-email" className="form-field-error" role="alert">{fieldErrors.email}</p>}
                 </div>
 
-                {/* Phone with country code */}
-                <div>
-                  <label htmlFor="phone" className="block text-xs tracking-widest uppercase text-forest/60 mb-2">
-                    Phone / WhatsApp <span className="text-forest/40 normal-case">(optional)</span>
+                {/* Phone */}
+                <div className="form-field">
+                  <label htmlFor="phone" className="form-field-label">
+                    Phone / WhatsApp <span className="form-field-optional">(optional)</span>
                   </label>
-                  <div className="flex gap-2">
-                    <select
-                      name="phoneCountry"
-                      value={form.phoneCountry}
-                      onChange={handleChange}
-                      className="px-3 py-4 rounded-2xl border border-gold/25 bg-cream focus:outline-none focus:border-gold/60 text-forest text-sm transition-all duration-200 shrink-0"
-                      style={{ width: '23%', minWidth: '80px' }}
-                      aria-label="Country code"
-                    >
+                  <div className="phone-input-row">
+                    <select name="phoneCountry" value={form.phoneCountry} onChange={handleChange}
+                      className="form-input-field phone-country-select" style={{ width: "23%", minWidth: "80px" }}
+                      aria-label="Country code">
                       {COUNTRY_CODES.map((c) => (
                         <option key={c.code} value={c.code}>{c.label}</option>
                       ))}
                     </select>
-                    <input
-                      id="phone" name="phone" type="tel"
-                      autoComplete="tel-national" inputMode="numeric"
-                      maxLength={15}
-                      placeholder="10-digit number"
-                      value={form.phone}
-                      onChange={handleChange}
-                      className={`flex-1 px-5 py-4 rounded-2xl border bg-cream focus:outline-none focus:ring-2 focus:ring-gold/15 text-forest text-sm placeholder:text-forest/30 transition-all duration-200 ${fieldErrors.phone ? 'border-crimson/70' : 'border-gold/25 focus:border-gold/60'}`}
-                      aria-describedby={fieldErrors.phone ? 'err-phone' : undefined}
-                    />
+                    <input id="phone" name="phone" type="tel" autoComplete="tel-national" inputMode="numeric"
+                      maxLength={15} placeholder="10-digit number" value={form.phone} onChange={handleChange}
+                      className={`form-input-field phone-digits-input${fieldErrors.phone ? " form-input-field--error" : ""}`}
+                      aria-describedby={fieldErrors.phone ? "err-phone" : undefined} />
                   </div>
-                  {fieldErrors.phone && <p id="err-phone" className="mt-1 text-xs text-crimson" role="alert">{fieldErrors.phone}</p>}
+                  {fieldErrors.phone && <p id="err-phone" className="form-field-error" role="alert">{fieldErrors.phone}</p>}
                 </div>
 
                 {/* Occasion */}
-                <div>
-                  <label htmlFor="occasion" className="block text-xs tracking-widest uppercase text-forest/60 mb-2">
-                    Occasion or Intent
-                  </label>
-                  <input
-                    id="occasion" name="occasion" type="text"
-                    maxLength={120}
-                    placeholder="e.g. Bridal, Heirloom redesign, Gift…"
-                    value={form.occasion}
-                    onChange={handleChange}
-                    className={`w-full px-5 py-4 rounded-2xl border bg-cream focus:outline-none focus:ring-2 focus:ring-gold/15 text-forest text-sm placeholder:text-forest/30 transition-all duration-200 ${fieldErrors.occasion ? 'border-crimson/70' : 'border-gold/25 focus:border-gold/60'}`}
-                    aria-describedby={fieldErrors.occasion ? 'err-occasion' : undefined}
-                  />
-                  {fieldErrors.occasion && <p id="err-occasion" className="mt-1 text-xs text-crimson" role="alert">{fieldErrors.occasion}</p>}
+                <div className="form-field">
+                  <label htmlFor="occasion" className="form-field-label">Occasion or Intent</label>
+                  <input id="occasion" name="occasion" type="text" maxLength={120}
+                    placeholder="e.g. Bridal, Heirloom redesign, Gift…" value={form.occasion} onChange={handleChange}
+                    className={`form-input-field${fieldErrors.occasion ? " form-input-field--error" : ""}`}
+                    aria-describedby={fieldErrors.occasion ? "err-occasion" : undefined} />
+                  {fieldErrors.occasion && <p id="err-occasion" className="form-field-error" role="alert">{fieldErrors.occasion}</p>}
                 </div>
 
-                {/* Message / Your Story */}
-                <div>
-                  <label htmlFor="message" className="block text-xs tracking-widest uppercase text-forest/60 mb-2 flex justify-between">
-                    <span>Your Story <span className="text-crimson">*</span></span>
-                    <span className="normal-case text-forest/35 font-normal">{form.message.length}/2000</span>
+                {/* Message */}
+                <div className="form-field">
+                  <label htmlFor="message" className="form-field-label form-field-label--row">
+                    <span>Your Story <span className="form-required">*</span></span>
+                    <span className="form-char-count">{form.message.length}/2000</span>
                   </label>
-                  <textarea
-                    id="message" name="message" required
-                    rows={5}
-                    maxLength={2000}
+                  <textarea id="message" name="message" required rows={5} maxLength={2000}
                     placeholder="Share the memory, ceremony, or feeling behind the piece you have in mind…"
-                    value={form.message}
-                    onChange={handleChange}
-                    className={`w-full px-5 py-4 rounded-2xl border bg-cream focus:outline-none focus:ring-2 focus:ring-gold/15 text-forest text-sm placeholder:text-forest/30 transition-all duration-200 resize-none ${fieldErrors.message ? 'border-crimson/70' : 'border-gold/25 focus:border-gold/60'}`}
-                    aria-describedby={fieldErrors.message ? 'err-message' : undefined}
-                  />
-                  {fieldErrors.message && <p id="err-message" className="mt-1 text-xs text-crimson" role="alert">{fieldErrors.message}</p>}
+                    value={form.message} onChange={handleChange}
+                    className={`form-input-field form-textarea${fieldErrors.message ? " form-input-field--error" : ""}`}
+                    aria-describedby={fieldErrors.message ? "err-message" : undefined} />
+                  {fieldErrors.message && <p id="err-message" className="form-field-error" role="alert">{fieldErrors.message}</p>}
                 </div>
 
-                <button type="submit" className="btn-primary w-full justify-center" disabled={sending}>
-                  {sending ? (
-                    <>
-                      <Loader size={14} className="animate-spin" />
-                      Sending…
-                    </>
-                  ) : (
-                    <>
-                      Send Your Story
-                      <ArrowUpRight size={14} />
-                    </>
-                  )}
+                <button type="submit" className="btn-primary consult-submit" disabled={sending}>
+                  {sending ? (<><Loader size={14} className="consult-spinner" />Sending…</>) : (<>Send Your Story <ArrowUpRight size={14} /></>)}
                 </button>
-
-                {sendError && (
-                  <p className="text-xs text-crimson text-center mt-2">{sendError}</p>
-                )}
-
-                <p className="text-xs text-forest/40 text-center">
-                  No pricing is discussed until we understand your vision fully.
-                </p>
+                {sendError && <p className="consult-send-error" role="alert">{sendError}</p>}
+                <p className="consult-disclaimer">No pricing is discussed until we understand your vision fully.</p>
               </form>
             )}
           </motion.div>
 
           {/* Contact info */}
-          <motion.div variants={fadeRight} {...inView} className="space-y-8">
+          <motion.div variants={fadeRight} {...inView} className="consult-contact">
             <div>
-              <p className="eyebrow text-crimson mb-4">Or Reach Us Directly</p>
-              <h2 className="display-md text-forest mb-6">We'd Love to Hear From You</h2>
-              <p className="text-sm leading-7 text-forest/65">
+              <p className="eyebrow" style={{ color: "var(--crimson)", marginBottom: "1rem" }}>Or Reach Us Directly</p>
+              <h2 className="display-md" style={{ color: "var(--forest)", marginBottom: "1.5rem" }}>We'd Love to Hear From You</h2>
+              <p className="consult-contact-intro">
                 Private consultations are encouraged so conversations around family jewelry, ceremonies, and design direction can happen with care and focus.
               </p>
             </div>
 
-            <div className="space-y-4">
+            <div className="consult-contact-links">
               {[
-                { icon: MessageCircle, label: "WhatsApp",  value: brand.phone,     href: brand.whatsapp, external: true },
-                { icon: Mail,          label: "Email",     value: brand.email,     href: `mailto:${brand.email}`, external: true },
-                { icon: Phone,         label: "Phone",     value: brand.phone,     href: `tel:${brand.phone}`, external: true },
-                { icon: MapPin,        label: "Location",  value: brand.address,   href: brand.mapLink, external: true },
+                { icon: MessageCircle, label: "WhatsApp", value: brand.phone,   href: brand.whatsapp, external: true },
+                { icon: Mail,          label: "Email",    value: brand.email,   href: `mailto:${brand.email}`, external: true },
+                { icon: Phone,         label: "Phone",    value: brand.phone,   href: `tel:${brand.phone}`, external: true },
+                { icon: MapPin,        label: "Location", value: brand.address, href: brand.mapLink, external: true },
               ].map(({ icon: Icon, label, value, href, external }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target={external ? "_blank" : undefined}
-                  rel={external ? "noreferrer" : undefined}
-                  className="flex items-start gap-4 card-parchment rounded-2xl p-5 hover:border-gold/40 transition-all duration-200 group"
-                >
-                  <span className="flex items-center justify-center h-10 w-10 rounded-full bg-crimson/8 text-crimson shrink-0 group-hover:bg-crimson group-hover:text-cream transition-all duration-200">
+                <a key={label} href={href} target={external ? "_blank" : undefined}
+                  rel={external ? "noreferrer" : undefined} className="consult-contact-item card-parchment group">
+                  <span className="consult-contact-icon">
                     <Icon size={16} />
                   </span>
                   <div>
-                    <p className="text-xs tracking-widest uppercase text-forest/50 mb-0.5">{label}</p>
-                    <p className="text-sm text-forest">{value}</p>
+                    <p className="consult-contact-label">{label}</p>
+                    <p className="consult-contact-value">{value}</p>
                   </div>
                 </a>
               ))}
             </div>
 
-            {/* Brand name card — same style as navbar logo */}
-            <div className="relative overflow-hidden rounded-3xl shadow-luxury bg-crimson flex items-center justify-center" style={{ minHeight: "13rem" }}>
+            <div className="consult-brand-card shadow-luxury">
               <div className="glow-consult-brand-card" />
-              <div className="relative z-10 flex flex-col items-center gap-2 p-8 text-center">
-                <span
-                  className="script-brand text-cream whitespace-nowrap"
-                  style={{ fontSize: "clamp(1.8rem, 5vw, 2.8rem)", lineHeight: 1 }}
-                >
+              <div className="consult-brand-inner">
+                <span className="script-brand" style={{ fontSize: "clamp(1.8rem,5vw,2.8rem)", lineHeight: 1, color: "var(--cream)" }}>
                   Murthy Ateliers by 9th
                 </span>
-                <div className="ornament mt-3" style={{ width: "120px" }} />
-                <p className="eyebrow text-gold/70 mt-1">Heirloom Jewels Crafted to Endure</p>
+                <div className="ornament" style={{ width: "120px", marginTop: "0.75rem" }} />
+                <p className="eyebrow" style={{ color: "rgba(211,175,55,0.70)", marginTop: "0.25rem" }}>
+                  Heirloom Jewels Crafted to Endure
+                </p>
               </div>
             </div>
           </motion.div>
@@ -365,3 +293,4 @@ export default function Consultation() {
     </>
   );
 }
+

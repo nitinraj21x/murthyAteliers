@@ -1,10 +1,6 @@
 /* ─── Theme variables (edit src/styles/theme.css to customise) ── */
 @import "./styles/theme.css";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /* ─── Custom Fonts ───────────────────────────────────────────── */
 @font-face {
   font-family: "Halimun";

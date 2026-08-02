@@ -11,9 +11,9 @@ export default function MainLayout() {
   }, [pathname]);
 
   return (
-    <div className="flex flex-col min-h-svh">
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100svh" }}>
       <SiteHeader />
-      <main className="flex-1">
+      <main style={{ flex: 1 }}>
         <Outlet />
       </main>
       <Footer />

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Clock } from "lucide-react";
 import { staggerItem } from "../utils/motion";
@@ -7,41 +7,31 @@ export default function JournalCard({ article, featured = false }) {
   return (
     <motion.article
       variants={staggerItem}
-      className={`group card-parchment rounded-3xl overflow-hidden flex flex-col ${
-        featured ? "lg:flex-row" : ""
-      }`}
+      className={`jcard${featured ? " jcard--featured" : ""}`}
     >
-      {/* Image */}
-      <div className={`journal-card-img-wrap ${featured ? "journal-card-img-wrap--featured" : ""}`}>
+      <div className={`jcard-img-wrap${featured ? " jcard-img-wrap--featured" : ""}`}>
         <img
           src={article.image}
           alt={article.title}
           className="journal-card-component-img"
           loading="lazy"
         />
-        <div className="absolute inset-0 img-overlay-dark opacity-40" />
-        <span className="absolute top-4 left-4 eyebrow text-gold bg-crimson/70 backdrop-blur-sm px-3 py-1.5 rounded-full text-[0.6rem]">
-          {article.category}
-        </span>
+        <div className="img-overlay-dark jcard-overlay" />
+        <span className="jcard-category eyebrow">{article.category}</span>
       </div>
 
-      {/* Content */}
-      <div className="flex flex-col flex-1 p-6 sm:p-7">
-        <div className="flex items-center gap-2 text-sage text-xs mb-3">
+      <div className="jcard-body">
+        <div className="jcard-meta">
           <Clock size={11} />
           <span>{article.readTime}</span>
         </div>
-        <h3 className="font-display text-forest text-2xl sm:text-3xl leading-tight group-hover:text-crimson transition-colors duration-300">
-          {article.title}
-        </h3>
-        <p className="mt-3 text-sm leading-7 text-forest/65 flex-1">{article.excerpt}</p>
-        <Link
-          to={`/journal/${article.slug}`}
-          className="mt-5 inline-flex items-center gap-1.5 text-xs font-medium tracking-widest uppercase text-crimson hover:text-forest transition-colors duration-200"
-        >
+        <h3 className="jcard-title font-display">{article.title}</h3>
+        <p className="jcard-excerpt">{article.excerpt}</p>
+        <Link to={`/journal/${article.slug}`} className="jcard-cta">
           Read More <ArrowUpRight size={12} />
         </Link>
       </div>
     </motion.article>
   );
 }
+

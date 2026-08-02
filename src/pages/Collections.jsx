@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
@@ -34,7 +34,7 @@ function JewelViewer({ jewel, imgActive, setImgActive }) {
   const next = () => setActive((a) => (a + 1) % images.length);
 
   return (
-    <div className="relative overflow-hidden rounded-3xl shadow-deep w-full h-full">
+    <div className="coll-viewer-wrap">
       <AnimatePresence mode="wait">
         <motion.img
           key={images[active]}
@@ -50,19 +50,15 @@ function JewelViewer({ jewel, imgActive, setImgActive }) {
       </AnimatePresence>
       {images.length > 1 && (
         <>
-          <button onClick={prev}
-            className="absolute left-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full bg-black/45 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-black/65 transition-all"
-            aria-label="Previous"><ChevronLeft size={16} /></button>
-          <button onClick={next}
-            className="absolute right-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full bg-black/45 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-black/65 transition-all"
-            aria-label="Next"><ChevronRight size={16} /></button>
-          <div className="absolute bottom-3 right-3 bg-black/50 backdrop-blur-sm rounded-full px-2.5 py-0.5">
-            <span className="text-xs text-white/70">{active + 1}/{images.length}</span>
+          <button onClick={prev} className="coll-viewer-btn coll-viewer-btn--prev" aria-label="Previous"><ChevronLeft size={16} /></button>
+          <button onClick={next} className="coll-viewer-btn coll-viewer-btn--next" aria-label="Next"><ChevronRight size={16} /></button>
+          <div className="coll-viewer-counter">
+            <span>{active + 1}/{images.length}</span>
           </div>
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+          <div className="coll-viewer-dots">
             {images.map((_, i) => (
               <button key={i} onClick={() => setActive(i)}
-                className="w-1.5 h-1.5 rounded-full transition-all duration-200"
+                className="coll-viewer-dot"
                 style={{ background: i === active ? "var(--gold)" : "rgba(255,255,255,0.4)" }}
                 aria-label={`Image ${i + 1}`} />
             ))}
@@ -80,38 +76,31 @@ function JewelStrip({ items, activeIdx, onSelect }) {
   const visible = items.slice(start, start + VISIBLE);
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="coll-strip">
       <button onClick={() => setStart((s) => Math.max(0, s - 1))}
-        disabled={start === 0}
-        className="flex-shrink-0 h-8 w-8 rounded-full border border-gold/30 flex items-center justify-center text-gold/60 hover:border-gold hover:text-gold transition-all disabled:opacity-20"
-        aria-label="Previous jewels"><ChevronLeft size={14} /></button>
-
-      <div className="flex gap-3 flex-1 overflow-hidden">
+        disabled={start === 0} className="coll-strip-arrow" aria-label="Previous jewels">
+        <ChevronLeft size={14} />
+      </button>
+      <div className="coll-strip-thumbs">
         {visible.map((item, i) => {
           const globalIdx = start + i;
           const isActive  = globalIdx === activeIdx;
           return (
             <button key={item.id} onClick={() => onSelect(globalIdx)}
-              className="flex-1 flex-shrink-0 group relative overflow-hidden rounded-2xl border-2 transition-all duration-300"
-              style={{
-                borderColor: isActive ? "var(--gold)" : "rgba(211,175,55,0.18)",
-                opacity: isActive ? 1 : 0.6,
-              }}
+              className="coll-strip-thumb"
+              style={{ borderColor: isActive ? "var(--gold)" : "rgba(211,175,55,0.18)", opacity: isActive ? 1 : 0.6 }}
               aria-label={`Select ${item.name}`}>
-              <div className="aspect-square overflow-hidden">
-                <img src={item.images[0]} alt={item.name}
-                  className="coll-strip-thumb-img"
-                  loading="lazy" />
+              <div className="coll-strip-thumb-img-wrap">
+                <img src={item.images[0]} alt={item.name} className="coll-strip-thumb-img" loading="lazy" />
               </div>
             </button>
           );
         })}
       </div>
-
       <button onClick={() => setStart((s) => Math.min(items.length - VISIBLE, s + 1))}
-        disabled={start + VISIBLE >= items.length}
-        className="flex-shrink-0 h-8 w-8 rounded-full border border-gold/30 flex items-center justify-center text-gold/60 hover:border-gold hover:text-gold transition-all disabled:opacity-20"
-        aria-label="Next jewels"><ChevronRight size={14} /></button>
+        disabled={start + VISIBLE >= items.length} className="coll-strip-arrow" aria-label="Next jewels">
+        <ChevronRight size={14} />
+      </button>
     </div>
   );
 }
@@ -142,81 +131,51 @@ function CollectionBlock({ id, eyebrow, heading, description, bgImage, items }) 
   const IMG_H = "min(65vh, 600px)";
 
   return (
-    <section id={id} className="relative overflow-hidden" style={{ minHeight: "90vh" }}>
+    <section id={id} className="coll-block-section" style={{ minHeight: "90vh" }}>
       <div className="coll-block-bg"
         style={{ backgroundImage: `url(${bgImage})` }} />
-      <div className="absolute inset-0" style={{ background: "rgba(10,8,5,0.82)" }} />
+      <div className="coll-block-dark-overlay" />
 
-      <div className="relative z-10 shell py-20 sm:py-24">
+      <div className="coll-block-content shell">
         <div className="frame">
-
-          {/* ═══ PRE-EXPLORE: centered, no image ═══ */}
           {!explored && (
-            <motion.div
-              key="pre-explore"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col items-center text-center max-w-2xl mx-auto py-12"
-            >
-              <p className="eyebrow text-gold/80 mb-4">{eyebrow}</p>
-              <h2 className="display-lg text-cream mb-6">{heading}</h2>
-              <div className="ornament mb-8 opacity-40 w-full max-w-xs" />
-              <p className="text-base leading-8 text-cream/65 mb-10">{description}</p>
-              <button onClick={() => setExplored(true)}
-                className="inline-flex items-center gap-2 btn-primary">
+            <motion.div key="pre-explore" initial={{ opacity:0,y:20 }} animate={{ opacity:1,y:0 }}
+              transition={{ duration:0.5, ease:[0.22,1,0.36,1] }} className="coll-block-pre">
+              <p className="eyebrow coll-block-eyebrow">{eyebrow}</p>
+              <h2 className="display-lg coll-block-heading">{heading}</h2>
+              <div className="ornament coll-block-ornament" />
+              <p className="coll-block-desc">{description}</p>
+              <button onClick={() => setExplored(true)} className="btn-primary coll-block-explore-btn">
                 Explore Collection <ArrowUpRight size={14} />
               </button>
             </motion.div>
           )}
-
-          {/* ═══ POST-EXPLORE: two-column layout ═══ */}
           {explored && (
-            <motion.div
-              key="post-explore"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4 }}
-              className="flex flex-col lg:flex-row gap-10 xl:gap-16 items-start"
-            >
-              {/* LEFT — fixed height, flex-col, strip pinned to bottom */}
-              <div className="w-full lg:w-[44%] min-w-0 flex flex-col" style={{ height: IMG_H }}>
-
-                {/* Top: eyebrow + typewriter title + ornament */}
-                <div className="flex-shrink-0 min-w-0">
-                  <p className="eyebrow text-gold/60 mb-3">{eyebrow}</p>
-                  <AnimatedTitle
-                    text={current.name}
-                    className="display-lg text-cream mb-5 break-words leading-tight"
-                  />
-                  <div className="ornament mb-5 opacity-40" />
+            <motion.div key="post-explore" initial={{ opacity:0 }} animate={{ opacity:1 }}
+              transition={{ duration:0.4 }} className="coll-block-explored">
+              <div className="coll-block-left" style={{ height: IMG_H }}>
+                <div className="coll-block-top">
+                  <p className="eyebrow coll-block-eyebrow-sm">{eyebrow}</p>
+                  <AnimatedTitle text={current.name} className="display-lg coll-block-title" />
+                  <div className="ornament coll-block-ornament-sm" />
                 </div>
-
-                {/* Middle: scrollable description */}
-                <div className="flex-1 overflow-y-auto pr-1 min-h-0">
-                  <p className="text-base leading-8 text-cream/65">{current.description}</p>
+                <div className="coll-block-desc-scroll">
+                  <p className="coll-block-current-desc">{current.description}</p>
                 </div>
-
-                {/* Bottom: CTA + strip pinned */}
-                <div className="flex-shrink-0 pt-6">
-                  <div className="flex justify-center mb-5">
-                    <button onClick={handleEnquire}
-                      className="inline-flex items-center gap-2 btn-primary">
+                <div className="coll-block-actions">
+                  <div className="coll-block-enquire-wrap">
+                    <button onClick={handleEnquire} className="btn-primary coll-block-enquire-btn">
                       Enquire About This Collection <ArrowUpRight size={14} />
                     </button>
                   </div>
                   <JewelStrip items={items} activeIdx={activeIdx} onSelect={setActiveIdx} />
                 </div>
               </div>
-
-              {/* RIGHT — image panel, same height */}
-              <div className="w-full lg:w-[56%] flex-shrink-0" style={{ height: IMG_H }}>
+              <div className="coll-block-right" style={{ height: IMG_H }}>
                 <JewelViewer jewel={current} imgActive={imgActive} setImgActive={setImgActive} />
               </div>
-
             </motion.div>
           )}
-
         </div>
       </div>
     </section>
@@ -249,12 +208,12 @@ export default function Collections() {
       <section id="page-hero" className="page-hero-sec">
         <img src="/jewellry/Web-Optimised/bannerCollection-opt.webp" alt="Collections"
           className="hero-banner-img hero-banner-img--collections" fetchPriority="high" decoding="async" />
-        <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/50 to-forest/15" />
-        <div className="relative z-10 shell pb-12 w-full">
+        <div className="page-hero-gradient" />
+        <div className="page-hero-content shell">
           <div className="frame">
-            <motion.p {...fadeUp} className="eyebrow text-gold/70 mb-3">Signature Collections</motion.p>
-            <motion.h1 {...fadeUp} transition={{ delay: 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="display-xl text-cream">
+            <motion.p {...fadeUp} className="eyebrow" style={{ color:"rgba(211,175,55,0.70)", marginBottom:"0.75rem" }}>Signature Collections</motion.p>
+            <motion.h1 {...fadeUp} transition={{ delay:0.1, duration:0.8, ease:[0.22,1,0.36,1] }}
+              className="display-xl" style={{ color:"var(--cream)" }}>
               Two Worlds of Heirloom Jewelry
             </motion.h1>
           </div>
@@ -262,16 +221,14 @@ export default function Collections() {
       </section>
 
       {/* Tab bar */}
-      <div className="sticky top-0 z-30 bg-forest/95 backdrop-blur-md border-b border-gold/20">
+      <div className="coll-tabbar">
         <div className="shell">
-          <div className="frame flex items-center gap-1 py-1">
+          <div className="frame coll-tabbar-inner">
             {[{ key: "cultural", label: "Cultural" }, { key: "commisioned", label: "Commissioned" }].map((tab) => (
-              <button key={tab.key} onClick={() => setActiveTab(tab.key)}
-                className="relative px-6 py-3.5 text-xs font-medium tracking-widest uppercase transition-colors duration-200"
+              <button key={tab.key} onClick={() => setActiveTab(tab.key)} className="coll-tab"
                 style={{ color: activeTab === tab.key ? "var(--gold)" : "rgba(250,248,237,0.5)" }}>
                 {tab.label}
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gold transition-opacity duration-200"
-                  style={{ opacity: activeTab === tab.key ? 1 : 0 }} />
+                <span className="coll-tab-underline" style={{ opacity: activeTab === tab.key ? 1 : 0 }} />
               </button>
             ))}
           </div>
@@ -307,16 +264,14 @@ export default function Collections() {
         )}
       </AnimatePresence>
 
-      {/* CTA */}
-      <section className="shell py-20">
+      <section className="shell coll-cta-sec">
         <div className="frame">
-          <motion.div variants={scaleIn} {...inView}
-            className="relative overflow-hidden rounded-3xl bg-crimson p-10 sm:p-16 text-center">
+          <motion.div variants={scaleIn} {...inView} className="coll-cta-card">
             <div className="glow-collections-cta" />
-            <div className="relative z-10">
-              <p className="eyebrow text-gold/70 mb-4">Don't see what you're looking for?</p>
-              <h2 className="display-md text-cream mb-6">Every piece can be made for you.</h2>
-              <Link to="/consultation" className="btn-primary inline-flex">
+            <div className="coll-cta-inner">
+              <p className="eyebrow" style={{ color:"rgba(211,175,55,0.70)", marginBottom:"1rem" }}>Don't see what you're looking for?</p>
+              <h2 className="display-md" style={{ color:"var(--cream)", marginBottom:"1.5rem" }}>Every piece can be made for you.</h2>
+              <Link to="/consultation" className="btn-primary coll-cta-btn">
                 Begin a Custom Commission <ArrowUpRight size={14} />
               </Link>
             </div>
@@ -326,3 +281,4 @@ export default function Collections() {
     </>
   );
 }
+

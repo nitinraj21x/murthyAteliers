@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+﻿import { motion } from "framer-motion";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, Clock, ArrowUpRight, BookOpen } from "lucide-react";
 import JournalCard from "../components/JournalCard";
@@ -12,14 +12,12 @@ function StoryView({ story }) {
       <section className="page-hero-sec">
         <img src={story.image} alt={story.title}
           className="hero-banner-img hero-banner-img--article" fetchPriority="high" />
-        <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/50 to-forest/20" />
-        <div className="relative z-10 shell pb-12 w-full">
+        <div className="page-hero-gradient" />
+        <div className="page-hero-content shell">
           <div className="frame">
-            <p className="eyebrow text-gold/70 mb-2">{story.category}</p>
-            <h1 className="display-lg text-cream max-w-3xl" style={{ textWrap: "balance" }}>
-              {story.title}
-            </h1>
-            <div className="flex items-center gap-2 mt-4 text-cream/50 text-xs">
+            <p className="eyebrow journal-hero-eyebrow">{story.category}</p>
+            <h1 className="display-lg journal-hero-title">{story.title}</h1>
+            <div className="journal-hero-meta">
               <Clock size={11} />
               <span>{story.readTime}</span>
             </div>
@@ -27,43 +25,32 @@ function StoryView({ story }) {
         </div>
       </section>
 
-      <section className="shell py-16">
-        <div className="frame max-w-3xl">
-          <Link to="/journal" className="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-forest/50 hover:text-crimson transition-colors mb-10">
+      <section className="shell journal-article-sec">
+        <div className="frame journal-article-inner">
+          <Link to="/journal" className="journal-back-link">
             <ArrowLeft size={13} /> Back to Journal
           </Link>
-
-          {/* Jewel attribution */}
-          <div className="card-parchment rounded-2xl px-6 py-4 mb-10 flex items-start gap-3">
-            <BookOpen size={15} className="text-gold mt-0.5 flex-shrink-0" />
+          <div className="card-parchment journal-jewel-attr">
+            <BookOpen size={15} className="journal-jewel-icon" />
             <div>
-              <p className="text-xs tracking-widest uppercase text-forest/45 font-medium mb-0.5">Lives on today in</p>
-              <p className="text-sm text-forest/70 italic">{story.jewel}</p>
+              <p className="journal-jewel-label">Lives on today in</p>
+              <p className="journal-jewel-value">{story.jewel}</p>
             </div>
           </div>
-
-          {/* Excerpt */}
-          <p className="text-base sm:text-lg leading-9 text-forest/75 mb-8">{story.excerpt}</p>
-
-          <div className="ornament mb-10" />
-
-          {/* Body paragraphs */}
-          <div className="space-y-6">
+          <p className="journal-excerpt">{story.excerpt}</p>
+          <div className="ornament journal-divider" />
+          <div className="journal-body-paras">
             {story.body.map((para, i) => (
-              <p key={i} className="text-base leading-9 text-forest/70">{para}</p>
+              <p key={i} className="journal-body-para">{para}</p>
             ))}
           </div>
-
-          {/* Meaning */}
-          <div className="mt-12 pt-8 border-t border-gold/20">
-            <p className="eyebrow text-crimson mb-3">What the story is really saying</p>
-            <p className="font-display italic text-forest/70 text-xl leading-9">{story.meaning}</p>
+          <div className="journal-meaning-block">
+            <p className="eyebrow" style={{ color:"var(--crimson)", marginBottom:"0.75rem" }}>What the story is really saying</p>
+            <p className="journal-meaning-text font-display">{story.meaning}</p>
           </div>
-
-          <div className="mt-10">
-            <Link to="/consultation" className="btn-primary inline-flex">
-              Begin a Conversation
-              <ArrowUpRight size={14} />
+          <div style={{ marginTop:"2.5rem" }}>
+            <Link to="/consultation" className="btn-primary journal-article-cta">
+              Begin a Conversation <ArrowUpRight size={14} />
             </Link>
           </div>
         </div>
@@ -79,14 +66,12 @@ function ArticleView({ article }) {
       <section className="page-hero-sec">
         <img src={article.image} alt={article.title}
           className="hero-banner-img hero-banner-img--article" fetchPriority="high" />
-        <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/50 to-forest/20" />
-        <div className="relative z-10 shell pb-12 w-full">
+        <div className="page-hero-gradient" />
+        <div className="page-hero-content shell">
           <div className="frame">
-            <p className="eyebrow text-gold/70 mb-3">{article.category}</p>
-            <h1 className="display-lg text-cream max-w-3xl" style={{ textWrap: "balance" }}>
-              {article.title}
-            </h1>
-            <div className="flex items-center gap-2 mt-4 text-cream/50 text-xs">
+            <p className="eyebrow journal-hero-eyebrow">{article.category}</p>
+            <h1 className="display-lg journal-hero-title">{article.title}</h1>
+            <div className="journal-hero-meta">
               <Clock size={11} />
               <span>{article.readTime}</span>
             </div>
@@ -94,21 +79,19 @@ function ArticleView({ article }) {
         </div>
       </section>
 
-      <section className="shell py-16">
-        <div className="frame max-w-3xl">
-          <Link to="/journal"
-            className="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-forest/50 hover:text-crimson transition-colors mb-10">
+      <section className="shell journal-article-sec">
+        <div className="frame journal-article-inner">
+          <Link to="/journal" className="journal-back-link">
             <ArrowLeft size={13} /> Back to Journal
           </Link>
-          <p className="text-base sm:text-lg leading-9 text-forest/75">{article.excerpt}</p>
-          <div className="ornament my-10" />
-          <p className="text-base leading-9 text-forest/70">
+          <p className="journal-excerpt">{article.excerpt}</p>
+          <div className="ornament journal-divider" />
+          <p className="journal-body-para">
             This is an editorial piece from the Murthy Ateliers journal — a space for deeper reading on heritage, craft, and the stories behind the jewels. Full articles are available to clients and subscribers.
           </p>
-          <div className="mt-10">
-            <Link to="/consultation" className="btn-primary inline-flex">
-              Begin a Conversation
-              <ArrowUpRight size={14} />
+          <div style={{ marginTop:"2.5rem" }}>
+            <Link to="/consultation" className="btn-primary journal-article-cta">
+              Begin a Conversation <ArrowUpRight size={14} />
             </Link>
           </div>
         </div>
@@ -124,45 +107,35 @@ function JournalIndex() {
 
   return (
     <>
-      {/* Hero */}
       <section id="page-hero" className="page-hero-sec page-hero-sec--tall">
         <img src="/jewellry/Web-Optimised/heirStory-opt.webp" alt="Journal"
           className="hero-banner-img hero-banner-img--journal" fetchPriority="high" decoding="async" />
-        <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/50 to-forest/20" />
-        <div className="relative z-10 shell pb-14 w-full">
+        <div className="page-hero-gradient" />
+        <div className="page-hero-content shell">
           <div className="frame">
-            <motion.p {...fadeUp} className="eyebrow text-gold/70 mb-4">Notes From the Atelier</motion.p>
-            <motion.h1 {...fadeUp} transition={{ delay: 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="display-xl text-cream">
-              The Journal
-            </motion.h1>
+            <motion.p {...fadeUp} className="eyebrow" style={{ color:"rgba(211,175,55,0.70)", marginBottom:"1rem" }}>Notes From the Atelier</motion.p>
+            <motion.h1 {...fadeUp} transition={{ delay:0.1, duration:0.8, ease:[0.22,1,0.36,1] }}
+              className="display-xl" style={{ color:"var(--cream)" }}>The Journal</motion.h1>
           </div>
         </div>
       </section>
 
-      {/* Featured article */}
-      <section className="shell py-16">
+      <section className="shell journal-featured-sec">
         <div className="frame">
-          <p className="eyebrow text-crimson mb-6">Featured</p>
-          <motion.article {...fadeUp} {...inView}
-            className="group grid gap-0 lg:grid-cols-[1.2fr_0.8fr] overflow-hidden rounded-3xl shadow-luxury card-parchment">
+          <p className="eyebrow" style={{ color:"var(--crimson)", marginBottom:"1.5rem" }}>Featured</p>
+          <motion.article {...fadeUp} {...inView} className="journal-featured-card group card-parchment shadow-luxury">
             <div className="journal-featured-img-wrap">
-              <img src={featured.image} alt={featured.title}
-                className="journal-featured-img" loading="lazy" />
-              <div className="absolute inset-0 img-overlay-dark opacity-30" />
-              <span className="absolute top-5 left-5 eyebrow text-gold bg-crimson/70 backdrop-blur-sm px-3 py-1.5 rounded-full text-[0.6rem]">
-                {featured.category}
-              </span>
+              <img src={featured.image} alt={featured.title} className="journal-featured-img" loading="lazy" />
+              <div className="img-fill img-overlay-dark journal-featured-overlay" />
+              <span className="journal-featured-cat eyebrow">{featured.category}</span>
             </div>
-            <div className="flex flex-col justify-center p-8 sm:p-10">
-              <div className="flex items-center gap-2 text-sage text-xs mb-4">
-                <Clock size={11} />
-                <span>{featured.readTime}</span>
+            <div className="journal-featured-body">
+              <div className="journal-hero-meta" style={{ marginBottom:"1rem" }}>
+                <Clock size={11} /><span>{featured.readTime}</span>
               </div>
-              <h2 className="font-display text-forest text-3xl sm:text-4xl leading-tight">{featured.title}</h2>
-              <p className="mt-4 text-sm leading-7 text-forest/65">{featured.excerpt}</p>
-              <Link to={`/journal/${featured.slug}`}
-                className="mt-6 inline-flex items-center gap-1.5 text-xs font-medium tracking-widest uppercase text-crimson hover:text-forest transition-colors">
+              <h2 className="font-display journal-featured-title">{featured.title}</h2>
+              <p className="journal-featured-excerpt">{featured.excerpt}</p>
+              <Link to={`/journal/${featured.slug}`} className="journal-read-more">
                 Read More <ArrowUpRight size={12} />
               </Link>
             </div>
@@ -170,11 +143,10 @@ function JournalIndex() {
         </div>
       </section>
 
-      {/* Rest of regular articles */}
-      <section className="shell pb-16">
+      <section className="shell journal-grid-sec">
         <div className="frame">
-          <div className="ornament mb-10" />
-          <motion.div variants={staggerContainer} {...inView} className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="ornament" style={{ marginBottom:"2.5rem" }} />
+          <motion.div variants={staggerContainer} {...inView} className="journal-cards-grid">
             {rest.map((article) => (
               <JournalCard key={article.slug} article={article} />
             ))}
@@ -182,45 +154,38 @@ function JournalIndex() {
         </div>
       </section>
 
-      {/* ── Stories Behind the Jewels ── */}
-      <section className="shell py-20 sm:py-28 bg-forest relative overflow-hidden">
+      <section className="shell journal-stories-sec" style={{ position:"relative", overflow:"hidden" }}>
         <div className="glow-journal-stories" />
-        <div className="frame relative z-10">
-          <motion.p {...fadeUp} {...inView} className="eyebrow text-gold/70 mb-4">
+        <div className="frame journal-stories-inner">
+          <motion.p {...fadeUp} {...inView} className="eyebrow" style={{ color:"rgba(211,175,55,0.70)", marginBottom:"1rem" }}>
             Stories Behind the Jewels
           </motion.p>
-          <motion.h2 {...fadeUp} {...inView} className="display-lg text-cream mb-4">
+          <motion.h2 {...fadeUp} {...inView} className="display-lg" style={{ color:"var(--cream)", marginBottom:"1rem" }}>
             Nine Legends Woven Into Gold
           </motion.h2>
-          <motion.p {...fadeUp} {...inView} className="text-sm leading-8 text-cream/55 max-w-2xl mb-14">
+          <motion.p {...fadeUp} {...inView} className="journal-stories-intro">
             Every motif on the D.K. Murthy design sheet — the swan, the serpent, the mango, the moon, the twin-headed bird, the crocodile, the pearl — is the last surviving frame of a much longer story. These are those stories, told the way a grandmother would tell them.
           </motion.p>
-
-          <motion.div variants={staggerContainer} {...inView} className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {jewelleryStories.map((story, i) => (
+          <motion.div variants={staggerContainer} {...inView} className="journal-cards-grid">
+            {jewelleryStories.map((story) => (
               <motion.div key={story.slug} variants={staggerItem}>
-                <Link to={`/journal/story-${story.slug}`} className="group block h-full">
-                  <article className="h-full rounded-3xl overflow-hidden border border-gold/15 hover:border-gold/35 transition-all duration-300"
-                    style={{ background: "rgba(255,255,255,0.03)" }}>
+                <Link to={`/journal/story-${story.slug}`} className="journal-story-link group">
+                  <article className="journal-story-card">
                     <div className="journal-story-card-img-wrap">
-                      <img src={story.image} alt={story.title}
-                        className="journal-story-card-img" loading="lazy" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                      <span className="absolute top-4 left-4 eyebrow text-gold/80 text-[0.6rem] bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-full">
-                        {story.category}
-                      </span>
-                      <div className="absolute bottom-4 left-4 right-4">
-                        <p className="text-xs text-gold/60 italic mb-1">{story.jewel}</p>
+                      <img src={story.image} alt={story.title} className="journal-story-card-img" loading="lazy" />
+                      <div className="journal-story-card-gradient" />
+                      <span className="journal-story-cat eyebrow">{story.category}</span>
+                      <div className="journal-story-jewel-wrap">
+                        <p className="journal-story-jewel">{story.jewel}</p>
                       </div>
                     </div>
-                    <div className="p-6">
-                      <div className="flex items-center gap-2 text-cream/40 text-xs mb-3">
-                        <Clock size={10} />
-                        <span>{story.readTime}</span>
+                    <div className="journal-story-body">
+                      <div className="journal-hero-meta journal-story-meta">
+                        <Clock size={10} /><span>{story.readTime}</span>
                       </div>
-                      <h3 className="font-display text-cream text-xl leading-tight mb-3">{story.title}</h3>
-                      <p className="text-xs leading-6 text-cream/55 line-clamp-3">{story.excerpt}</p>
-                      <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium tracking-widest uppercase text-gold/70 group-hover:text-gold transition-colors">
+                      <h3 className="font-display journal-story-title">{story.title}</h3>
+                      <p className="journal-story-excerpt">{story.excerpt}</p>
+                      <span className="journal-story-cta">
                         Read Story <ArrowUpRight size={11} />
                       </span>
                     </div>
@@ -239,23 +204,21 @@ function JournalIndex() {
 export default function Journal() {
   const { slug } = useParams();
 
-  // Check if it's a story
   if (slug && slug.startsWith("story-")) {
     const storySlug = slug.replace("story-", "");
     const story = jewelleryStories.find((s) => s.slug === storySlug);
     if (story) return <StoryView story={story} />;
   }
 
-  // Check if it's a regular article
   const article = slug ? journalArticles.find((a) => a.slug === slug) : null;
 
   if (slug && !article && !(slug.startsWith("story-"))) {
     return (
-      <div className="min-h-svh flex items-center justify-center shell">
+      <div className="journal-notfound shell">
         <div className="text-center">
-          <p className="eyebrow text-crimson mb-4">Not Found</p>
-          <h1 className="display-md text-forest mb-6">Article not found</h1>
-          <Link to="/journal" className="btn-primary inline-flex">Back to Journal</Link>
+          <p className="eyebrow" style={{ color:"var(--crimson)", marginBottom:"1rem" }}>Not Found</p>
+          <h1 className="display-md" style={{ color:"var(--forest)", marginBottom:"1.5rem" }}>Article not found</h1>
+          <Link to="/journal" className="btn-primary">Back to Journal</Link>
         </div>
       </div>
     );
@@ -263,3 +226,4 @@ export default function Journal() {
 
   return article ? <ArticleView article={article} /> : <JournalIndex />;
 }
+
