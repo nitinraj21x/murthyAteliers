@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { fadeUp } from "../utils/motion";
@@ -6,6 +7,10 @@ import { fadeUp } from "../utils/motion";
 export default function NotFound() {
   return (
     <div className="not-found-page shell">
+      <Helmet>
+        <title>Page Not Found — Murthy Ateliers</title>
+        <meta name="description" content="The page you were looking for could not be found. Return to Murthy Ateliers." />
+      </Helmet>
       <div className="frame not-found-inner">
         <motion.p {...fadeUp} className="eyebrow text-crimson" style={{ marginBottom: "1rem" }}>
           404 — Page Not Found

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { sendEmail } from "../utils/emailjs";
+import PhoneInput from "./PhoneInput";
 import {
   sanitizeText,
   sanitizeMultiline,
@@ -297,35 +298,18 @@ export default function Footer() {
                       {/* Phone with country code */}
                       <div className="form-group">
                         <label className="form-label" htmlFor="booking-phone">Phone / WhatsApp *</label>
-                        <div className="phone-input-row">
-                          <select
-                            name="phoneCountry"
-                            value={bookingForm.phoneCountry}
-                            onChange={handleInputChange}
-                            className="form-input phone-country-select"
-                            aria-label="Country code"
-                          >
-                            {COUNTRY_CODES.map((c) => (
-                              <option key={c.code} value={c.code}>{c.label}</option>
-                            ))}
-                          </select>
-                          <input
-                            type="tel"
-                            id="booking-phone"
-                            name="phone"
-                            required
-                            autoComplete="tel-national"
-                            inputMode="numeric"
-                            className={`form-input phone-digits-input${fieldErrors.phone ? ' form-input-error' : ''}`}
-                            placeholder="10-digit number"
-                            value={bookingForm.phone}
-                            onChange={handleInputChange}
-                            maxLength={15}
-                            aria-describedby={fieldErrors.phone ? 'booking-phone-err' : undefined}
-                          />
-                        </div>
+                        <PhoneInput
+                          countryValue={bookingForm.phoneCountry}
+                          phoneValue={bookingForm.phone}
+                          onCountryChange={handleInputChange}
+                          onPhoneChange={handleInputChange}
+                          error={fieldErrors.phone}
+                          inputClass="form-input"
+                          errorClass="form-input-error"
+                          inputId="booking-phone"
+                        />
                         {fieldErrors.phone && (
-                          <span id="booking-phone-err" className="form-field-error" role="alert">{fieldErrors.phone}</span>
+                          <span id="err-booking-phone" className="form-field-error" role="alert">{fieldErrors.phone}</span>
                         )}
                       </div>
                     </div>

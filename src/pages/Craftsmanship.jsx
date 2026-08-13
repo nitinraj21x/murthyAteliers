@@ -1,5 +1,6 @@
 ﻿import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 import ProcessStep from "../components/ProcessStep";
@@ -33,6 +34,11 @@ const craftDetails = [
 export default function Craftsmanship() {
   return (
     <>
+      <Helmet>
+        <title>Craftsmanship — Murthy Ateliers</title>
+        <meta name="description" content="Explore the five stages of making an heirloom at Murthy Ateliers — from concept and stone selection to handcrafting and the moment a piece passes into your hands." />
+      </Helmet>
+
       <section id="page-hero" className="page-hero-sec page-hero-sec--tall">
         <img src="/imgs/bannerCraft.webp" alt="Craftsmanship"
           className="hero-banner-img hero-banner-img--craft" fetchPriority="high" decoding="async" />

@@ -1,6 +1,7 @@
 ﻿import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { fadeUp, inView, scaleIn } from "../utils/motion";
 import { culturalCollection, commissionedCollection } from "../data/collections";
@@ -200,10 +201,15 @@ export default function Collections() {
       }, 180);
       return () => clearTimeout(t);
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps — intentional mount-only run
 
   return (
     <>
+      <Helmet>
+        <title>Collections — Murthy Ateliers</title>
+        <meta name="description" content="Browse two worlds of heirloom jewelry at Murthy Ateliers — the Cultural Collection rooted in South Indian temple tradition, and the Commissioned Collection made entirely for you." />
+      </Helmet>
+
       {/* Hero */}
       <section id="page-hero" className="page-hero-sec">
         <img src="/jewellry/Web-Optimised/bannerCollection-opt.webp" alt="Collections"

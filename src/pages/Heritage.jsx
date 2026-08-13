@@ -1,6 +1,7 @@
 ﻿import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
 import { founderStory } from "../data/content";
 import {
@@ -382,6 +383,11 @@ function RegionalVariations() {
 export default function Heritage() {
   return (
     <>
+      <Helmet>
+        <title>Heritage — Murthy Ateliers</title>
+        <meta name="description" content="The story of Murthy Ateliers — rooted in Mylapore, Chennai. Explore the history of South Indian jewellery, the legacy of D.K. Murthy, and two thousand years of ornament tradition." />
+      </Helmet>
+
       {/* Hero */}
       <section id="page-hero" className="page-hero-sec page-hero-sec--tall">
         <img src="/imgs/heriBanner.webp" alt="Heritage"

@@ -1,5 +1,6 @@
 ﻿import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
@@ -98,10 +99,20 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (window.location.hash) {
-      const el = document.getElementById(window.location.hash.slice(1));
-      if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 500);
-    }
+    if (!window.location.hash) return;
+    const id = window.location.hash.slice(1);
+    // Use rAF loop to wait for DOM paint rather than a fixed timeout
+    let attempts = 0;
+    const tryScroll = () => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else if (attempts < 20) {
+        attempts++;
+        requestAnimationFrame(tryScroll);
+      }
+    };
+    requestAnimationFrame(tryScroll);
   }, []);
 
   const isPeek = collState === "peek";
@@ -135,6 +146,11 @@ export default function Home() {
 
   return (
     <>
+      <Helmet>
+        <title>Murthy Ateliers — Heirloom Jewels Crafted to Endure</title>
+        <meta name="description" content="South Indian heritage jewelry house rooted in the legacy of D.K. Murthy & E.A. Swamy Jewelers, Mylapore, Chennai. Handcrafted heirloom pieces made to be passed on." />
+      </Helmet>
+
       {/* ====================================================================
           Section 1 — Home Banner (100vw × 50vh)
           ==================================================================== */}

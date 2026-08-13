@@ -2509,27 +2509,152 @@ textarea.form-input {
    ========================================================================== */
 
 /* ==========================================================================
-   Phone Input — Country Code + Digits Row
+   Phone Input — Custom Flag Picker + Digits Row (3:10 ratio via grid)
    ========================================================================== */
 
 .phone-input-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: 3fr 10fr;
   gap: 0.5rem;
   align-items: stretch;
+  width: 100%;
 }
 
-.phone-country-select {
-  flex: 0 0 auto;
-  max-width: 172px;
-  min-width: 130px;
-  padding: 0.6rem 0.6rem !important;
-  font-size: 0.78rem !important;
-}
-
-.phone-digits-input {
-  flex: 1 1 0;
+/* ── Picker container (holds trigger + dropdown) ── */
+.phone-picker {
+  position: relative;
   min-width: 0;
 }
+
+/* ── Trigger button ── */
+.phone-picker-trigger {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.6rem 0.4rem;
+  border: 1px solid rgba(211,175,55,0.4);
+  border-radius: 0.5rem;
+  background: white;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  min-width: 0;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.phone-picker-trigger:hover,
+.phone-picker-trigger:focus-visible {
+  border-color: rgba(106,20,19,0.5);
+  box-shadow: 0 0 0 3px rgba(106,20,19,0.05);
+  outline: none;
+}
+
+.phone-picker-code {
+  font-size: 0.8rem;
+  color: #3d4b2a;
+  font-family: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.phone-picker-chevron {
+  color: #9a9a8a;
+  flex-shrink: 0;
+}
+
+/* ── Dropdown panel ── */
+.phone-picker-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 999;
+  width: 260px;
+  background: #fff;
+  border: 1px solid rgba(211,175,55,0.35);
+  border-radius: 0.6rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.phone-picker-search-wrap {
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid rgba(211,175,55,0.2);
+}
+
+.phone-picker-search {
+  width: 100%;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid rgba(211,175,55,0.35);
+  border-radius: 0.4rem;
+  font-size: 0.8rem;
+  font-family: inherit;
+  color: #3d4b2a;
+  background: #fafaf7;
+  outline: none;
+}
+.phone-picker-search:focus {
+  border-color: rgba(106,20,19,0.5);
+}
+
+/* ── Option list ── */
+.phone-picker-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.3rem 0;
+  max-height: 220px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.phone-picker-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.phone-picker-option:hover {
+  background: rgba(211,175,55,0.1);
+}
+.phone-picker-option--active {
+  background: rgba(211,175,55,0.15);
+  font-weight: 600;
+}
+
+.phone-picker-name {
+  flex: 1;
+  font-size: 0.8rem;
+  color: #3d4b2a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.phone-picker-option-code {
+  font-size: 0.75rem;
+  color: #9a9a8a;
+  flex-shrink: 0;
+}
+
+.phone-picker-empty {
+  padding: 0.75rem;
+  font-size: 0.8rem;
+  color: #9a9a8a;
+  text-align: center;
+}
+
+/* ── Digit input ── */
+.phone-digits-input {
+  width: 100%;
+  min-width: 0;
+}
+
 
 /* ==========================================================================
    Form Field Validation Error States
@@ -2565,13 +2690,11 @@ textarea.form-input {
    ========================================================================== */
 @media (max-width: 560px) {
   .phone-input-row {
-    flex-direction: column;
+    grid-template-columns: 3fr 10fr;
     gap: 0.4rem;
   }
-
-  .phone-country-select {
-    max-width: 100%;
-    width: 100%;
+  .phone-picker-dropdown {
+    width: 240px;
   }
 }
 
@@ -2586,12 +2709,14 @@ textarea.form-input {
   z-index: 50;
   padding: 1rem 1.25rem;
   pointer-events: none;
+  padding-top: 3px;
 }
 
 .site-header-inner {
   display: flex;
   align-items: center;
   pointer-events: auto;
+  height: 50px;
 }
 
 .site-header-logo-row {
@@ -3362,9 +3487,9 @@ textarea.form-input {
 .form-textarea { resize: none; }
 .form-field-error { margin-top: 0.25rem; font-size: 0.75rem; color: var(--crimson); }
 
-.phone-input-row  { display: flex; gap: 0.5rem; }
-.phone-country-select { flex-shrink: 0; }
-.phone-digits-input   { flex: 1; }
+.phone-input-row  { display: grid; grid-template-columns: 3fr 10fr; gap: 0.5rem; width: 100%; }
+.phone-picker     { position: relative; min-width: 0; }
+.phone-digits-input { width: 100%; min-width: 0; }
 
 .consult-submit   { width: 100%; justify-content: center; margin-top: 0.5rem; }
 .consult-spinner  { animation: spin 1s linear infinite; }
@@ -3907,6 +4032,8 @@ textarea.form-input {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: center;
+  min-height: 50px;
 }
 
 /* Line 1: "Murthy Ateliers" */
@@ -3918,7 +4045,7 @@ textarea.form-input {
 
 /* Line 2: "by 9th" — slightly smaller, right-aligned */
 .site-logo-line2 {
-  font-size: clamp(0.55rem, 1.8vw, 0.78rem);
+  font-size: clamp(0.55rem, 1.8vw, 0.9rem);
   white-space: nowrap;
   display: block;
   align-self: flex-end;   /* pushes to the right edge of the container */

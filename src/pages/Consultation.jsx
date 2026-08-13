@@ -1,10 +1,12 @@
 ﻿import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { ArrowUpRight, MessageCircle, Mail, MapPin, Phone, CheckCircle, Loader } from "lucide-react";
 import { brand } from "../data/content";
 import { fadeUp, fadeLeft, fadeRight, staggerContainer, staggerItem, inView } from "../utils/motion";
 import { sendEmail } from "../utils/emailjs";
+import PhoneInput from "../components/PhoneInput";
 import {
   sanitizeText,
   sanitizeMultiline,
@@ -13,7 +15,6 @@ import {
   validatePhone,
   validateTextField,
   validateTextarea,
-  COUNTRY_CODES,
 } from "../utils/sanitize";
 
 const consultationSteps = [
@@ -21,8 +22,6 @@ const consultationSteps = [
   { step: "02", title: "Design Conversation", body: "We review silhouettes, motif references, and ceremonial context together, refining the direction until it feels right." },
   { step: "03", title: "Craft & Deliver", body: "The piece is made slowly, by hand, and delivered with care advice, styling notes, and space for it to become yours." },
 ];
-
-const todayStr = new Date().toISOString().split('T')[0];
 
 export default function Consultation() {
   const location = useLocation();
@@ -47,7 +46,7 @@ export default function Consultation() {
     if (name === 'phone') {
       clean = value.replace(/[^\d\s\-\.\(\)]/g, '').slice(0, 15);
     } else if (name === 'name') {
-      clean = value.slice(0, 80);
+      clean = value.slice(0, 60);
     } else if (name === 'email') {
       clean = value.slice(0, 254).replace(/\s/g, '');
     } else if (name === 'occasion') {
@@ -112,6 +111,11 @@ export default function Consultation() {
 
   return (
     <>
+      <Helmet>
+        <title>Begin Your Consultation — Murthy Ateliers</title>
+        <meta name="description" content="Start a private consultation with Murthy Ateliers. Share your story — a family memory, ceremony, or feeling — and we will craft an heirloom piece made entirely for you." />
+      </Helmet>
+
       {/* Hero */}
       <section id="page-hero" className="page-hero-sec">
         <img src="/jewellry/Web-Optimised/bannerConsult.webp" alt="Consultation"
@@ -172,7 +176,7 @@ export default function Consultation() {
                   <label htmlFor="name" className="form-field-label">
                     Your Name <span className="form-required">*</span>
                   </label>
-                  <input id="name" name="name" type="text" required autoComplete="name" maxLength={80}
+                  <input id="name" name="name" type="text" required autoComplete="name" maxLength={60}
                     placeholder="e.g. Shanthi Shankar" value={form.name} onChange={handleChange}
                     className={`form-input-field${fieldErrors.name ? " form-input-field--error" : ""}`}
                     aria-describedby={fieldErrors.name ? "err-name" : undefined} />
@@ -196,19 +200,13 @@ export default function Consultation() {
                   <label htmlFor="phone" className="form-field-label">
                     Phone / WhatsApp <span className="form-field-optional">(optional)</span>
                   </label>
-                  <div className="phone-input-row">
-                    <select name="phoneCountry" value={form.phoneCountry} onChange={handleChange}
-                      className="form-input-field phone-country-select" style={{ width: "23%", minWidth: "80px" }}
-                      aria-label="Country code">
-                      {COUNTRY_CODES.map((c) => (
-                        <option key={c.code} value={c.code}>{c.label}</option>
-                      ))}
-                    </select>
-                    <input id="phone" name="phone" type="tel" autoComplete="tel-national" inputMode="numeric"
-                      maxLength={15} placeholder="10-digit number" value={form.phone} onChange={handleChange}
-                      className={`form-input-field phone-digits-input${fieldErrors.phone ? " form-input-field--error" : ""}`}
-                      aria-describedby={fieldErrors.phone ? "err-phone" : undefined} />
-                  </div>
+                  <PhoneInput
+                    countryValue={form.phoneCountry}
+                    phoneValue={form.phone}
+                    onCountryChange={handleChange}
+                    onPhoneChange={handleChange}
+                    error={fieldErrors.phone}
+                  />
                   {fieldErrors.phone && <p id="err-phone" className="form-field-error" role="alert">{fieldErrors.phone}</p>}
                 </div>
 

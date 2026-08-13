@@ -1,5 +1,6 @@
 ﻿import { motion } from "framer-motion";
 import { Link, useParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { ArrowLeft, Clock, ArrowUpRight, BookOpen } from "lucide-react";
 import JournalCard from "../components/JournalCard";
 import { journalArticles, jewelleryStories } from "../data/content";
@@ -9,6 +10,10 @@ import { fadeUp, staggerContainer, staggerItem, inView } from "../utils/motion";
 function StoryView({ story }) {
   return (
     <>
+      <Helmet>
+        <title>{story.title} — Murthy Ateliers Journal</title>
+        <meta name="description" content={story.excerpt} />
+      </Helmet>
       <section className="page-hero-sec">
         <img src={story.image} alt={story.title}
           className="hero-banner-img hero-banner-img--article" fetchPriority="high" />
@@ -63,6 +68,10 @@ function StoryView({ story }) {
 function ArticleView({ article }) {
   return (
     <>
+      <Helmet>
+        <title>{article.title} — Murthy Ateliers Journal</title>
+        <meta name="description" content={article.excerpt} />
+      </Helmet>
       <section className="page-hero-sec">
         <img src={article.image} alt={article.title}
           className="hero-banner-img hero-banner-img--article" fetchPriority="high" />
@@ -86,9 +95,14 @@ function ArticleView({ article }) {
           </Link>
           <p className="journal-excerpt">{article.excerpt}</p>
           <div className="ornament journal-divider" />
-          <p className="journal-body-para">
-            This is an editorial piece from the Murthy Ateliers journal — a space for deeper reading on heritage, craft, and the stories behind the jewels. Full articles are available to clients and subscribers.
-          </p>
+          <div className="journal-body-paras">
+            {article.body
+              ? article.body.map((para, i) => (
+                  <p key={i} className="journal-body-para">{para}</p>
+                ))
+              : <p className="journal-body-para">Full article coming soon.</p>
+            }
+          </div>
           <div style={{ marginTop:"2.5rem" }}>
             <Link to="/consultation" className="btn-primary journal-article-cta">
               Begin a Conversation <ArrowUpRight size={14} />
@@ -107,6 +121,11 @@ function JournalIndex() {
 
   return (
     <>
+      <Helmet>
+        <title>The Journal — Murthy Ateliers</title>
+        <meta name="description" content="Notes from the atelier — a storytelling-led editorial space featuring reflections on heritage, craftsmanship, culture, and the stories behind South Indian heirloom jewelry." />
+      </Helmet>
+
       <section id="page-hero" className="page-hero-sec page-hero-sec--tall">
         <img src="/jewellry/Web-Optimised/heirStory-opt.webp" alt="Journal"
           className="hero-banner-img hero-banner-img--journal" fetchPriority="high" decoding="async" />

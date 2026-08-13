@@ -126,6 +126,13 @@ export const journalArticles = [
     excerpt:  "Why jewels intended for memory age more beautifully than pieces made for trend cycles. A meditation on permanence and the objects we choose to keep.",
     image:    "/jewellry/Web-Optimised/heirStory-opt.webp",
     readTime: "6 min read",
+    body: [
+      "There is a particular quality of light in old gold — a warmth that seems less like reflection and more like something the metal has gathered over decades of being worn, held, stored, and handed on. It is not a quality you can manufacture at the point of making. It accumulates.",
+      "Heirloom jewelry was never designed to be fashionable. That is precisely its power. A piece made for a trend is obsolete the moment the trend moves on. A piece made for memory has no expiry date — every year it is worn, it deepens.",
+      "At Murthy Ateliers, we think of each commission not as a product but as an opening sentence. The piece we make is the first line. The stories it gathers — the ceremonies it attends, the hands it passes through, the names attached to it — are the paragraphs that follow, written by generations we will never meet.",
+      "South Indian tradition understood this intuitively. Gold given at a wedding was not a gift; it was an investment of trust. It was the family saying: we believe this union will last long enough for this piece to matter to someone not yet born.",
+      "That is the standard we try to build to. Not 'will this be beautiful next season' but 'will this still be meaningful in eighty years.' The answer changes everything about how you design, what materials you choose, and how slowly you are willing to work.",
+    ],
   },
   {
     slug:     "mylapore-craft-heritage",
@@ -134,6 +141,13 @@ export const journalArticles = [
     excerpt:  "How street, sanctum, and silk have shaped the visual language of South Indian ornament across centuries of living tradition.",
     image:    "/jewellry/Web-Optimised/imgs/craftmanship.webp",
     readTime: "8 min read",
+    body: [
+      "Mylapore is not a neighbourhood in the way most neighbourhoods are. It is a living archive — a place where you can still hear temple bells, the rhythm of a loom, and the soft tap of a goldsmith's hammer within the same city block.",
+      "The Kapaleeshwarar Temple at its centre is not merely a landmark. It is the visual grammar that has shaped South Indian ornament for over a thousand years. The gopuram's tiered geometry, the lotus borders carved into its stone, the rhythm of the shrine archways — these are the motifs that eventually migrated from temple wall to the goldsmith's bench, and from the bench to the skin of the devotee.",
+      "D.K. Murthy understood this connection not as an aesthetic theory but as a daily fact. His workshop sat close enough to the temple that the morning puja bells were a reliable time signal. The proximity was intentional. You cannot make temple jewelry without understanding the temple — its proportions, its moods, the particular quality of the light it admits.",
+      "The master goldsmiths (Thattars) who built Mylapore's reputation worked by feel as much as by measurement. They understood how gold moves, how it holds warmth, where it needs to be thick to survive generations of wearing and where it can be left thin for lightness and drape.",
+      "That knowledge is not written down anywhere. It lives in the hands. Murthy Ateliers was built around the imperative to keep those hands working — to ensure that this embodied tradition has somewhere to go after the generation that holds it can no longer hold it.",
+    ],
   },
   {
     slug:     "styling-antique-jewelry",
@@ -142,6 +156,13 @@ export const journalArticles = [
     excerpt:  "Layering temple pieces with restraint so the jewel remains the point of focus. Notes on proportion, occasion, and the art of wearing less.",
     image:    "/jewellry/Web-Optimised/antique.webp",
     readTime: "5 min read",
+    body: [
+      "The most common mistake with antique South Indian jewelry is wearing too much of it at once. Each piece in the traditional vocabulary — the long necklace, the short chain, the ear drops, the bangles — was designed to be read individually. Stack them all together and none of them can be seen.",
+      "The rule we return to is simple: let one piece be the point of the whole outfit. If you are wearing a heavy temple necklace, let the ears be quiet. If the earrings are the statement, clear the neckline. The jewelry should always win the room — not compete with itself.",
+      "For daylight occasions, a single strand of kemp-set gold worn against a plain silk is the most powerful combination we know. The absence of competing elements lets the craftsmanship do its full work.",
+      "For bridal styling, the tradition of layering multiple necklaces at different lengths is correct and intended — but even here, the pieces should be chosen so that each length is distinct and each piece's motif can be seen from a respectful distance.",
+      "Antique gold also behaves differently in different lights. In direct sun it can look raw and heavy. In the warm, indirect light of a home or a sabha, it becomes something else entirely — soft, glowing, almost alive. Dress for where the photographs will be taken, but dress to be seen where the moment actually happens.",
+    ],
   },
   {
     slug:     "caring-for-precious-pieces",
@@ -150,6 +171,13 @@ export const journalArticles = [
     excerpt:  "Warm storage, gentle cleaning, and ritual-minded care that keeps heirlooms luminous across generations of wearing.",
     image:    "/jewellry/Web-Optimised/imgs/heirloom.webp",
     readTime: "4 min read",
+    body: [
+      "High-carat gold (22k) is a generous, soft metal. It holds warmth and takes on patina beautifully — but that softness also means it is susceptible to scratches if stored carelessly. The most important thing you can do for a piece is to give it its own space: a separate velvet pouch or compartment where it cannot rub against other jewels.",
+      "Kundan-set pieces — where stones are held in pressed pure-gold foil rather than prong settings — require extra care around moisture. Water, perfume, and sweat all darken the foil over time. Remove Kundan pieces before bathing, swimming, or applying fragrance. If a piece has been worn, wipe it gently with a dry, lint-free cloth before storing.",
+      "For general cleaning, lukewarm water and a very soft brush are sufficient for plain gold pieces. Never use ultrasonic cleaners on kemp or Kundan jewelry — the vibrations can loosen the stone settings.",
+      "Twice a year, examine clasps, string, and any moveable parts for wear. It is far better to restring a necklace before it breaks than after. If a stone feels loose, bring it in before wearing again.",
+      "Storage in a cool, dry environment away from direct sunlight preserves both the metal's colour and the integrity of any organic materials (silk thread, lac) used in traditional settings. A small silica gel sachet in your jewelry box keeps humidity in check during the monsoon months.",
+    ],
   },
   {
     slug:     "behind-the-design-process",
@@ -158,6 +186,13 @@ export const journalArticles = [
     excerpt:  "From the first sketch to the final polish — a look inside the atelier and the slow, deliberate work that makes a piece feel inevitable.",
     image:    "/jewellry/Web-Optimised/craft.webp",
     readTime: "7 min read",
+    body: [
+      "Every piece at Murthy Ateliers begins with a conversation, not a catalogue. Before a line is drawn, we need to understand what the piece is for — not just the occasion, but the feeling the wearer wants to carry with them when they put it on.",
+      "The first sketch is always rough, intentionally so. It is a question, not a proposal. We are asking: is the weight here or here? Does the rhythm of the motif go fast or slow? Should this feel like architecture or like water?",
+      "Stone selection happens early, before the metalwork, because the stones govern everything that follows. A ruby with strong saturation demands bolder settings and simpler gold surrounds. A pale, milky pearl calls for more elaborate goldwork to give it context. The stone is not an afterthought — it is the reason for the piece.",
+      "Handcrafting in our atelier is organised around stages, each with its own master. The carver, the setter, the polisher, and the person who does final quality review each see the piece with fresh eyes. This built-in separation prevents the tunnel vision that comes from staring at one object for too long.",
+      "The final polish is always done by hand, never by machine. A machine polishes uniformly, which means it erases the subtle high and low points that give handmade gold its warmth and depth. Polishing by hand lets the craftsperson preserve what should glow and shadow what should recede.",
+    ],
   },
   {
     slug:     "emotional-value-of-passing-jewelry",
@@ -166,6 +201,14 @@ export const journalArticles = [
     excerpt:  "On the quiet power of objects that carry names, dates, and the warmth of hands that wore them before yours.",
     image:    "/jewellry/Web-Optimised/lineage.webp",
     readTime: "9 min read",
+    body: [
+      "There is a moment that happens in many South Indian families, usually quietly, without ceremony: an older woman opens a box or unfolds a cloth and places a piece of gold in the hands of someone younger. No speech is necessary. The weight of the object says everything.",
+      "What is being transferred is not just gold. It is a history of wearing — every occasion the piece attended, every hand that fastened the clasp, every generation that held it briefly on their way to passing it on. Objects accumulate the lives of the people who own them in a way that photographs and words do not quite manage.",
+      "This is why the redesign work we do — taking an old piece and giving it a form that can be worn again — feels different from making a new commission. When someone brings us their grandmother's jewelry and asks us to continue it, we are not being asked to make something beautiful. We are being asked to keep a conversation going that started before we were born.",
+      "The pieces that matter most to families are rarely the most elaborate or the most expensive. They are the ones with a story attached — the necklace worn at every wedding in the family for four generations, the bangles a woman wore every day until the day she could not. The gold is incidental. The continuity is everything.",
+      "At Murthy Ateliers, we build pieces with this kind of life in mind. We choose materials that will not corrode or tarnish irreversibly. We use construction methods that can be repaired, restrung, and adjusted by future craftspeople. We design proportions that will read as beautiful in silhouette long after the specific details of our era have passed out of fashion.",
+      "The ambition, always, is to make something that will be in that box — unfolded, placed in the hands of someone younger — decades from now, carrying warmth it has not yet gathered.",
+    ],
   },
 ];
 
