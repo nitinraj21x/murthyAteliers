@@ -174,7 +174,7 @@ export const regionalVariations = [
     ornament: "Waist Belt",
     description:
       "An articulated gold plaque belt worn over the saree at the hips, symbolising feminine power and prosperity.",
-    image: "/jewellry/Web-Optimised/jewellry/Cultural/1/DPPHOTGRAPHY-8173.webp",
+    image: "/jewellry/Web-Optimised/waistbelt.webp",
     states: {
       "Tamil Nadu": "Oddiyanam",
       Kerala: "Vaddanam",
@@ -186,7 +186,7 @@ export const regionalVariations = [
     ornament: "Coin Necklace",
     description:
       "A garland of gold coins, each bearing Lakshmi, symbolising wearable wealth and the goddess's direct blessing on the bride.",
-    image: "/jewellry/Web-Optimised/jewellry/Cultural/2/DPPHOTGRAPHY-8350.webp",
+    image: "/jewellry/Web-Optimised/coinNecklace.webp",
     states: {
       "Tamil Nadu": "Kasu Malai",
       Kerala: "Kasu Mala / Lakshmi Sara",
@@ -198,7 +198,7 @@ export const regionalVariations = [
     ornament: "Marriage Pendant",
     description:
       "The sacred pendant tied at the bride's throat by the groom — the single indispensable act of a Hindu South Indian wedding.",
-    image: "/jewellry/Web-Optimised/jewellry/Cultural/3/DPPHOTGRAPHY-8180.webp",
+    image: "/jewellry/Web-Optimised/antique.webp",
     states: {
       "Tamil Nadu": "Thirumangalyam / Thali",
       Kerala: "Minnu (Christian) / Nagapada Thali (Nair)",
@@ -210,7 +210,7 @@ export const regionalVariations = [
     ornament: "Armlet",
     description:
       "Worn on the upper arm in an inverted-V shape, the vanki references the coiled serpent and belongs first to the divine feminine.",
-    image: "/jewellry/Web-Optimised/jewellry/Cultural/4/DPPHOTGRAPHY-8194.webp",
+    image: "/jewellry/Web-Optimised/armlet.webp",
     states: {
       "Tamil Nadu": "Vanki",
       Kerala: "Vanki / Aaram",
@@ -222,7 +222,7 @@ export const regionalVariations = [
     ornament: "Hair Ornament",
     description:
       "A long articulated serpent ornament running the full length of the braid, sacred to the naga tradition across South India.",
-    image: "/jewellry/Web-Optimised/jewellry/Cultural/5/DPPHOTGRAPHY-8202.webp",
+    image: "/jewellry/Web-Optimised/jewellry/Extra/DPPHOTGRAPHY-8360.webp",
     states: {
       "Tamil Nadu": "Jadanagam (native form)",
       Kerala: "Jadanagam (borrowed from Tamil tradition)",

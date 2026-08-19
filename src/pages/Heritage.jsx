@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -451,17 +451,16 @@ export default function Heritage() {
       <section className="shell heri-pillars-sec">
         <div className="glow-gold-right" />
         <div className="frame heri-frame-z">
-          <motion.p {...fadeUp} {...inView} className="eyebrow heri-eyebrow-gold">Two Pillars of Our Story</motion.p>
           <motion.h2 {...fadeUp} {...inView} className="display-lg heri-heading-cream-lg">Where We Come From</motion.h2>
           <motion.div variants={staggerContainer} {...inView} className="heri-pillars-list">
             {heritagePoints.map((point, i) => (
               <motion.div key={point.title} variants={staggerItem}
-                className={`grid gap-6 lg:grid-cols-2 items-center ${i % 2 === 1 ? "lg:[direction:rtl]" : ""}`}>
-                <div className="heri-pillar-img-wrap">
+                className="grid gap-6 lg:grid-cols-2 items-center">
+                <div className={`heri-pillar-img-wrap ${i % 2 === 1 ? "lg:order-2" : "lg:order-1"}`}>
                   <img src={point.image} alt={point.title} className="heritage-pillar-img" loading="lazy" />
                   <div className="img-fill img-overlay-dark heri-pillar-overlay" />
                 </div>
-                <div className="heri-pillar-text">
+                <div className={`heri-pillar-text ${i % 2 === 1 ? "lg:order-1" : "lg:order-2"}`}>
                   <h3 className="font-display heri-pillar-title">{point.title}</h3>
                   <div className="ornament-sm heri-ornament-sm" />
                   <p className="heri-body-cream-sm">{point.body}</p>

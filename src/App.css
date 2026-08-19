@@ -1404,6 +1404,8 @@
 
 .footer-links {
   list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -1422,6 +1424,8 @@
 
 .footer-contact {
   list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -2837,14 +2841,48 @@ textarea.form-input {
   overflow: hidden;
 }
 
-/* Logo inside the drawer — single line, full name */
+/* Let the brand area shrink inside the drawer instead of forcing the title tiny */
+.nav-drawer-header .site-logo-link {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Logo inside the drawer — two lines, but readable */
 .nav-drawer-logo-text {
-  display: block;            /* override the flex-column from site-logo-text */
-  font-size: clamp(0.78rem, 4vw, 1.1rem);
-  white-space: nowrap;
-  overflow: visible;         /* let it breathe — the header has overflow:hidden as safety net */
-  text-overflow: clip;
-  max-width: none;
+  min-width: 0;
+  line-height: 0.92;
+  overflow: hidden;
+  max-width: 100%;
+  font-size: clamp(1.04rem, 2vw, 1.35rem);
+}
+
+.nav-drawer-logo-text .site-logo-line1 {
+  font-size: inherit;
+}
+
+.nav-drawer-logo-text .site-logo-line2 {
+  font-size: clamp(0.7rem, 1.05vw, 0.88rem);
+  margin-top: 0;
+}
+
+@media (max-width: 767px) {
+  .nav-drawer-logo-text {
+    font-size: clamp(0.98rem, 4vw, 1.12rem);
+  }
+
+  .nav-drawer-logo-text .site-logo-line2 {
+    font-size: clamp(0.62rem, 2.1vw, 0.76rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .nav-drawer-logo-text {
+    font-size: clamp(1.18rem, 1.45vw, 1.5rem);
+  }
+
+  .nav-drawer-logo-text .site-logo-line2 {
+    font-size: clamp(0.78rem, 0.9vw, 0.94rem);
+  }
 }
 
 .nav-drawer-close {
@@ -4021,6 +4059,13 @@ textarea.form-input {
   text-decoration: none;
   display: flex;
   align-items: center;
+}
+
+/* Hide company name beside burger on mobile & tablet */
+@media (max-width: 1023px) {
+  .site-header-logo-row .site-logo-link {
+    display: none !important;
+  }
 }
 
 /* Two-line logo block */

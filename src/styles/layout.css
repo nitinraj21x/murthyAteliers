@@ -382,3 +382,15 @@
 .h-10  { height: 2.5rem; }
 .order-1 { order: 1; }
 .order-2 { order: 2; }
+
+/* ── Tailwind Aliases & Additions ──────────────────────────────── */
+.flex { display: flex; }
+.grid { display: grid; }
+
+@media (min-width: 1024px) {
+  .lg\:flex-row-reverse { flex-direction: row-reverse; }
+}
+@media (min-width: 1280px) {
+  .xl\:gap-14 { gap: 3.5rem; }
+}
+
