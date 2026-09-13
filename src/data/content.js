@@ -23,8 +23,8 @@ export const navigation = [
   { label: "Consultation",   href: "/consultation" },
 ];
 
-/* ─── Hero — used in Home.jsx directly with inline data ─────── */
-// hero export removed — Home.jsx uses local PROCESS_STEPS and JOURNAL_POSTS constants
+/* ─── Hero — shared content used across Home/Craftsmanship/Journal ─────── */
+// hero export removed - these pages now read from the shared content arrays below
 
 /* ─── Founder Story ──────────────────────────────────────────── */
 export const founderStory = {
@@ -78,30 +78,35 @@ export const processSteps = [
   {
     step:  "01",
     title: "Concept & Story",
+    subtitle: "கற்பனை",
     body:  "Every piece begins with a family memory, ceremonial need, or personal moodboard that defines its emotional center.",
     image: img.sketch,
   },
   {
     step:  "02",
     title: "Stone Selection",
+    subtitle: "கல் தேர்வு",
     body:  "Rubies, emeralds, diamonds, and pearls are chosen for warmth, balance, and how they sit against the gold.",
     image: img.stones,
   },
   {
     step:  "03",
     title: "Handcrafting",
+    subtitle: "கைவினை",
     body:  "Temple geometry, kasu rhythm, granulation, and setting work are shaped slowly by bench-led discipline.",
     image: img.artisan1,
   },
   {
     step:  "04",
     title: "Finishing & Detailing",
+    subtitle: "மெருகூட்டல்",
     body:  "Edges are softened, surfaces are polished, and contrast is tuned until the jewel feels complete in portrait light.",
     image: img.finishing,
   },
   {
     step:  "05",
     title: "Passed Into Your Hands",
+    subtitle: "சமர்ப்பித்தல்",
     body:  "The final experience is intimate and guided, with care advice, styling notes, and space for the piece to become yours.",
     image: img.velvetTray,
   },

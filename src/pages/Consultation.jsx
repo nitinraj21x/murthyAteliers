@@ -1,4 +1,3 @@
-﻿import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
@@ -7,6 +6,8 @@ import { brand } from "../data/content";
 import { fadeUp, fadeLeft, fadeRight, staggerContainer, staggerItem, inView } from "../utils/motion";
 import { sendEmail } from "../utils/emailjs";
 import PhoneInput from "../components/PhoneInput";
+import LeadProtection from "../components/LeadProtection";
+import useLeadForm from "../hooks/useLeadForm";
 import {
   sanitizeText,
   sanitizeMultiline,
@@ -18,116 +19,124 @@ import {
 } from "../utils/sanitize";
 
 const consultationSteps = [
-  { step: "01", title: "Share Your Story", body: "Tell us about the piece you have in mind — a family memory, a ceremony, or a feeling you want to translate into gold." },
+  { step: "01", title: "Share Your Story", body: "Tell us about the piece you have in mind - a family memory, a ceremony, or a feeling you want to translate into gold." },
   { step: "02", title: "Design Conversation", body: "We review silhouettes, motif references, and ceremonial context together, refining the direction until it feels right." },
   { step: "03", title: "Craft & Deliver", body: "The piece is made slowly, by hand, and delivered with care advice, styling notes, and space for it to become yours." },
 ];
 
 export default function Consultation() {
   const location = useLocation();
-  const prefill  = location.state?.prefill || {};
+  const prefill = location.state?.prefill || {};
 
-  const [submitted, setSubmitted] = useState(false);
-  const [sending, setSending]     = useState(false);
-  const [sendError, setSendError] = useState("");
-  const [fieldErrors, setFieldErrors] = useState({});
-  const [form, setForm] = useState({
-    name:         "",
-    email:        "",
+  const initialForm = {
+    name: "",
+    email: "",
     phoneCountry: "+91",
-    phone:        "",
-    occasion:     prefill.occasion ? sanitizeText(prefill.occasion).slice(0, 120) : "",
-    message:      prefill.message  ? sanitizeMultiline(prefill.message).slice(0, 2000) : "",
-  });
+    phone: "",
+    occasion: prefill.occasion ? sanitizeText(prefill.occasion).slice(0, 120) : "",
+    message: prefill.message ? sanitizeMultiline(prefill.message).slice(0, 2000) : "",
+  };
 
-  function handleChange(e) {
-    const { name, value } = e.target;
+  const normalizeConsultationValue = (name, value) => {
     let clean = value;
-    if (name === 'phone') {
-      clean = value.replace(/[^\d\s\-\.\(\)]/g, '').slice(0, 15);
-    } else if (name === 'name') {
+    if (name === "phone") {
+      clean = value.replace(/[^\d\s().-]/g, "").slice(0, 15);
+    } else if (name === "name") {
       clean = value.slice(0, 60);
-    } else if (name === 'email') {
-      clean = value.slice(0, 254).replace(/\s/g, '');
-    } else if (name === 'occasion') {
+    } else if (name === "email") {
+      clean = value.slice(0, 254).replace(/\s/g, "");
+    } else if (name === "occasion") {
       clean = value.slice(0, 120);
-    } else if (name === 'message') {
+    } else if (name === "message") {
       clean = value.slice(0, 2000);
     }
-    setForm((prev) => ({ ...prev, [name]: clean }));
-    if (fieldErrors[name]) {
-      setFieldErrors((prev) => ({ ...prev, [name]: null }));
-    }
-  }
+    return clean;
+  };
 
-  function validateAll() {
+  const validateConsultationValues = (values) => {
     const errors = {};
-    const nameErr = validateName(form.name);
+    const nameErr = validateName(values.name);
     if (nameErr) errors.name = nameErr;
-    const emailErr = validateEmail(form.email);
+
+    const emailErr = validateEmail(values.email);
     if (emailErr) errors.email = emailErr;
-    // Phone is optional on consultation page but if filled must be 10 digits
-    if (form.phone.trim()) {
-      const phoneErr = validatePhone(form.phone);
+
+    if (values.phone.trim()) {
+      const phoneErr = validatePhone(values.phone);
       if (phoneErr) errors.phone = phoneErr;
     }
-    const occasionErr = validateTextField(form.occasion, 'Occasion', { required: false, max: 120 });
+
+    const occasionErr = validateTextField(values.occasion, "Occasion", { required: false, max: 120 });
     if (occasionErr) errors.occasion = occasionErr;
-    const messageErr = validateTextarea(form.message, 'Your Story', { required: true, max: 2000 });
+
+    const messageErr = validateTextarea(values.message, "Your Story", { required: true, max: 2000 });
     if (messageErr) errors.message = messageErr;
-    setFieldErrors(errors);
-    return Object.keys(errors).length === 0;
-  }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    if (!validateAll()) return;
+    return errors;
+  };
 
-    setSending(true);
-    setSendError("");
+  const buildConsultationPayload = (values) => {
+    const fullPhone = values.phone.trim()
+      ? `${values.phoneCountry} ${values.phone.trim()}`
+      : "";
 
-    const fullPhone = form.phone.trim()
-      ? `${form.phoneCountry} ${form.phone.trim()}`
-      : '';
+    return {
+      from_name: sanitizeText(values.name),
+      from_email: sanitizeText(values.email),
+      phone: sanitizeText(fullPhone),
+      occasion: sanitizeText(values.occasion),
+      message: sanitizeMultiline(values.message),
+      to_name: "Murthy Ateliers",
+    };
+  };
 
-    const result = await sendEmail({
-      from_name: sanitizeText(form.name),
-      from_email: sanitizeText(form.email),
-      phone:      sanitizeText(fullPhone),
-      occasion:   sanitizeText(form.occasion),
-      message:    sanitizeMultiline(form.message),
-      to_name:    "Murthy Ateliers",
-    });
-
-    setSending(false);
-
-    if (result.success) {
-      setSubmitted(true);
-    } else {
-      setSendError("Something went wrong. Please try WhatsApp or email us directly.");
-    }
-  }
-
+  const {
+    form,
+    fieldErrors,
+    sending,
+    sendError,
+    submitted,
+    handleChange,
+    handleSubmit,
+  } = useLeadForm({
+    initialValues: initialForm,
+    normalizeValue: normalizeConsultationValue,
+    validateValues: validateConsultationValues,
+    buildPayload: buildConsultationPayload,
+    submit: sendEmail,
+  });
 
   return (
     <>
       <Helmet>
-        <title>Begin Your Consultation — Murthy Ateliers</title>
-        <meta name="description" content="Start a private consultation with Murthy Ateliers. Share your story — a family memory, ceremony, or feeling — and we will craft an heirloom piece made entirely for you." />
+        <title>Begin Your Consultation - Murthy Ateliers</title>
+        <meta
+          name="description"
+          content="Start a private consultation with Murthy Ateliers. Share your story - a family memory, ceremony, or feeling - and we will craft an heirloom piece made entirely for you."
+        />
       </Helmet>
 
       {/* Hero */}
       <section id="page-hero" className="page-hero-sec">
-        <img src="/jewellry/Web-Optimised/bannerConsult.webp" alt="Consultation"
-          className="hero-banner-img hero-banner-img--consult" fetchPriority="high" decoding="async" />
+        <img
+          src="/jewellry/Web-Optimised/bannerConsult.webp"
+          alt="Consultation"
+          className="hero-banner-img hero-banner-img--consult"
+          fetchPriority="high"
+          decoding="async"
+        />
         <div className="gradient-hero-overlay-dark page-hero-gradient" />
         <div className="page-hero-content shell">
           <div className="frame">
             <motion.p {...fadeUp} className="eyebrow" style={{ color: "rgba(211,175,55,0.70)", marginBottom: "1rem" }}>
               Create Something Personal
             </motion.p>
-            <motion.h1 {...fadeUp} transition={{ delay: 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="display-xl" style={{ color: "var(--cream)" }}>
+            <motion.h1
+              {...fadeUp}
+              transition={{ delay: 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="display-xl"
+              style={{ color: "var(--cream)" }}
+            >
               Begin Your Consultation
             </motion.h1>
           </div>
@@ -153,33 +162,43 @@ export default function Consultation() {
       {/* Main content: form + contact */}
       <section className="shell consult-main-sec">
         <div className="frame consult-main-grid">
-
           {/* Form */}
           <motion.div variants={fadeLeft} {...inView}>
             <p className="eyebrow" style={{ color: "var(--crimson)", marginBottom: "1rem" }}>Inquiry Form</p>
             <h2 className="display-md" style={{ color: "var(--forest)", marginBottom: "2rem" }}>Tell Us Your Story</h2>
 
             {submitted ? (
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
-                className="card-parchment consult-success">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="card-parchment consult-success"
+              >
                 <CheckCircle size={40} className="consult-success-icon" />
                 <h3 className="font-display consult-success-title">Thank you, {form.name}.</h3>
                 <p className="consult-success-body">
-                  We've received your inquiry and will be in touch within 2–3 working days to begin the conversation.
+                  We&apos;ve received your inquiry and will be in touch within 2-3 working days to begin the conversation.
                 </p>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="consult-form" noValidate>
-
                 {/* Name */}
                 <div className="form-field">
                   <label htmlFor="name" className="form-field-label">
                     Your Name <span className="form-required">*</span>
                   </label>
-                  <input id="name" name="name" type="text" required autoComplete="name" maxLength={60}
-                    placeholder="e.g. Shanthi Shankar" value={form.name} onChange={handleChange}
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    autoComplete="name"
+                    maxLength={60}
+                    placeholder="e.g. Shanthi Shankar"
+                    value={form.name}
+                    onChange={handleChange}
                     className={`form-input-field${fieldErrors.name ? " form-input-field--error" : ""}`}
-                    aria-describedby={fieldErrors.name ? "err-name" : undefined} />
+                    aria-describedby={fieldErrors.name ? "err-name" : undefined}
+                  />
                   {fieldErrors.name && <p id="err-name" className="form-field-error" role="alert">{fieldErrors.name}</p>}
                 </div>
 
@@ -188,10 +207,20 @@ export default function Consultation() {
                   <label htmlFor="email" className="form-field-label">
                     Email Address <span className="form-required">*</span>
                   </label>
-                  <input id="email" name="email" type="email" required autoComplete="email" inputMode="email"
-                    maxLength={254} placeholder="e.g. shanthi@mylapore.com" value={form.email} onChange={handleChange}
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    autoComplete="email"
+                    inputMode="email"
+                    maxLength={254}
+                    placeholder="e.g. shanthi@mylapore.com"
+                    value={form.email}
+                    onChange={handleChange}
                     className={`form-input-field${fieldErrors.email ? " form-input-field--error" : ""}`}
-                    aria-describedby={fieldErrors.email ? "err-email" : undefined} />
+                    aria-describedby={fieldErrors.email ? "err-email" : undefined}
+                  />
                   {fieldErrors.email && <p id="err-email" className="form-field-error" role="alert">{fieldErrors.email}</p>}
                 </div>
 
@@ -213,10 +242,17 @@ export default function Consultation() {
                 {/* Occasion */}
                 <div className="form-field">
                   <label htmlFor="occasion" className="form-field-label">Occasion or Intent</label>
-                  <input id="occasion" name="occasion" type="text" maxLength={120}
-                    placeholder="e.g. Bridal, Heirloom redesign, Gift…" value={form.occasion} onChange={handleChange}
+                  <input
+                    id="occasion"
+                    name="occasion"
+                    type="text"
+                    maxLength={120}
+                    placeholder="e.g. Bridal, Heirloom redesign, Gift..."
+                    value={form.occasion}
+                    onChange={handleChange}
                     className={`form-input-field${fieldErrors.occasion ? " form-input-field--error" : ""}`}
-                    aria-describedby={fieldErrors.occasion ? "err-occasion" : undefined} />
+                    aria-describedby={fieldErrors.occasion ? "err-occasion" : undefined}
+                  />
                   {fieldErrors.occasion && <p id="err-occasion" className="form-field-error" role="alert">{fieldErrors.occasion}</p>}
                 </div>
 
@@ -226,16 +262,24 @@ export default function Consultation() {
                     <span>Your Story <span className="form-required">*</span></span>
                     <span className="form-char-count">{form.message.length}/2000</span>
                   </label>
-                  <textarea id="message" name="message" required rows={5} maxLength={2000}
-                    placeholder="Share the memory, ceremony, or feeling behind the piece you have in mind…"
-                    value={form.message} onChange={handleChange}
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    rows={5}
+                    maxLength={2000}
+                    placeholder="Share the memory, ceremony, or feeling behind the piece you have in mind..."
+                    value={form.message}
+                    onChange={handleChange}
                     className={`form-input-field form-textarea${fieldErrors.message ? " form-input-field--error" : ""}`}
-                    aria-describedby={fieldErrors.message ? "err-message" : undefined} />
+                    aria-describedby={fieldErrors.message ? "err-message" : undefined}
+                  />
                   {fieldErrors.message && <p id="err-message" className="form-field-error" role="alert">{fieldErrors.message}</p>}
                 </div>
 
+                <LeadProtection />
                 <button type="submit" className="btn-primary consult-submit" disabled={sending}>
-                  {sending ? (<><Loader size={14} className="consult-spinner" />Sending…</>) : (<>Send Your Story <ArrowUpRight size={14} /></>)}
+                  {sending ? (<><Loader size={14} className="consult-spinner" />Sending...</>) : (<>Send Your Story <ArrowUpRight size={14} /></>)}
                 </button>
                 {sendError && <p className="consult-send-error" role="alert">{sendError}</p>}
                 <p className="consult-disclaimer">No pricing is discussed until we understand your vision fully.</p>
@@ -247,7 +291,7 @@ export default function Consultation() {
           <motion.div variants={fadeRight} {...inView} className="consult-contact">
             <div>
               <p className="eyebrow" style={{ color: "var(--crimson)", marginBottom: "1rem" }}>Or Reach Us Directly</p>
-              <h2 className="display-md" style={{ color: "var(--forest)", marginBottom: "1.5rem" }}>We'd Love to Hear From You</h2>
+              <h2 className="display-md" style={{ color: "var(--forest)", marginBottom: "1.5rem" }}>We&apos;d Love to Hear From You</h2>
               <p className="consult-contact-intro">
                 Private consultations are encouraged so conversations around family jewelry, ceremonies, and design direction can happen with care and focus.
               </p>
@@ -255,13 +299,18 @@ export default function Consultation() {
 
             <div className="consult-contact-links">
               {[
-                { icon: MessageCircle, label: "WhatsApp", value: brand.phone,   href: brand.whatsapp, external: true },
-                { icon: Mail,          label: "Email",    value: brand.email,   href: `mailto:${brand.email}`, external: true },
-                { icon: Phone,         label: "Phone",    value: brand.phone,   href: `tel:${brand.phone}`, external: true },
-                { icon: MapPin,        label: "Location", value: brand.address, href: brand.mapLink, external: true },
+                { icon: MessageCircle, label: "WhatsApp", value: brand.phone, href: brand.whatsapp, external: true },
+                { icon: Mail, label: "Email", value: brand.email, href: `mailto:${brand.email}`, external: true },
+                { icon: Phone, label: "Phone", value: brand.phone, href: `tel:${brand.phone}`, external: true },
+                { icon: MapPin, label: "Location", value: brand.address, href: brand.mapLink, external: true },
               ].map(({ icon: Icon, label, value, href, external }) => (
-                <a key={label} href={href} target={external ? "_blank" : undefined}
-                  rel={external ? "noreferrer" : undefined} className="consult-contact-item card-parchment group">
+                <a
+                  key={label}
+                  href={href}
+                  target={external ? "_blank" : undefined}
+                  rel={external ? "noopener noreferrer" : undefined}
+                  className="consult-contact-item card-parchment group"
+                >
                   <span className="consult-contact-icon">
                     <Icon size={16} />
                   </span>
@@ -291,4 +340,3 @@ export default function Consultation() {
     </>
   );
 }
-

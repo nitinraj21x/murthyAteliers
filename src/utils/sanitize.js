@@ -1,54 +1,32 @@
 /**
  * sanitize.js
- * Client-side input sanitization and validation utilities.
+ * Client-side normalization and validation utilities.
  *
- * NOTE: This is defence-in-depth on the frontend only. All user data sent to
- * any backend/email service must ALSO be validated server-side.  These helpers
- * protect against XSS, injection attempts and malformed values being stored or
- * displayed inside the React app.
+ * Keep these helpers lossless: do not HTML-escape or aggressively rewrite
+ * values that are going to an email API. React already escapes JSX output when
+ * values are rendered in the app.
  */
 
 // ---------------------------------------------------------------------------
 // Character-level sanitization
 // ---------------------------------------------------------------------------
 
-/**
- * Strip HTML/XML tags, null bytes, and escape dangerous characters that could
- * be used in XSS or template-injection attacks.
- */
 export function sanitizeText(value) {
   if (typeof value !== 'string') return '';
   return value
-    // Remove null bytes
     .replace(/\0/g, '')
-    // Strip HTML/XML tags
-    .replace(/<[^>]*>/g, '')
-    // Escape angle brackets and quotes to HTML entities
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#x27;')
-    // Remove common SQL injection patterns (belt-and-suspenders; the email
-    // service should parameterize on its end too)
-    .replace(/(['";\\])\s*(--|\/\*|xp_|exec|select|insert|update|delete|drop|union|alter|cast|convert|declare|waitfor|benchmark)/gi, '')
+    .replace(/[\r\n\t]+/g, ' ')
     .trim();
 }
 
 /**
- * Sanitize but keep new-lines (for textarea fields).
+ * Normalize textarea content while keeping internal new-lines intact.
  */
 export function sanitizeMultiline(value) {
   if (typeof value !== 'string') return '';
   return value
     .replace(/\0/g, '')
-    .replace(/<[^>]*>/g, '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#x27;')
-    .replace(/(['";\\])\s*(--|\/\*|xp_|exec|select|insert|update|delete|drop|union|alter|cast|convert|declare|waitfor|benchmark)/gi, '')
+    .replace(/\r\n?/g, '\n')
     .trim();
 }
 
@@ -62,7 +40,7 @@ export function validateName(value) {
   if (!v) return 'Name is required.';
   if (v.length < 2) return 'Name must be at least 2 characters.';
   if (v.length > 60) return 'Name must be 60 characters or fewer.';
-  if (!/^[\p{L}\p{M}\s'\-\.]+$/u.test(v))
+  if (!/^[\p{L}\p{M}\s'.-]+$/u.test(v))
     return 'Name contains invalid characters.';
   return null;
 }
@@ -79,13 +57,13 @@ export function validateEmail(value) {
 }
 
 /**
- * Phone: exactly 10 digits (after stripping spaces/dashes/dots).
+ * Phone: allow an international-length subscriber number.
  * The country code is stored separately and prepended on submission.
  */
 export function validatePhone(digits) {
-  const stripped = digits.replace(/[\s\-\.\(\)]/g, '');
+  const stripped = typeof digits === 'string' ? digits.replace(/\D/g, '') : '';
   if (!stripped) return 'Phone number is required.';
-  if (!/^\d{10}$/.test(stripped)) return 'Enter exactly 10 digits.';
+  if (stripped.length < 6 || stripped.length > 15) return 'Enter 6 to 15 digits.';
   return null;
 }
 

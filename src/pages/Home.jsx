@@ -5,34 +5,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 import FaqAccordion from "../components/FaqAccordion";
-import { philosophy, bespoke, legacyStories, faqs } from "../data/content";
+import { philosophy, bespoke, legacyStories, faqs, processSteps, journalArticles } from "../data/content";
 import { fadeRight, staggerContainer, staggerItem, inView, scaleIn } from "../utils/motion";
-
-// ─── Static data ────────────────────────────────────────────────────────────
-
-const PROCESS_STEPS = [
-  { step: 1, title: "Concept & Story",       subtitle: "கற்பனை",       image: "/jewellry/Web-Optimised/craft.webp",        desc: "Every piece begins not with metal, but with memory. We collect family stories, research historical archives, sketch motifs inspired by Mylapore temple arches, and map out the visual weight and balance of the design on parchment." },
-  { step: 2, title: "Stone Selection",        subtitle: "கல் தேர்வு",   image: "/jewellry/Web-Optimised/hero_jewel.webp",   desc: "We source natural, uncut diamonds (Polki), deep red kemp rubies, and premium cabochon emeralds. Each gemstone is chosen for its unique character, saturation of color, and ability to hold warm light under traditional settings." },
-  { step: 3, title: "Handcrafting",           subtitle: "கைவினை",       image: "/jewellry/Web-Optimised/handCrafted.webp",  desc: "Senior master artisans (Thattars) in our Mylapore workshop hand-carve, hammer, and chase the 22k gold. Ancient techniques like repoussé (nakshi) and filigree are utilized to raise three-dimensional gold motifs from flat sheets." },
-  { step: 4, title: "Finishing & Detailing",  subtitle: "மெருகூட்டல்",  image: "/jewellry/Web-Optimised/detailing.webp",    desc: "Using natural polishing compounds and antique patinas, we bring out the warm, buttery luster of high-carat gold. Stones are set using the ancient Kundan technique, sealing them in layers of pure, pressed gold foil." },
-  { step: 5, title: "Passed Into Your Hands", subtitle: "சமர்ப்பித்தல்", image: "/jewellry/Web-Optimised/lineage.webp",     desc: "The finished heirloom is placed on raw silk inside a wooden presentation box. More than a piece of craft, it is delivered as an unfinished sentence—ready to gather stories and be passed down through generations." },
-];
-
-const JOURNAL_POSTS = [
-  { id: "post-1", title: "The Story of Heirloom Jewelry",       tag: "Heritage Lore", date: "May 24, 2026",   excerpt: "In South India, jewelry was never mere ornamentation; it was an investment of trust, a store of family memory, and a talisman. We trace the history of passing gold down generations.",            image: "/jewellry/Web-Optimised/heritage.webp",       body: (<><p>Heirloom jewelry is a physical manifestation of time. In South Indian culture, jewelry was never created to be discarded or styled for a single season. It represented the family's honor, its security, and its memory.</p><blockquote>"Some things are not made—they are continued. The gold around your neck carries the heartbeat of the grandmother you never met."</blockquote><p>At Murthy Ateliers, we honor this continuity. When clients bring us ancestral pieces, we study the old carvings, note the wear of the metal where it rested against skin, and design the new piece to carry that history forward.</p></>) },
-  { id: "post-2", title: "Mylapore & Our Craft Heritage",        tag: "Atelier Notes", date: "April 15, 2026", excerpt: "Mylapore is not just a neighborhood; it is a living archive of art. We explore the connection between this sacred geography and the integrity of traditional goldsmithing.",                     image: "/jewellry/Web-Optimised/founder_story.webp",  body: (<><p>Mylapore is a historic neighborhood in Chennai, famous for its grand Kapaleeshwarar Temple, bronze sculptors, and traditional silk weavers. But hidden in its narrow streets are the workshops of the traditional goldsmiths (Thattars) who have built Mylapore's reputation for trust and mastery.</p><blockquote>"To create in Mylapore is to hear the bells of the temple and the tapping of the goldsmith's hammer in the same breath."</blockquote><p>Every piece we craft carries this sacred geography.</p></>) },
-  { id: "post-3", title: "Preserving and Caring for Antique Gold", tag: "Care Guide",  date: "March 08, 2026", excerpt: "High-carat traditional gold and kemp stones require gentle care to preserve their warm, soft luster. Read our comprehensive care guide from our senior craftsmen.",                            image: "/jewellry/Web-Optimised/preservation.webp",   body: (<><p>High-carat gold (22k) is a soft metal, susceptible to scratches if stored improperly. Similarly, traditional South Indian kemp stones are set with thin gold foils (Kundan technique) which must be kept free from moisture to prevent darkening.</p><ul><li><strong>Storage:</strong> Always store each piece separately in a dry, velvet-lined box.</li><li><strong>Moisture:</strong> Never expose kemp jewelry to water or perfumes.</li><li><strong>Cleaning:</strong> Wipe gently with a dry, soft cloth after wearing.</li></ul></>) },
-];
-
-// ─── Component ──────────────────────────────────────────────────────────────
 
 export default function Home() {
   const navigate = useNavigate();
 
-  const [activeProcessStep, setActiveProcessStep] = useState(1);
+  const [activeProcessStep, setActiveProcessStep] = useState(processSteps[0]?.step || "01");
   const [mobileSlide, setMobileSlide]             = useState(0);
   const touchStartX                               = useRef(null);
-  const [activeJournal, setActiveJournal]         = useState(null);
 
   // "peek" = initial 50vh clipped state; "full" = expanded, cards animating in
   const [collState, setCollState] = useState("peek"); // "peek" | "full"
@@ -85,7 +66,7 @@ export default function Home() {
       window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchend",   onTouchEnd);
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   // Process touch handlers
   const handleProcessTouchStart = (e) => { touchStartX.current = e.touches[0].clientX; };
@@ -93,7 +74,7 @@ export default function Home() {
     if (touchStartX.current === null) return;
     const delta = touchStartX.current - e.changedTouches[0].clientX;
     if (Math.abs(delta) < 40) return;
-    if (delta > 0 && mobileSlide < PROCESS_STEPS.length - 1) setMobileSlide((s) => s + 1);
+    if (delta > 0 && mobileSlide < processSteps.length - 1) setMobileSlide((s) => s + 1);
     else if (delta < 0 && mobileSlide > 0)                   setMobileSlide((s) => s - 1);
     touchStartX.current = null;
   };
@@ -407,7 +388,7 @@ export default function Home() {
         <div className="process-container process-desktop-only">
           <div className="process-line" />
           <div className="process-timeline">
-            {PROCESS_STEPS.map((step) => (
+            {processSteps.map((step) => (
               <div key={step.step} className={`process-step ${activeProcessStep === step.step ? "active" : ""}`} onClick={() => setActiveProcessStep(step.step)}>
                 <div className="process-node">{step.step}</div>
                 <h4 className="process-step-title">{step.title}</h4>
@@ -415,13 +396,13 @@ export default function Home() {
               </div>
             ))}
           </div>
-          {PROCESS_STEPS.map((step) => step.step !== activeProcessStep ? null : (
+          {processSteps.map((step) => step.step !== activeProcessStep ? null : (
             <div key={step.step} className="process-details-card animate-fade-in">
               <div><img src={step.image} alt={step.title} className="process-details-img" /></div>
               <div className="process-details-content">
                 <span className="process-details-num">{step.step.toString().padStart(2, "0")}</span>
                 <h3 className="process-details-title">{step.title} <span>{step.subtitle}</span></h3>
-                <p className="process-details-desc founder-body">{step.desc}</p>
+                <p className="process-details-desc founder-body">{step.body}</p>
               </div>
             </div>
           ))}
@@ -429,13 +410,13 @@ export default function Home() {
         {/* Mobile */}
         <div className="process-mobile-slider" onTouchStart={handleProcessTouchStart} onTouchEnd={handleProcessTouchEnd}>
           <div className="process-mobile-track" style={{ transform: `translateX(-${mobileSlide * 100}%)` }}>
-            {PROCESS_STEPS.map((step) => (
+            {processSteps.map((step) => (
               <div key={step.step} className="process-mobile-slide">
                 <img src={step.image} alt={step.title} className="process-mobile-img" />
                 <div className="process-mobile-content">
                   <span className="process-mobile-num">{step.step.toString().padStart(2, "0")}</span>
                   <h3 className="process-mobile-title">{step.title} <span className="process-mobile-sub">{step.subtitle}</span></h3>
-                  <p className="process-mobile-desc">{step.desc}</p>
+                  <p className="process-mobile-desc">{step.body}</p>
                 </div>
               </div>
             ))}
@@ -443,11 +424,11 @@ export default function Home() {
           <div className="process-mobile-arrows">
             <button className="process-mobile-arrow" onClick={() => setMobileSlide((s) => Math.max(0, s - 1))} aria-label="Previous step" disabled={mobileSlide === 0}>←</button>
             <div className="process-mobile-dots">
-              {PROCESS_STEPS.map((_, i) => (
+              {processSteps.map((_, i) => (
                 <button key={i} className={`process-mobile-dot ${i === mobileSlide ? "active" : ""}`} onClick={() => setMobileSlide(i)} aria-label={`Go to step ${i + 1}`} />
               ))}
             </div>
-            <button className="process-mobile-arrow" onClick={() => setMobileSlide((s) => Math.min(PROCESS_STEPS.length - 1, s + 1))} aria-label="Next step" disabled={mobileSlide === PROCESS_STEPS.length - 1}>→</button>
+            <button className="process-mobile-arrow" onClick={() => setMobileSlide((s) => Math.min(processSteps.length - 1, s + 1))} aria-label="Next step" disabled={mobileSlide === processSteps.length - 1}>→</button>
           </div>
         </div>
       </section>
@@ -498,38 +479,25 @@ export default function Home() {
           <p style={{ maxWidth: "600px", margin: "0 auto", opacity: 0.8 }} className="founder-body">A storytelling-led editorial space featuring reflections on heritage, craftsmanship, culture, and preservation.</p>
         </div>
         <div className="journal-grid">
-          {JOURNAL_POSTS.map((post) => (
-            <div key={post.id} className="journal-card">
-              <img src={post.image} alt={post.title} className="home-journal-card-img" />
+          {journalArticles.slice(0, 3).map((article) => (
+            <article key={article.slug} className="journal-card">
+              <img src={article.image} alt={article.title} className="home-journal-card-img" />
               <div className="journal-card-content">
-                <span className="journal-card-tag">{post.tag}</span>
-                <h3 className="journal-card-title">{post.title}</h3>
-                <p className="journal-card-excerpt">{post.excerpt}</p>
-                <button className="btn-text" style={{ alignSelf: "flex-start" }} onClick={() => setActiveJournal(post)}>Read Narrative</button>
+                <span className="journal-card-tag">{article.category}</span>
+                <h3 className="journal-card-title">{article.title}</h3>
+                <p className="journal-card-excerpt">{article.excerpt}</p>
+                <Link
+                  to={`/journal/${article.slug}`}
+                  className="btn-text"
+                  style={{ alignSelf: "flex-start" }}
+                >
+                  Read Narrative
+                </Link>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </section>
-
-      {/* Journal drawer */}
-      <div className={`journal-drawer ${activeJournal ? "open" : ""}`}>
-        {activeJournal && (
-          <>
-            <button className="journal-drawer-close" onClick={() => setActiveJournal(null)}>
-              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-              Back to Journal
-            </button>
-            <div className="journal-drawer-header">
-              <span className="journal-card-tag" style={{ fontSize: "0.85rem" }}>{activeJournal.tag}</span>
-              <h2 className="journal-drawer-title">{activeJournal.title}</h2>
-              <div className="journal-drawer-meta"><span>Published: {activeJournal.date}</span><span>By: Murthy Ateliers</span></div>
-            </div>
-            <img src={activeJournal.image} alt={activeJournal.title} className="home-journal-drawer-img" />
-            <div className="journal-drawer-body">{activeJournal.body}</div>
-          </>
-        )}
-      </div>
 
       {/* ====================================================================
           Section 8 — Testimonials

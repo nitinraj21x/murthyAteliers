@@ -43,10 +43,16 @@ export async function sendEmail(templateParams) {
   }
 
   try {
-    await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, { publicKey: PUBLIC_KEY });
+    await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, {
+      publicKey: PUBLIC_KEY,
+      blockHeadless: true,
+      limitRate: { id: "murthy-lead-forms", throttle: 60000 },
+    });
     return { success: true };
   } catch (err) {
     console.error("EmailJS error:", err);
-    return { success: false, error: err?.text ?? err?.message ?? "Unknown error" };
+    return { success: false, error: err?.status === 429
+      ? "Please wait a minute before sending another request."
+      : "Your request could not be sent. Please verify again and retry, or contact us directly." };
   }
 }
