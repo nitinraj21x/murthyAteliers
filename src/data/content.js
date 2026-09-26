@@ -272,7 +272,7 @@ export const jewelleryStories = [
     title:    "The Swan Who Could Drink Only the Milk",
     jewel:    "Hamsa Pendant (No. 1) and Hamsa Earrings (No. 5)",
     excerpt:  "Long before she was ever carved in gold, Saraswati was given a choice of how to travel through the world. She chose the humblest-looking of all the divine mounts: a plain white swan — and the reason is everything.",
-    image:    "/jewellry/Web-Optimised/heirStory-opt.webp",
+    image:    "/storyImgs/1.png",
     readTime: "4 min read",
     body: [
       "Long before she was ever carved in gold, Saraswati was given a choice of how to travel through the world. She could have chosen the lion, like Durga. She could have chosen the elephant, like Indra. Instead, the goddess of knowledge chose the humblest-looking of all the divine mounts: a plain white swan.",
@@ -288,7 +288,7 @@ export const jewelleryStories = [
     title:    "The Boy Who Danced on the Serpent's Hood",
     jewel:    "Nagaram Pendant (No. 3) and Nagar Pendant (No. 13)",
     excerpt:  "In the village of Vrindavan there was a bend in the river Yamuna so poisoned that birds fell dead from the sky. And one day a boy dived in after a ball without a second thought.",
-    image:    "/jewellry/Web-Optimised/heritage.webp",
+    image:    "/storyImgs/2.png",
     readTime: "4 min read",
     body: [
       "In the village of Vrindavan there was a bend in the river Yamuna so poisoned that birds fell dead from the sky simply flying over it, and cattle who drank from it never rose again. Beneath that water lived Kaliya, a serpent with five hoods, driven from his true home in the ocean for his arrogance and left to rule this one small, ruined stretch of river as his only kingdom.",
@@ -303,7 +303,7 @@ export const jewelleryStories = [
     title:    "The Race for the One Mango",
     jewel:    "Mango Necklace (No. 4), Big Mango Malai, and Mango-Pattern Eartops",
     excerpt:  "The sage Narada arrived on Mount Kailash carrying a single mango that could grant complete knowledge — but it could not be divided. Only one person could eat it.",
-    image:    "/jewellry/Web-Optimised/lineage.webp",
+    image:    "/storyImgs/3.png",
     readTime: "4 min read",
     body: [
       "The sage Narada was well known among the gods for a particular talent: he could not resist stirring up a little mischief, however holy his intentions. One day he arrived on Mount Kailash carrying a single mango, gifted to him by Brahma himself, and explained to Shiva and Parvati that whoever ate this fruit would gain complete knowledge and wisdom — but that it could not be divided. Only one person could eat it.",
@@ -320,7 +320,7 @@ export const jewelleryStories = [
     title:    "The Moon Who Was Loved Unevenly",
     jewel:    "Crescent-Shaped Pendant (No. 8) and Chocker Necklace of Crescents (No. 11)",
     excerpt:  "Chandra, the moon-god, was married to twenty-seven daughters of the sage Daksha. But he loved only one of them, and left the other twenty-six to feel the particular loneliness of being married but unchosen.",
-    image:    "/jewellry/Web-Optimised/imgs/heirloom.webp",
+    image:    "/storyImgs/4.png",
     readTime: "5 min read",
     body: [
       "Chandra, the moon-god, was married to all twenty-seven daughters of the great sage Daksha — each of them one of the twenty-seven lunar houses through which the moon passes every month. But Chandra, for all his brightness, loved only one of his twenty-seven wives, a gentle star named Rohini, and left the other twenty-six to feel the particular loneliness of being married but unchosen.",
@@ -337,7 +337,7 @@ export const jewelleryStories = [
     title:    "The Bird with Two Heads and the Fight That Would Not End",
     jewel:    "Makaripadakkam (No. 17)",
     excerpt:  "When Vishnu tore himself out of a stone pillar as Narasimha to destroy a tyrant, he did exactly what he had come to do. But having done it, he could not stop.",
-    image:    "/jewellry/Web-Optimised/preservation.webp",
+    image:    "/storyImgs/5.png",
     readTime: "5 min read",
     body: [
       "When Vishnu tore himself out of a stone pillar as Narasimha, half man and half lion, to destroy the tyrant king Hiranyakashipu, he did exactly what he had come to do. But having done it, he could not stop. His fury, once loosed, kept burning long after its target was dead, until the gods themselves began to fear that Narasimha would go on to unmake the very world he had just saved.",
@@ -353,7 +353,7 @@ export const jewelleryStories = [
     title:    "The Creature Who Carries the River Down From Heaven",
     jewel:    "Makarakanti Padakkam (Nos. 22 & 23) and the Guardian Arches of Every Temple",
     excerpt:  "The river Ganga did not always flow on earth. She lived once only in the heavens, until a king undertook a penance so long and so severe that even the gods took notice.",
-    image:    "/jewellry/Web-Optimised/collection1-opt.webp",
+    image:    "/storyImgs/6.png",
     readTime: "5 min read",
     body: [
       "The river Ganga did not always flow on earth. She lived once only in the heavens, until a king named Bhagiratha, desperate to free the souls of his sixty thousand ancestors who could find no peace until they were touched by her sacred water, undertook a penance so long and so severe that even the gods took notice.",
@@ -369,7 +369,7 @@ export const jewelleryStories = [
     title:    "The Ocean That Was Churned Until It Gave Up Everything",
     jewel:    "Every Pearl Strand in This Catalogue",
     excerpt:  "Long ago, the gods lost their strength — and Vishnu offered them one path back to power: churn the great Ocean of Milk itself. But nectar was not the first thing to surface.",
-    image:    "/jewellry/Web-Optimised/handCrafted.webp",
+    image:    "/storyImgs/7.png",
     readTime: "5 min read",
     body: [
       "Long ago, the gods lost their strength — cursed by an offended sage for a single act of carelessness — and the demons, sensing weakness, rose to seize the three worlds for themselves. Vishnu offered the gods one path back to power: churn the great Ocean of Milk itself, using Mount Mandara as the churning rod and the serpent-king Vasuki as the rope, and out of that endless churning would eventually rise Amrita, the nectar of immortality.",
@@ -385,7 +385,7 @@ export const jewelleryStories = [
     title:    "The God Who Dances Wearing the Sky Itself",
     jewel:    "Head Ornament with Teeka, Chandra and Surya (No. 10)",
     excerpt:  "Among all of Shiva's countless forms, none is more beloved in Tamil Nadu than Nataraja — the Lord of the Cosmic Dance, caught forever mid-motion inside a circle of flame.",
-    image:    "/jewellry/Web-Optimised/craft.webp",
+    image:    "/storyImgs/8.png",
     readTime: "4 min read",
     body: [
       "Among all of Shiva's countless forms, none is more beloved in Tamil Nadu than Nataraja — Shiva as the Lord of the Cosmic Dance, caught forever mid-motion inside a circle of flame, one foot planted on the small demon of ignorance beneath him, the other lifted free into the air.",
