@@ -128,9 +128,6 @@ function CollectionBlock({ id, eyebrow, heading, description, bgImage, items }) 
     });
   }
 
-  /* Shared image column height — both sides will match this */
-  const IMG_H = "min(65vh, 600px)";
-
   return (
     <section id={id} className="coll-block-section" style={{ minHeight: "90vh" }}>
       <div className="coll-block-bg"
@@ -154,7 +151,7 @@ function CollectionBlock({ id, eyebrow, heading, description, bgImage, items }) 
           {explored && (
             <motion.div key="post-explore" initial={{ opacity:0 }} animate={{ opacity:1 }}
               transition={{ duration:0.4 }} className="coll-block-explored">
-              <div className="coll-block-left" style={{ height: IMG_H }}>
+              <div className="coll-block-left">
                 <div className="coll-block-top">
                   <p className="eyebrow coll-block-eyebrow-sm">{eyebrow}</p>
                   <AnimatedTitle text={current.name} className="display-lg coll-block-title" />
@@ -172,7 +169,7 @@ function CollectionBlock({ id, eyebrow, heading, description, bgImage, items }) 
                   <JewelStrip items={items} activeIdx={activeIdx} onSelect={setActiveIdx} />
                 </div>
               </div>
-              <div className="coll-block-right" style={{ height: IMG_H }}>
+              <div className="coll-block-right">
                 <JewelViewer jewel={current} imgActive={imgActive} setImgActive={setImgActive} />
               </div>
             </motion.div>

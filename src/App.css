@@ -3580,19 +3580,28 @@ textarea.form-input {
 .coll-block-explore-btn { display:inline-flex; align-items:center; gap:0.5rem; }
 .coll-block-explored { display:flex; flex-direction:column; gap:2.5rem; align-items:flex-start; }
 @media(min-width:1024px){ .coll-block-explored { flex-direction:row; gap:4rem; } }
-.coll-block-left { width:100%; display:flex; flex-direction:column; min-width:0; }
-@media(min-width:1024px){ .coll-block-left { width:44%; } }
+.coll-block-left { width:100%; display:flex; flex-direction:column; min-width:0; height:auto; }
+@media(min-width:1024px){ .coll-block-left { width:44%; height:min(65vh,600px); } }
 .coll-block-top { flex-shrink:0; min-width:0; }
 .coll-block-eyebrow-sm { color:rgba(211,175,55,0.60); margin-bottom:0.75rem; }
 .coll-block-title { color:var(--cream); margin-bottom:1.25rem; word-break:break-word; overflow-wrap:break-word; line-height:1.25; }
 .coll-block-ornament-sm { margin-bottom:1.25rem; opacity:0.40; }
-.coll-block-desc-scroll { flex:1; overflow-y:auto; padding-right:0.25rem; min-height:0; }
+/* Below lg: description expands naturally — no clipping */
+.coll-block-desc-scroll { flex:0 0 auto; overflow-y:visible; padding-right:0.25rem; min-height:0; }
+/* At lg+: left column has a fixed height, so description scrolls within remaining flex space */
+@media(min-width:1024px){ .coll-block-desc-scroll { flex:1; overflow-y:auto; } }
 .coll-block-current-desc { font-size:1rem; line-height:2rem; color:rgba(250,248,237,0.65); }
+@media(max-height:650px){ .coll-block-current-desc { font-size:0.875rem; line-height:1.75; }
+  .coll-block-title { margin-bottom:0.6rem; }
+  .coll-block-ornament-sm { margin-bottom:0.6rem; }
+  .coll-block-eyebrow-sm { margin-bottom:0.4rem; }
+  .coll-block-actions { padding-top:0.75rem; }
+}
 .coll-block-actions { flex-shrink:0; padding-top:1.5rem; }
 .coll-block-enquire-wrap { display:flex; justify-content:center; margin-bottom:1.25rem; }
 .coll-block-enquire-btn { display:inline-flex; align-items:center; gap:0.5rem; }
 .coll-block-right { width:100%; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
-@media(min-width:1024px){ .coll-block-right { width:56%; } }
+@media(min-width:1024px){ .coll-block-right { width:56%; height:min(65vh,600px); } }
 
 .coll-tabbar { position:sticky; top:0; z-index:30; background:rgba(61,75,42,0.95); backdrop-filter:blur(12px); border-bottom:1px solid rgba(211,175,55,0.20); }
 .coll-tabbar-inner { display:flex; align-items:center; padding-block:0.25rem; }
